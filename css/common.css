@@ -1,0 +1,440 @@
+:root {
+  font-family: sans-serif, "PingFang", "Microsoft JhengHei";
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  --color: #444;
+  --link: #990;
+  --green: #76c114;
+  --yellow: #d6b113;
+  --gold: #b68f1f;
+  --primary: var(--gold);
+}
+
+body {
+  margin: 0;
+  color: var(--color);
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2rem;
+  text-align: center;
+}
+
+a {
+  color: var(--link);
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 0.8rem;
+  margin: 0;
+  font-size: 16px;
+  outline: none;
+  border-radius: 0.25rem;
+  border: 1px solid #aaa;
+}
+
+.btn {
+  margin: 0.25rem;
+  padding: 0.6rem 1rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.btn--gray {
+  background: #aaa;
+}
+
+section {
+  box-sizing: border-box;
+}
+
+.main {
+  min-height: calc(100vh - 200px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0.25rem 0.8rem;
+  background: rgba(0, 0, 0, 0.1333333333);
+  border-radius: 0.25rem;
+}
+
+.badge--inprogress {
+  background: var(--yellow);
+  color: #fff;
+}
+
+.badge--done {
+  background: var(--green);
+  color: #fff;
+}
+
+.avatar {
+  display: inline-block;
+  position: relative;
+}
+
+.avatar img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border: 4px solid #fff;
+  border-radius: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.avatar .party {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  right: 0;
+  bottom: 6px;
+  border: 4px solid #fff;
+}
+
+.party {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #aaa;
+  border-radius: 100px;
+}
+
+.party--1 {
+  background: #090;
+}
+
+.party--2 {
+  background: #934098;
+}
+
+.party--3 {
+  background: #a73f24;
+}
+
+.party--4 {
+  background: #f9be01;
+}
+
+.party--5 {
+  background: #1b893b;
+}
+
+.party--6 {
+  background: #35C8C7;
+}
+
+.party--7 {
+  background: #0000aa;
+}
+
+._congress .site-header {
+  position: sticky;
+  top: 0;
+  background: #630;
+  color: #fff;
+}
+
+._congress .site-header .header {
+  height: 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  ._congress .site-header .header {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+._congress .site-header .header a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+._congress .site-header .header .logo {
+  color: #fc0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+._congress .site-header .header .logo img {
+  height: 2rem;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+._congress .site-header .header .rwd-menu-icon {
+  display: none;
+}
+
+._congress .site-header .header .rwd-menu-icon button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+}
+
+@media (max-width: 991px) {
+  ._congress .site-header .header .rwd-menu-icon {
+    display: block;
+  }
+}
+
+._congress .site-header .header .menu {
+  display: flex;
+}
+
+._congress .site-header .header .menu a {
+  display: block;
+  padding: 0.4rem 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1333333333);
+}
+
+._congress .site-header .header .menu .search-bar {
+  display: grid;
+  grid-template-columns: 1fr 1.6rem;
+  margin: 0 1rem;
+  padding: 0 0.8rem;
+  background: #fff;
+  border-radius: 0.25rem;
+}
+
+._congress .site-header .header .menu .search-bar input,
+._congress .site-header .header .menu .search-bar button {
+  display: block;
+  padding: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: 0;
+}
+
+@media (max-width: 991px) {
+  ._congress .site-header .header .menu {
+    padding: 0.4rem 4%;
+    display: block;
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.4s;
+    color: #222;
+  }
+  ._congress .site-header .header .menu > a {
+    padding: 1rem 0;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1333333333);
+  }
+  ._congress .site-header .header .menu > .search-bar {
+    margin: 1rem 0;
+    padding: 1rem 0.4rem;
+    background-color: rgba(0, 0, 0, 0.0666666667);
+  }
+  ._congress .site-header .header .menu.active {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 991px) {
+  ._congress .site-header .header .g0v {
+    display: none;
+  }
+}
+
+._congress .site-header .header .g0v img {
+  height: 1.8rem;
+}
+
+._congress .site-footer {
+  padding: 4rem 0;
+  background: #222;
+  color: #fff;
+}
+
+._congress .site-footer .footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+}
+
+._congress .site-footer a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+._congress .site-footer .g0v img {
+  width: 100px;
+}
+
+._congress .site-footer .about {
+  text-align: right;
+}
+
+._search .search {
+  padding: 2rem 0;
+  background: #f7f4ca;
+  background-image: url("/images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+._search .search .search-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+._search .search .search-form .search-keywords {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background: #fff;
+  border-radius: 0.25rem;
+}
+
+._search .search .search-form .search-keywords input,
+._search .search .search-form .search-keywords button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: 0;
+  font-size: 1.2rem;
+}
+
+._search .search .options-switch {
+  margin: 0.4rem 0;
+  text-align: right;
+}
+
+._search .search .options-switch a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+._search .search .options .option {
+  margin: 0.4rem 0;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+}
+
+._search .search .options .option .value {
+  display: flex;
+  align-items: center;
+}
+
+._search .search .options .option .value input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  background: #fff;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+._search .search .options .option .value span {
+  margin: 0 0.25rem;
+}
+
+._search .search .options .actions {
+  text-align: center;
+}
+
+._search .results {
+  padding: 2rem 0 4rem 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+._search .results h1 {
+  color: var(--primary);
+}
+
+._search .result {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  display: block;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.0784313725);
+  border-top: 0.4rem solid #e2d3aa;
+  border-radius: 0.4rem 0.4rem 1rem 1rem;
+  color: currentColor;
+  text-decoration: none;
+}
+
+._search .result .title {
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+._search .result .status {
+  margin: 0.8rem 0;
+  color: #aaa;
+}
+
+._search .result .legislators {
+  margin-top: 1rem;
+}
+
+._search .result .legislators .badge {
+  font-size: 0.5rem;
+}
+
+._bills .info {
+  padding: 2rem 0;
+  background: #f7f4ca;
+  background-image: url("/images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+}
+
+._bills .legislators {
+  padding: 2rem 0;
+  background: #f4f0e4;
+  text-align: center;
+}
+
+._bills .legislators .legislator {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.material-symbols-rounded {
+  vertical-align: middle;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/*# sourceMappingURL=common.css.map */

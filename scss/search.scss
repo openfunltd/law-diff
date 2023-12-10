@@ -1,0 +1,113 @@
+._search {
+  .search {
+    padding: 2rem 0;
+    background: #f7f4ca;
+    background-image: url('/images/search_bg.svg'), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    .search-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem 0;
+
+      .search-keywords {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        background: #fff;
+        border-radius: 0.25rem;
+
+        input, button {
+          appearance: none;
+          background: transparent;
+          border: 0;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .options-switch {
+      margin: 0.4rem 0;
+      text-align: right;
+
+      a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .options {
+      .option {
+        margin: 0.4rem 0;
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        align-items: center;
+
+        .title {
+        }
+
+        .value {
+          display: flex;
+          align-items: center;
+
+          input {
+            appearance: none;
+            width: 100%;
+            background: #fff;
+            border: 0;
+            border-radius: 0.25rem;
+          }
+
+          span {
+            margin: 0 0.25rem;
+          }
+        }
+      }
+
+      .actions {
+        text-align: center;
+      }
+    }
+  }
+
+  .results {
+    padding: 2rem 0 4rem 0;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      color: var(--primary);
+    }
+  }
+
+  .result {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    display: block;
+    box-shadow: 0 10px 20px #00000014;
+    border-top: 0.4rem solid #e2d3aa;
+    border-radius: 0.4rem 0.4rem 1rem 1rem;
+    color: currentColor;
+    text-decoration: none;
+
+    .title {
+      margin-bottom: 0.4rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .status {
+      margin: 0.8rem 0;
+      color: #aaa;
+    }
+
+    .legislators {
+      margin-top: 1rem;
+
+      .badge {
+        font-size: 0.5rem;
+      }
+    }
+  }
+}

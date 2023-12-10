@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜尋頁</title>
+  <meta name=description content="">
+  <meta name="og:type" content="website">
+  <meta name="og:title" content="">
+  <meta name="og:description" content="">
+  <meta name="og:site_name" content="">
+  <meta name="og:image" content="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="css/common.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="js/common.js"></script>
+</head>
+<body>
+  <div class="_congress _search">
+    <section class="site-header">
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <a href="https://ly.g0v.tw/">
+              <img src="/images/logo.svg" alt="國會大代誌">
+              國會大代誌
+            </a>
+          </div>
+          <div class="rwd-menu-icon">
+            <button @click="rwdMenuVisible = !rwdMenuVisible">
+              <span
+                v-if="!rwdMenuVisible"
+                class="material-symbols-rounded"
+              >
+                menu
+              </span>
+              <span
+                v-else
+                class="material-symbols-rounded"
+              >
+                close
+              </span>
+            </button>
+          </div>
+          <div
+            class="menu"
+            :class="{ active: rwdMenuVisible }"
+          >
+            <a href="https://ly.g0v.tw/calendar">預報</a>
+            <a href="https://ly.g0v.tw/sittings">會議</a>
+            <a href="https://ly.g0v.tw/debates">質詢</a>
+
+            <form action="/" class="search-bar">
+              <input type="text" placeholder="搜尋議案">
+              <button>
+                <span class="material-symbols-rounded">
+                  search
+                </span>
+              </button>
+            </form>
+          </div>
+          <div class="g0v">
+            <a href="http://g0v.tw" target="_blank">
+              <img src="/images/g0v_logo.png">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main">
+      <section class="search">
+        <div class="container">
+          <form action="/" class="search-form">
+            <div class="search-keywords">
+              <input type="text" placeholder="搜尋議案關鍵字">
+              <button>
+                <span class="material-symbols-rounded">
+                  search
+                </span>
+                搜尋
+              </button>
+            </div>
+
+            <div class="options-switch">
+              <a
+                @click.prevent="advancedSearchVisible = !advancedSearchVisible"
+                href="#"
+              >
+                進階搜尋
+                <span
+                  v-if="advancedSearchVisible"
+                  class="material-symbols-rounded"
+                >
+                  expand_more
+                </span>
+                <span
+                  v-else
+                  class="material-symbols-rounded"
+                >
+                  expand_less
+                </span>
+              </a>
+            </div>
+
+            <div
+              v-if="advancedSearchVisible"
+              class="options"
+            >
+              <div class="option">
+                <div class="title">
+                  日期區間
+                </div>
+                <div class="value">
+                  <input type="date">
+                  <span>~</span>
+                  <input type="date">
+                </div>
+              </div>
+              <div class="option">
+                <div class="title">
+                  委員姓名
+                </div>
+                <div class="value">
+                  <input type="text">
+                </div>
+              </div>
+              <div class="option">
+                <div class="title">
+                  法律名稱
+                </div>
+                <div class="value">
+                  <input type="text">
+                </div>
+              </div>
+              <div class="option">
+                <div class="title">
+                  法律內容
+                </div>
+                <div class="value">
+                  <input type="text">
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn btn--gray" type="reset">
+                  <span class="material-symbols-rounded">
+                    close
+                  </span>
+                  清除條件
+                </button>
+                <button class="btn">
+                  <span class="material-symbols-rounded">
+                    search
+                  </span>
+                  搜尋
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="results">
+        <div class="container">
+          <h1>議案搜尋結果</h1>
+
+          <a href="/bills" class="result">
+            <div class="title">
+              擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
+            </div>
+            <div class="status">
+              <span class="badge badge--inprogress">
+                <span class="material-symbols-rounded">
+                  clock_loader_40
+                  <!-- 有 10, 20, 40, 60, 80, 90 這幾個選項 -->
+                </span>
+                交付審查
+              </span>
+              112年10月16日
+            </div>
+            <div class="desc">
+              本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
+            </div>
+            <div class="legislators">
+              相關委員：
+              <span class="badge">
+                <!-- 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                <span class="party party--1"></span>
+                王定宇
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                王美惠
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                王婉諭
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                伍麗華
+              </span>
+            </div>
+          </a>
+
+          <a href="/bills" class="result">
+            <div class="title">
+              擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
+            </div>
+            <div class="status">
+              <span class="badge badge--done">
+                <span class="material-symbols-rounded">
+                  task_alt
+                </span>
+                已生效
+              </span>
+              112年12月6日（台立院議字第1120703929號）
+            </div>
+            <div class="desc">
+              本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
+            </div>
+            <div class="legislators">
+              相關委員：
+              <span class="badge">
+                <!-- 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                <span class="party party--1"></span>
+                王定宇
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                王美惠
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                王婉諭
+              </span>
+              <span class="badge">
+                <span class="party party--1"></span>
+                伍麗華
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <section class="site-footer">
+      <div class="container">
+        <div class="footer">
+          <div class="g0v">
+            <a href="http://g0v.tw" target="_blank">
+              <img src="/images/g0v_logo_s.svg">
+            </a>
+          </div>
+          <div class="about">
+            <a href="https://ly.g0v.tw/about">
+              關於國會大代誌
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+._bills {
+  .info {
+    padding: 2rem 0;
+    background: #f7f4ca;
+    background-image: url('/images/search_bg.svg'), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+  }
+
+  .legislators {
+    padding: 2rem 0;
+    background: #f4f0e4;
+    text-align: center;
+
+    .legislator {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+  }
+}
