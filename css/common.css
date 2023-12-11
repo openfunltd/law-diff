@@ -36,6 +36,11 @@ button {
   outline: none;
   border-radius: 0.25rem;
   border: 1px solid #aaa;
+  color: var(--color);
+}
+
+select {
+  background: #fff;
 }
 
 .btn {

@@ -399,7 +399,7 @@
                       [通過]
                     </template>
                     {{ bill.from?.name }}
-                    <template v-if="bill.from.nowRule">
+                    <template v-if="!bill.from.nowRule">
                       修正條文
                     </template>
                   </div>
