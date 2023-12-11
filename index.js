@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const app = express()
 
+app.use('/favicon.ico', express.static(__dirname + '/favicon.ico'))
 app.use('/images', express.static(__dirname + '/images'))
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/js', express.static(__dirname + '/js'))

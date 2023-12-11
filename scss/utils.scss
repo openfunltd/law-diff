@@ -4,11 +4,12 @@
   line-height: 1.6;
   scroll-behavior: smooth;
   --color: #444;
-  --link: #990;
+  --link: var(--red);
+  --red: #d62322;
   --green: #76c114;
   --yellow: #d6b113;
-  --gold: #b68f1f;
-  --primary: var(--gold);
+  --gold: #c2a86b;
+  --primary: var(--red);
 }
 
 body {
@@ -187,13 +188,12 @@ section {
   position: sticky;
   top: 0;
   z-index: 10000;
-  background: #630;
-  color: #fff;
+  background: #fff;
 
   .header {
     height: 4rem;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto;
     grid-gap: 3rem;
     align-items: center;
 
@@ -204,6 +204,11 @@ section {
     a {
       color: currentColor;
       text-decoration: none;
+      transition: color 0.4s;
+
+      &:hover {
+        color: var(--red);
+      }
     }
 
     .logo {
@@ -225,7 +230,6 @@ section {
         appearance: none;
         background: transparent;
         border: none;
-        color: #fff;
       }
 
       @media (max-width: 991px) {
@@ -247,7 +251,7 @@ section {
         grid-template-columns: 1fr 1.6rem;
         margin: 0 1rem;
         padding: 0 0.8rem;
-        background: #fff;
+        background: #0001;
         border-radius: 0.25rem;
 
         input, button {
@@ -289,16 +293,6 @@ section {
         }
       }
     }
-
-    .g0v {
-      @media (max-width: 991px) {
-        display: none;
-      }
-
-      img {
-        height: 1.8rem;
-      }
-    }
   }
 }
 
@@ -306,12 +300,9 @@ section {
   padding: 2rem 0;
   background: #222;
   color: #fff;
+  font-size: 0.8rem;
 
   .footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: space-between;
   }
 
   a {
@@ -319,13 +310,43 @@ section {
     text-decoration: none;
   }
 
-  .g0v {
+  .ccw {
     img {
-      width: 100px;
+      height: 3rem;
     }
   }
 
-  .about {
-    text-align: right;
+  .info {
+    margin: 3rem 0 1.4rem 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    .contact {
+    }
+
+    .sns {
+      text-align: right;
+
+      a {
+        &:after {
+          content: ', '
+        }
+
+        &:last-child {
+          &:after {
+            content: none;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+
+      .sns {
+        margin-top: 1rem;
+        text-align: left;
+      }
+    }
   }
 }

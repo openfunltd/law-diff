@@ -82,7 +82,7 @@
     margin: 0 auto;
 
     h1 {
-      color: var(--primary);
+      // color: var(--gold);
     }
 
     .filters {
@@ -110,7 +110,9 @@
     padding: 2rem;
     display: block;
     box-shadow: 0 10px 20px #00000014;
+    // border-top: 0.4rem solid var(--gold);
     border-top: 0.4rem solid #e2d3aa;
+    border-top: 0.4rem solid var(--red);
     border-radius: 0.4rem 0.4rem 1rem 1rem;
     color: currentColor;
     text-decoration: none;
