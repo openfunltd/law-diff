@@ -13,8 +13,8 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link rel="stylesheet" href="css/common.css">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script type="module" src="js/common.js"></script>
+  <script src="/js/vue.global.js"></script>
+  <script type="module" src="/js/common.js"></script>
 </head>
 <body>
   <div class="_congress _bills">
@@ -322,6 +322,13 @@
             </select>
           </div>
 
+          <div class="diff-hint">
+            <span class="material-symbols-rounded">
+              info
+            </span>
+            與現行法規比較 <ins>綠色</ins> 為新增 <del>紅色</del>為刪除
+          </div>
+
           <div class="bills">
             <template v-for="bill in filterBills">
               <!-- 無修正 -->
@@ -343,8 +350,11 @@
                     [通過]
                   </template>
                   {{ bill.from?.name }}
-                  <template v-if="!bill.from?.nowRule">
-                    版
+                  <template v-if="bill.from?.new">
+                    新增條文
+                  </template>
+                  <template v-else-if="!bill.from?.nowRule">
+                    修正條文
                   </template>
                 </div>
                 <div
@@ -367,7 +377,13 @@
                   <template v-if="bill.by?.passed">
                     [通過]
                   </template>
-                  {{ bill.by?.name }} 新增條文
+                  {{ bill.by?.name }}
+                  <template v-if="bill.by?.new">
+                    新增條文
+                  </template>
+                  <template v-else-if="!bill.by?.nowRule">
+                    修正條文
+                  </template>
                 </div>
                 <div
                   v-html="bill.by?.htmlContent"
@@ -394,7 +410,10 @@
                       [通過]
                     </template>
                     {{ bill.from?.name }}
-                    <template v-if="!bill.from.nowRule">
+                    <template v-if="bill.from?.new">
+                      新增條文
+                    </template>
+                    <template v-else-if="!bill.from?.nowRule">
                       修正條文
                     </template>
                   </div>
@@ -414,7 +433,12 @@
                       [通過]
                     </template>
                     {{ bill.by?.name }}
-                    修正條文
+                    <template v-if="bill.by?.new">
+                      新增條文
+                    </template>
+                    <template v-else-if="!bill.by?.nowRule">
+                      修正條文
+                    </template>
                   </div>
                   <div
                     v-html="bill.by?.htmlContent"

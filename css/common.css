@@ -23,6 +23,12 @@ h1 {
   text-align: center;
 }
 
+h1 .icon {
+  margin-top: -0.4rem;
+  font-size: 2.6rem;
+  color: var(--gold);
+}
+
 a {
   color: var(--link);
 }
@@ -109,10 +115,15 @@ section {
 }
 
 .legislator {
-  margin: 0 0.5rem 0.5rem 0.5rem;
+  margin: 0 0.5rem 1rem 0.5rem;
   max-width: 90px;
   display: inline-block;
   vertical-align: top;
+  line-height: 1.2;
+}
+
+.legislator .avatar {
+  margin-bottom: 0.25rem;
 }
 
 .avatar {
@@ -210,14 +221,8 @@ section {
   color: var(--red);
 }
 
-.site-header .header .logo {
-  color: #fc0;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
 .site-header .header .logo img {
-  height: 2rem;
+  height: 2.4rem;
   margin-right: 0.6rem;
   vertical-align: middle;
 }
@@ -312,7 +317,7 @@ section {
 }
 
 .site-footer .ccw img {
-  height: 3rem;
+  height: 2.2rem;
 }
 
 .site-footer .info {
@@ -477,7 +482,7 @@ section {
 }
 
 ._search .result .legislators .badge {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 }
 
 ._bills .bill-info {
@@ -647,7 +652,13 @@ section {
 @media (max-width: 767px) {
   ._bills .comparation .compare span {
     display: block;
+    margin: 0.4rem 0;
   }
+}
+
+._bills .comparation .diff-hint {
+  text-align: right;
+  color: #666;
 }
 
 ._bills .comparation .bill {

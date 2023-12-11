@@ -22,9 +22,6 @@
         border-radius: 100px;
         font-weight: bold;
       }
-
-      .proposers {
-      }
     }
   }
 
@@ -169,8 +166,14 @@
 
         @media (max-width: 767px) {
           display: block;
+          margin: 0.4rem 0;
         }
       }
+    }
+
+    .diff-hint {
+      text-align: right;
+      color: #666;
     }
 
     .bill {

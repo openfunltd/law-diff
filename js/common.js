@@ -1,4 +1,4 @@
-import Diff from 'https://cdn.jsdelivr.net/npm/text-diff@1.0.1/+esm'
+import Diff from '/js/text_diff.js'
 
 const { ref, computed, createApp, onMounted } = Vue
 
@@ -42,11 +42,14 @@ const common = {
           by: null
         }
 
+        const isNew = !billsSet[0].content
+
         // 找左欄資料
         if (billsSet[compareFrom.value].content) {
           row.from = {
             name: versions[compareFrom.value],
             nowRule: compareFrom.value === 0,
+            new: isNew,
             ...billsSet[compareFrom.value]
           }
         }
@@ -58,6 +61,7 @@ const common = {
             ? {
               name: versions[idx],
               nowRule: false,
+              new: isNew,
               ...billsSet[idx]
             }
             : null
@@ -65,6 +69,7 @@ const common = {
           row.by = {
             name: versions[compareBy.value],
             nowRule: false,
+            new: isNew,
             ...billsSet[compareBy.value]
           }
         }

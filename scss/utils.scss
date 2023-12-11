@@ -21,6 +21,12 @@ h1 {
   font-weight: 400;
   font-size: 2rem;
   text-align: center;
+
+  .icon {
+    margin-top: -0.4rem;
+    font-size: 2.6rem;
+    color: var(--gold);
+  }
 }
 
 a {
@@ -104,10 +110,15 @@ section {
 }
 
 .legislator {
-  margin: 0 0.5rem 0.5rem 0.5rem;
+  margin: 0 0.5rem 1rem 0.5rem;
   max-width: 90px;
   display: inline-block;
   vertical-align: top;
+  line-height: 1.2;
+
+  .avatar {
+    margin-bottom: 0.25rem;
+  }
 }
 
 .avatar {
@@ -181,9 +192,6 @@ section {
   }
 }
 
-._congress {
-}
-
 .site-header {
   position: sticky;
   top: 0;
@@ -212,12 +220,8 @@ section {
     }
 
     .logo {
-      color: #fc0;
-      font-size: 1.25rem;
-      font-weight: bold;
-
       img {
-        height: 2rem;
+        height: 2.4rem;
         margin-right: 0.6rem;
         vertical-align: middle;
       }
@@ -312,7 +316,7 @@ section {
 
   .ccw {
     img {
-      height: 3rem;
+      height: 2.2rem;
     }
   }
 
