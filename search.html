@@ -165,6 +165,46 @@
         <div class="container">
           <h1>議案搜尋結果</h1>
 
+          <div class="filters">
+            <div class="filter">
+              搜尋關鍵字：移民
+            </div>
+
+            <div></div>
+
+            <!-- 有選時間時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                schedule
+              </span>
+              2023-12-01 ~ 2023-12-12
+            </div>
+
+            <!-- 有填寫委員名稱時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                group
+              </span>
+              林淑芬, 范雲
+            </div>
+
+            <!-- 有填寫法律名稱時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                gavel
+              </span>
+              入出國及移民法
+            </div>
+
+            <!-- 有填寫法律內容時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                receipt_long
+              </span>
+              出國及移民法有關規範
+            </div>
+          </div>
+
           <a href="/bills" class="result">
             <div class="title">
               擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
@@ -173,7 +213,10 @@
               <span class="badge badge--inprogress">
                 <span class="material-symbols-rounded">
                   clock_loader_40
-                  <!-- 有 10, 20, 40, 60, 80, 90 這幾個選項 -->
+                  <!--
+                    google icon 有 10, 20, 40, 60, 80, 90 這幾個選項，對應到
+                    提案, 一讀, 委員會, 二讀, 三讀, 頒佈, 生效
+                  -->
                 </span>
                 交付審查
               </span>
@@ -185,21 +228,21 @@
             <div class="legislators">
               相關委員：
               <span class="badge">
-                <!-- 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
                 <span class="party party--1"></span>
                 王定宇
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
-                王美惠
+                <span class="party party--0"></span>
+                黃國書
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
+                <span class="party party--4"></span>
                 王婉諭
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
-                伍麗華
+                <span class="party party--3"></span>
+                陳柏惟
               </span>
             </div>
           </a>
@@ -223,24 +266,81 @@
             <div class="legislators">
               相關委員：
               <span class="badge">
-                <!-- 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
                 <span class="party party--1"></span>
                 王定宇
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
-                王美惠
+                <span class="party party--0"></span>
+                黃國書
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
+                <span class="party party--4"></span>
                 王婉諭
               </span>
               <span class="badge">
-                <span class="party party--1"></span>
-                伍麗華
+                <span class="party party--3"></span>
+                陳柏惟
               </span>
             </div>
           </a>
+
+          <div class="pages">
+            <a href="#">上一頁</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">下一頁</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 查無搜尋結果時 -->
+      <section class="results">
+        <div class="container">
+          <h1>查無議案搜尋結果</h1>
+
+          <div class="filters">
+            <div class="filter">
+              搜尋關鍵字：移民
+            </div>
+
+            <div></div>
+
+            <!-- 有選時間時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                schedule
+              </span>
+              2023-12-01 ~ 2023-12-12
+            </div>
+
+            <!-- 有填寫委員名稱時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                group
+              </span>
+              林淑芬, 范雲
+            </div>
+
+            <!-- 有填寫法律名稱時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                gavel
+              </span>
+              入出國及移民法
+            </div>
+
+            <!-- 有填寫法律內容時顯示 -->
+            <div class="filter">
+              <span class="material-symbols-rounded">
+                receipt_long
+              </span>
+              出國及移民法有關規範
+            </div>
+          </div>
         </div>
       </section>
     </div>

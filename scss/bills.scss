@@ -7,16 +7,246 @@
     background-position: center center;
     background-size: cover;
     text-align: center;
+
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .proposer {
+      .title {
+        margin: 2rem auto 1rem auto;
+        padding: 0 1rem;
+        width: fit-content;
+        background: #fff;
+        border-radius: 100px;
+        font-weight: bold;
+      }
+
+      .proposers {
+      }
+    }
   }
 
   .legislators {
     padding: 2rem 0;
     background: #f4f0e4;
     text-align: center;
+  }
 
-    .legislator {
-      display: inline-block;
-      margin-right: 1rem;
+  .progress {
+    padding: 2rem 0;
+    background: #fff;
+    background-image: url('/images/progress_bg.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+
+    .progress-bar {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+
+      @media (max-width: 991px) {
+        display: block;
+        text-align: left;
+      }
+    }
+
+    .step {
+      position: relative;
+      word-break: break-all;
+
+      @media (max-width: 991px) {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-gap: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        border-top: 3px dotted #ccc;
+        position: absolute;
+        left: calc(50% + 1.5rem);
+        top: 1.5rem;
+        width: calc(100% - 3rem);
+
+        @media (max-width: 991px) {
+          width: 10px;
+          left: 1.5rem;
+          top: 3rem;
+          bottom: 0;
+          border-top: 0;
+          border-left: 3px dotted #ccc;
+        }
+      }
+
+      .icon {
+        & > span {
+          color: #ccc;
+          font-size: 3rem;
+        }
+      }
+
+      .content {
+        @media (max-width: 991px) {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          vertical-align: top;
+        }
+      }
+
+      .title {
+        color: #aaa;
+        font-size: 1.6rem;
+      }
+
+      .date {
+        color: #0005;
+      }
+
+      .links {
+        a {
+          margin: 0.25rem;
+          padding: 0.25rem 0.6rem;
+          display: inline-block;
+          color: var(--color);
+          font-size: 0.8rem;
+          background: #0001;
+          border-radius: 0.25rem;
+          text-decoration: none;
+        }
+      }
+
+      &.done {
+        .icon > span {
+          color: var(--green);
+        }
+
+        .title {
+          color: var(--color);
+        }
+
+        &:after {
+          border-color: var(--green);
+        }
+      }
+
+      &.active {
+        .icon > span {
+          color: var(--yellow);
+        }
+
+        .title {
+          color: var(--color);
+        }
+      }
+
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .comparation {
+    padding: 2rem 0;
+    text-align: center;
+
+    .compare {
+      margin-bottom: 3rem;
+
+      select {
+        width: 300px;
+      }
+      span {
+        margin: 0 1rem;
+
+        @media (max-width: 767px) {
+          display: block;
+        }
+      }
+    }
+
+    .bill {
+      margin: 1rem 0;
+      padding: 1rem;
+      box-shadow: 0 0 10px #0002;
+      border-radius: 0.25rem;
+      text-align: left;
+
+      .version {
+        margin: -1rem -1rem 1rem -1rem;
+        padding: 0.6rem 1rem;
+        color: var(--color);
+        font-weight: bold;
+        background: #0001;
+        text-decoration: none;
+      }
+
+      &--new {
+        .version {
+          background: #0901;
+        }
+      }
+
+      .content {
+      }
+
+      .comment {
+        margin-top: 1rem;
+        padding: 0.6rem;
+        background: #fafaec;
+        border-radius: 0.25rem;
+        font-size: 0.8rem;
+      }
+
+      &:first-child {
+        border-right: 1px solid #0001;
+      }
+    }
+
+    .bill-compare {
+      margin: 1.6rem 0;
+      display: grid;
+      overflow: hidden;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 0 8px #0002;
+      border-radius: 0.25rem;
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+      }
+
+      .bill {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+
+        .version {
+          background: #9001;
+        }
+
+        &:last-child {
+          .version {
+            background: #0901;
+          }
+        }
+      }
+    }
+
+    del {
+      background: #ffbdbd;
+      color: #0003;
+    }
+    ins {
+      background: #bedeac;
+      text-decoration: none;
     }
   }
 }

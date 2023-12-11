@@ -12,6 +12,10 @@
       margin: 0 auto;
       padding: 2rem 0;
 
+      @media (max-width: 767px) {
+        padding: 0;
+      }
+
       .search-keywords {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -66,6 +70,7 @@
       }
 
       .actions {
+        margin-top: 1.2rem;
         text-align: center;
       }
     }
@@ -78,6 +83,25 @@
 
     h1 {
       color: var(--primary);
+    }
+
+    .filters {
+      margin: 3rem 0 2rem 0;
+      padding: 0.8rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 0.4rem 1rem;
+      background: #f2f2f2;
+      border-radius: 0.25rem;
+      color: #777;
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr;
+      }
+
+      .filter {
+        margin-right: 2rem;
+      }
     }
   }
 
