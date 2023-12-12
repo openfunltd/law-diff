@@ -81,7 +81,7 @@
         }
       }
 
-      .icon {
+      .step-icon {
         & > span {
           color: #ccc;
           font-size: 3rem;
@@ -104,6 +104,10 @@
 
       .date {
         color: #0005;
+
+        .icon {
+          font-size: 0.8rem;
+        }
       }
 
       .links {
@@ -116,11 +120,15 @@
           background: #0001;
           border-radius: 0.25rem;
           text-decoration: none;
+
+          .icon {
+            font-size: 1rem;
+          }
         }
       }
 
       &.done {
-        .icon > span {
+        .step-icon > span {
           color: var(--green);
         }
 
@@ -134,7 +142,7 @@
       }
 
       &.active {
-        .icon > span {
+        .step-icon > span {
           color: var(--yellow);
         }
 

@@ -37,8 +37,9 @@ input,
 textarea,
 select,
 button {
-  padding: 0.8rem;
+  padding: 0.6rem 0.4rem;
   margin: 0;
+  min-height: 1rem;
   font-size: 16px;
   outline: none;
   border-radius: 0.25rem;
@@ -370,6 +371,7 @@ section {
 }
 
 ._search .search .search-form .search-keywords {
+  padding: 0.2rem 0.4rem;
   display: grid;
   grid-template-columns: 1fr auto;
   background: #fff;
@@ -574,7 +576,7 @@ section {
   }
 }
 
-._bills .progress .step .icon > span {
+._bills .progress .step .step-icon > span {
   color: #ccc;
   font-size: 3rem;
 }
@@ -597,6 +599,10 @@ section {
   color: rgba(0, 0, 0, 0.3333333333);
 }
 
+._bills .progress .step .date .icon {
+  font-size: 0.8rem;
+}
+
 ._bills .progress .step .links a {
   margin: 0.25rem;
   padding: 0.25rem 0.6rem;
@@ -608,7 +614,11 @@ section {
   text-decoration: none;
 }
 
-._bills .progress .step.done .icon > span {
+._bills .progress .step .links a .icon {
+  font-size: 1rem;
+}
+
+._bills .progress .step.done .step-icon > span {
   color: var(--green);
 }
 
@@ -620,7 +630,7 @@ section {
   border-color: var(--green);
 }
 
-._bills .progress .step.active .icon > span {
+._bills .progress .step.active .step-icon > span {
   color: var(--yellow);
 }
 
