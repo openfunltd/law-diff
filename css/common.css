@@ -468,6 +468,12 @@ section {
   text-decoration: none;
 }
 
+@media (max-width: 767px) {
+  ._search .result {
+    padding: 1rem;
+  }
+}
+
 ._search .result .title {
   margin-bottom: 0.4rem;
   font-size: 1.2rem;
@@ -690,6 +696,10 @@ section {
 
 ._bills .comparation .bill--new .version {
   background: rgba(0, 153, 0, 0.0666666667);
+}
+
+._bills .comparation .bill .passed-icon {
+  color: var(--green);
 }
 
 ._bills .comparation .bill .comment {

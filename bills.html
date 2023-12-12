@@ -451,9 +451,12 @@
                   v-else
                   class="version"
                 >
-                  <template v-if="bill.from?.passed">
-                    [通過]
-                  </template>
+                  <span
+                    v-if="bill.from?.passed"
+                    class="passed-icon material-symbols-rounded"
+                  >
+                    task_alt
+                  </span>
                   {{ bill.from?.name }}
                   <template v-if="bill.from?.new">
                     新增條文
@@ -479,9 +482,12 @@
                 class="bill bill--new"
               >
                 <div class="version">
-                  <template v-if="bill.by?.passed">
-                    [通過]
-                  </template>
+                  <span
+                    v-if="bill.by?.passed"
+                    class="passed-icon material-symbols-rounded"
+                  >
+                    task_alt
+                  </span>
                   {{ bill.by?.name }}
                   <template v-if="bill.by?.new">
                     新增條文
@@ -511,9 +517,12 @@
               >
                 <div class="bill">
                   <div class="version">
-                    <template v-if="bill.from?.passed">
-                      [通過]
-                    </template>
+                    <span
+                      v-if="bill.from?.passed"
+                      class="passed-icon material-symbols-rounded"
+                    >
+                      task_alt
+                    </span>
                     {{ bill.from?.name }}
                     <template v-if="bill.from?.new">
                       新增條文
@@ -534,9 +543,12 @@
                 </div>
                 <div class="bill">
                   <div class="version">
-                    <template v-if="bill.by?.passed">
-                      [通過]
-                    </template>
+                    <span
+                      v-if="bill.by?.passed"
+                      class="passed-icon material-symbols-rounded"
+                    >
+                      task_alt
+                    </span>
                     {{ bill.by?.name }}
                     <template v-if="bill.by?.new">
                       新增條文

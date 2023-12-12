@@ -118,6 +118,10 @@
     color: currentColor;
     text-decoration: none;
 
+    @media (max-width: 767px) {
+      padding: 1rem;
+    }
+
     .title {
       margin-bottom: 0.4rem;
       font-size: 1.2rem;
