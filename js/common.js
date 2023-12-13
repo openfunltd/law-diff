@@ -4,13 +4,18 @@ const { ref, computed, createApp, onMounted } = Vue
 
 const common = {
   setup () {
+    // ---------- 共用 ----------
     // 是否顯示rwd menu
     const rwdMenuVisible = ref(false)
 
+    // ---------- 搜尋頁 ----------
     // 搜尋頁是否顯示進階搜尋
     const advancedSearchVisible = ref(false)
 
+    // ---------- 議案頁 ----------
     // 議案頁的兩個對照版本 0為現行條文 -1為通過條文 其他請參考網頁中的versions
+    const billViewing = ref('comparation') // 預設顯示法案對照表
+
     const compareFrom = ref(0)
     const compareBy = ref(-1)
 
@@ -103,6 +108,7 @@ const common = {
     return {
       rwdMenuVisible,
       advancedSearchVisible,
+      billViewing,
       compareFrom,
       compareBy,
       billVersions,

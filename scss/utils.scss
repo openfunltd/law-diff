@@ -31,7 +31,13 @@ h1 {
 
 h2 {
   .icon {
-    // color: var(--gold);
+    width: 1.6em;
+    height: 1.6em;
+    font-size: 1em;
+    line-height: 1.6em;
+    background-color: var(--gold);
+    border-radius: 100px;
+    color: #fff;
   }
 }
 
@@ -123,8 +129,29 @@ section {
   vertical-align: top;
   line-height: 1.2;
 
+  a {
+    color: currentColor;
+    text-decoration: none;
+  }
+
   .avatar {
     margin-bottom: 0.25rem;
+  }
+
+  &--sm {
+    .avatar {
+      img {
+        width: 50px;
+        height: 50px;
+        border-width: 2px solid #fff;
+      }
+
+      .party {
+        width: 0.6rem;
+        height: 0.6rem;
+        bottom: 4px;
+      }
+    }
   }
 }
 

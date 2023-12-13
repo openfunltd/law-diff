@@ -81,7 +81,7 @@
 
           <div class="proposer">
             <div class="title">
-              提案人
+              主提案第一人
             </div>
             <div class="proposers">
               <div class="legislator">
@@ -91,25 +91,7 @@
                   <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
                 </div>
                 <div>
-                  李昆澤
-                </div>
-              </div>
-              <div class="legislator">
-                <div class="avatar">
-                  <span class="party party--1"></span>
-                  <img src="https://www.ly.gov.tw/Images/Legislators/100005.jpg" alt="伍麗華 Saidhai‧Tahovecahe">
-                </div>
-                <div>
-                  伍麗華 Saidhai‧Tahovecahe
-                </div>
-              </div>
-              <div class="legislator">
-                <div class="avatar">
-                  <span class="party party--7"></span>
-                  <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
-                </div>
-                <div>
-                  蔣萬安
+                  <a href="#">李昆澤</a>
                 </div>
               </div>
             </div>
@@ -117,7 +99,36 @@
         </div>
       </section>
 
-      <section class="progress">
+      <section class="bill-tab">
+        <div class="container">
+          <a
+            href="#"
+            :class="{ active: billViewing === 'comparation' }"
+            @click.prevent="billViewing = 'comparation'"
+          >
+            法案對照表
+          </a>
+          <a
+            href="#"
+            :class="{ active: billViewing === 'progress' }"
+            @click.prevent="billViewing = 'progress'"
+          >
+            立法進度
+          </a>
+          <a
+            href="#"
+            :class="{ active: billViewing === 'legislators' }"
+            @click.prevent="billViewing = 'legislators'"
+          >
+            相關委員
+          </a>
+        </div>
+      </section>
+
+      <section
+        v-if="billViewing === 'progress'"
+        class="progress"
+      >
         <div class="container">
           <h2>
             <span class="icon material-symbols-rounded">
@@ -299,102 +310,142 @@
         </div>
       </section>
 
-      <section class="legislators">
+      <section
+        v-if="billViewing === 'legislators'"
+        class="legislators"
+      >
         <div class="container">
-          <h2>
-            <span class="icon material-symbols-rounded">
-              groups
-            </span>
-            連署名單
-          </h2>
-          <div class="legislator">
-            <div class="avatar">
-              <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-              <span class="party party--1"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
+          <div class="row">
+            <div class="col">
+              <h2>
+                <span class="icon material-symbols-rounded">
+                  groups
+                </span>
+                主提案非第一人
+              </h2>
+              <div>
+                <div class="legislator">
+                  <div class="avatar">
+                    <span class="party party--3"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
+                  </div>
+                  <div>
+                    陳柏惟
+                  </div>
+                </div>
+                <div class="legislator">
+                  <div class="avatar">
+                    <span class="party party--7"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
+                  </div>
+                  <div>
+                    蔣萬安
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              李昆澤
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--3"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
-            </div>
-            <div>
-              陳柏惟
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--7"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
-            </div>
-            <div>
-              蔣萬安
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-              <span class="party party--1"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
-            </div>
-            <div>
-              李昆澤
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--3"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
-            </div>
-            <div>
-              陳柏惟
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--7"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
-            </div>
-            <div>
-              蔣萬安
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-              <span class="party party--1"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
-            </div>
-            <div>
-              李昆澤
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--3"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
-            </div>
-            <div>
-              陳柏惟
-            </div>
-          </div>
-          <div class="legislator">
-            <div class="avatar">
-              <span class="party party--7"></span>
-              <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
-            </div>
-            <div>
-              蔣萬安
-            </div>
+            <div class="separator"></div>
+            <div class="col">
+              <h2>
+                <span class="icon material-symbols-rounded">
+                  groups
+                </span>
+                連署名單
+              </h2>
+              <div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                    <span class="party party--1"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
+                  </div>
+                  <div>
+                    李昆澤
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--3"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
+                  </div>
+                  <div>
+                    陳柏惟
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--7"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
+                  </div>
+                  <div>
+                    蔣萬安
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                    <span class="party party--1"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
+                  </div>
+                  <div>
+                    李昆澤
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--3"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
+                  </div>
+                  <div>
+                    陳柏惟
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--7"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
+                  </div>
+                  <div>
+                    蔣萬安
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                    <span class="party party--1"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
+                  </div>
+                  <div>
+                    李昆澤
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--3"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100063.jpg" alt="陳柏惟">
+                  </div>
+                  <div>
+                    陳柏惟
+                  </div>
+                </div>
+                <div class="legislator legislator--sm">
+                  <div class="avatar">
+                    <span class="party party--7"></span>
+                    <img src="https://www.ly.gov.tw/Images/Legislators/100095.jpg" alt="蔣萬安">
+                  </div>
+                  <div>
+                    蔣萬安
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </section>
 
-      <section class="comparation">
+      <section
+        v-if="billViewing === 'comparation'"
+        class="comparation"
+      >
         <div class="container">
           <h2>
             <span class="icon material-symbols-rounded">
@@ -404,7 +455,7 @@
           </h2>
 
           <div class="compare">
-            <select v-model="compareFrom">
+            <!-- <select v-model="compareFrom" disabled>
               <option :value="0">現行條文</option>
               <option
                 v-for="(item, idx) in billVersions"
@@ -412,9 +463,9 @@
               >
                 {{ item }}
               </option>
-            </select>
+            </select> -->
             <span>
-              對照
+              現行條文對照
             </span>
             <select v-model="compareBy">
               <option :value="-1">通過條文</option>

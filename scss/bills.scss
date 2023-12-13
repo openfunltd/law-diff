@@ -25,20 +25,87 @@
     }
   }
 
-  .legislators {
-    padding: 2rem 0;
-    background: #f4f0e4;
+  .bill-tab {
+    position: sticky;
+    top: 4rem;
+    z-index: 9000;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
     text-align: center;
+
+    a {
+      display: inline-block;
+      margin: 0 1rem;
+      color: var(--color);
+      text-decoration: none;
+      transition: color 0.4s;
+
+      &:after {
+        display: block;
+        content: '';
+        border-bottom: 3px solid var(--red);
+        width: 0;
+        opacity: 0;
+        transition: width 0.4s, opacity 0.4s;
+      }
+
+      &:hover {
+        color: var(--red);
+      }
+
+      &.active {
+        &:after {
+          width: 100%;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .legislators {
+    padding: 2rem 0 4rem 0;
+    background: #f6f5f1;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 2.2rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: auto 1px auto;
+      justify-content: space-around;
+
+      .separator {
+        border-left: 1px solid #0001;
+      }
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+
+        .separator {
+          border-left: none;
+          border-bottom: 1px solid #0001;
+        }
+      }
+    }
   }
 
   .progress {
-    padding: 2rem 0;
+    padding: 2rem 0 4rem 0;
     background: #fff;
     background-image: url('/images/progress_bg.svg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     text-align: center;
+
+    h2 {
+      margin-bottom: 3rem;
+    }
 
     .progress-bar {
       display: grid;
@@ -160,7 +227,7 @@
   }
 
   .comparation {
-    padding: 2rem 0;
+    padding: 2rem 0 4rem 0;
     text-align: center;
 
     .compare {
