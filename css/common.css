@@ -379,7 +379,7 @@ section {
 ._search .search {
   padding: 2rem 0;
   background: #f7f4ca;
-  background-image: url("/images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+  background-image: url("./images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -523,7 +523,7 @@ section {
 ._bills .bill-info {
   padding: 2rem 0;
   background: #f7f4ca;
-  background-image: url("/images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
+  background-image: url("./images/search_bg.svg"), linear-gradient(25deg, #cbe8f5, #f7f4ca);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -616,7 +616,7 @@ section {
 ._bills .progress {
   padding: 2rem 0 4rem 0;
   background: #fff;
-  background-image: url("/images/progress_bg.svg");
+  background-image: url("./images/progress_bg.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
