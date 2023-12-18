@@ -1,0 +1,390 @@
+:root {
+  font-family: sans-serif, 'PingFang', 'Microsoft JhengHei';
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  --color: #444;
+  --link: var(--red);
+  --red: #d62322;
+  --green: #76c114;
+  --yellow: #d6b113;
+  --gold: #c2a86b;
+  --primary: var(--red);
+}
+
+body {
+  margin: 0;
+  color: var(--color);
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2rem;
+  text-align: center;
+
+  .icon {
+    margin-top: -0.4rem;
+    font-size: 2.6rem;
+    color: var(--gold);
+  }
+}
+
+h2 {
+  .icon {
+    width: 1.6em;
+    height: 1.6em;
+    font-size: 1em;
+    line-height: 1.6em;
+    background-color: var(--gold);
+    border-radius: 100px;
+    color: #fff;
+  }
+}
+
+a {
+  color: var(--link);
+}
+
+input, textarea, select, button {
+  padding: 0.6rem 0.4rem;
+  margin: 0;
+  min-height: 1rem;
+  font-size: 16px;
+  outline: none;
+  border-radius: 0.25rem;
+  border: 1px solid #aaa;
+  color: var(--color);
+}
+
+select {
+  background: #fff;
+}
+
+.btn {
+  margin: 0.25rem;
+  padding: 0.6rem 1rem;
+  appearance: none;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25rem;
+
+  &--gray {
+    background: #aaa;
+  }
+}
+
+section {
+  box-sizing: border-box;
+}
+
+.main {
+  min-height: calc(100vh - 200px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
+.pages {
+  margin: 3rem 0;
+  text-align: center;
+
+  a {
+    margin: 0 0.4rem;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+      color: var(--color);
+    }
+  }
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0.25rem 0.8rem;
+  background: #0001;
+  border-radius: 0.25rem;
+
+  &--inprogress {
+    background: var(--yellow);
+    color: #fff;
+  }
+
+  &--done {
+    background: var(--green);
+    color: #fff;
+  }
+}
+
+.legislator {
+  margin: 0 0.5rem 1rem 0.5rem;
+  max-width: 90px;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.2;
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+  }
+
+  .avatar {
+    margin-bottom: 0.25rem;
+  }
+
+  &--sm {
+    .avatar {
+      img {
+        width: 50px;
+        height: 50px;
+        border-width: 2px solid #fff;
+      }
+
+      .party {
+        width: 0.6rem;
+        height: 0.6rem;
+        bottom: 4px;
+      }
+    }
+  }
+}
+
+.avatar {
+  display: inline-block;
+  position: relative;
+
+  img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border: 4px solid #fff;
+    border-radius: 100px;
+    object-fit: cover;
+  }
+
+  .party {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    right: 0;
+    bottom: 6px;
+    border: 4px solid #fff;
+  }
+}
+
+.party {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #aaa;
+  border-radius: 100px;
+
+  // 無黨籍
+  &--1 {
+    background: #aaa;
+  }
+
+  // 民進黨
+  &--1 {
+    background: #1B9431;
+  }
+
+  // 社民黨
+  &--2 {
+    background: #FF0088;
+  }
+
+  // 台灣基進
+  &--3 {
+    background: #a73f24;
+  }
+
+  // 時代力量
+  &--4 {
+    background: #FBBE01
+  }
+
+  // 綠黨
+  &--5 {
+    background: #73BE00
+  }
+
+  // 民眾黨
+  &--6 {
+    background: #28C8C8;
+  }
+
+  // 國民黨
+  &--7 {
+    background: #000099;
+  }
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: #fff;
+
+  .header {
+    height: 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 3rem;
+    align-items: center;
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr auto;
+    }
+
+    a {
+      color: currentColor;
+      text-decoration: none;
+      transition: color 0.4s;
+
+      &:hover {
+        color: var(--red);
+      }
+    }
+
+    .logo {
+      img {
+        height: 2.4rem;
+        margin-right: 0.6rem;
+        vertical-align: middle;
+      }
+    }
+
+    .rwd-menu-icon {
+      display: none;
+
+      button {
+        appearance: none;
+        background: transparent;
+        border: none;
+      }
+
+      @media (max-width: 991px) {
+        display: block;
+      }
+    }
+
+    .menu {
+      display: flex;
+
+      a {
+        display: block;
+        padding: 0.4rem 1rem;
+        border-left: 1px solid #fff2;
+      }
+
+      .search-bar {
+        display: grid;
+        grid-template-columns: 1fr 1.6rem;
+        margin: 0 1rem;
+        padding: 0 0.8rem;
+        background: #0001;
+        border-radius: 0.25rem;
+
+        input, button {
+          display: block;
+          padding: 0;
+          appearance: none;
+          background: transparent;
+          border: 0;
+        }
+      }
+
+      @media (max-width: 991px) {
+        padding: 0.4rem 4%; // %4 is same as container
+        display: block;
+        position: fixed;
+        top: 4rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        transform: translateX(100%);
+        transition: transform 0.4s;
+        color: #222;
+
+        & > a {
+          padding: 1rem 0;
+          display: block;
+          border-bottom: 1px solid #0002;
+        }
+
+        & > .search-bar {
+          margin: 1rem 0;
+          padding: 1rem 0.4rem;
+          background-color: #0001;
+        }
+
+        &.active {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+}
+
+.site-footer {
+  padding: 2rem 0;
+  background: #222;
+  color: #fff;
+  font-size: 0.8rem;
+
+  .footer {
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+  }
+
+  .ccw {
+    img {
+      height: 2.2rem;
+    }
+  }
+
+  .info {
+    margin: 3rem 0 1.4rem 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    .contact {
+    }
+
+    .sns {
+      text-align: right;
+
+      a {
+        &:after {
+          content: ', '
+        }
+
+        &:last-child {
+          &:after {
+            content: none;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+
+      .sns {
+        margin-top: 1rem;
+        text-align: left;
+      }
+    }
+  }
+}
