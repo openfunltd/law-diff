@@ -1,4 +1,4 @@
-import Diff from '/js/text_diff.js'
+import Diff from './js/text_diff.js'
 
 const { ref, computed, createApp, onMounted } = Vue
 
