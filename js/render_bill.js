@@ -2,7 +2,7 @@ renderData();
 
 async function renderData(){
   //const billResponse = await fetch("https://ly.govapi.tw/bill/20委10033531");
-  const billResponse = await fetch("https://ly.govapi.tw/bill/20委100309220委100309299");
+  const billResponse = await fetch("https://ly.govapi.tw/bill/20委10030929");
   //const billResponse = await fetch("https://ly.govapi.tw/bill/20政10034320");
   const billData = await billResponse.json();
     
