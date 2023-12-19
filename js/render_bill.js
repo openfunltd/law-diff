@@ -1,7 +1,8 @@
 renderData();
 
 async function renderData(){
-  const billResponse = await fetch("https://ly.govapi.tw/bill/20委10033531");
+  //const billResponse = await fetch("https://ly.govapi.tw/bill/20委10033531");
+  const billResponse = await fetch("https://ly.govapi.tw/bill/20委100309220委100309299");
   //const billResponse = await fetch("https://ly.govapi.tw/bill/20政10034320");
   const billData = await billResponse.json();
     
@@ -24,7 +25,7 @@ async function renderData(){
   document.getElementById('billName').innerText = billName;
   document.getElementById('reason').innerText = reason;
   document.getElementById('text-theFirst').innerText = theFirst;
-  document.getElementById('party-theFirst').classList.add('party--1');
+  document.getElementById('party-theFirst').classList.add(`party--${partyColorCode[partyTheFirst]}`);
   const imgTheFirst = document.getElementById('img-theFirst');
   imgTheFirst.src = picUrlTheFirst;
   imgTheFirst.alt = theFirst;
@@ -88,7 +89,7 @@ function buildlegislatorDiv(listName, name, party, picUrl) {
   const avatarDiv = document.createElement('div');
   avatarDiv.className = 'avatar';
   const partySpan = document.createElement('span');
-  partySpan.className = 'party party--0';
+  partySpan.className = `party party--${partyColorCode[party]}`;
   const img = document.createElement('img');
   img.src = picUrl;
   img.alt = name;
@@ -101,4 +102,16 @@ function buildlegislatorDiv(listName, name, party, picUrl) {
   legislatorDiv.appendChild(nameDiv);
 
   return legislatorDiv;
+}
+
+//0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7
+const partyColorCode = {
+  無黨籍 : 0,
+  民主進步黨 : 1,
+  社會民主黨 : 2,
+  台灣基進 : 3,
+  時代力量 : 4,
+  綠黨 : 5,
+  台灣民眾黨 : 6,
+  中國國民黨 : 7,
 }
