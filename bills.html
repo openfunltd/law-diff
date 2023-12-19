@@ -67,7 +67,7 @@
       <section class="bill-info">
         <div class="container">
           <div class="content">
-            <h1>擬具「消費者保護法增訂第四條之一條文草案」，請審議案。</h1>
+            <h1 id="billName"></h1>
             <div class="reasons">
               <h2>
                 <span class="icon material-symbols-rounded">
@@ -75,7 +75,7 @@
                 </span>
                 立法理由
               </h2>
-              <p>本院委員李桐豪、陳怡潔、劉建國、盧秀燕、李鴻鈞、楊玉欣等24人，鑒於現行預付型商品之履約保證，多依據「消費者保護法」第十七條第一項授權：「中央主管機關得選擇特定行業，公告規定其定型化契約應記載或不得記載之事項」刊載於相關規定之中，但為使保障消費者預支消費行為更加完備，爰提案增訂消費者保護法第四條之一，強制企業達一定標準、規模之預付型商品須提供履約保證，並明訂於契約內容之中。是否有當？敬請公決。</p>
+              <p id="reason"></p>
             </div>
           </div>
 
@@ -87,11 +87,11 @@
               <div class="legislator">
                 <div class="avatar">
                   <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-                  <span class="party party--1"></span>
-                  <img src="https://www.ly.gov.tw/Images/Legislators/100006.jpg" alt="李昆澤">
+                  <span id="party-theFirst" class="party"></span>
+                  <img id="img-theFirst" src="" alt="">
                 </div>
                 <div>
-                  <a href="#">李昆澤</a>
+                  <a id="text-theFirst" href="#"></a>
                 </div>
               </div>
             </div>
@@ -910,5 +910,6 @@
       ]
     ]
   </script>
+  <script src="./js/get_bill_data.js"></script>
 </body>
 </html>
