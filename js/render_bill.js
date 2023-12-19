@@ -30,12 +30,13 @@ async function renderData(){
   imgTheFirst.alt = theFirst;
 
   let nonFirsts = [];
+  const cosigners = (billData.連署人 != undefined) ? billData.連署人 : [];
   if (billData.提案人 != undefined && billData.提案人.length > 1) {
     nonFirsts = billData.提案人.slice(1);
   }
 
   const mainDiv = document.querySelector('.main');
-  mainDivObserver = new MutationObserver(() => renderLegislatorsSection(nonFirsts, legislatorData));
+  mainDivObserver = new MutationObserver(() => renderLegislatorsSection(nonFirsts, cosigners, legislatorData));
   mainDivObserver.observe(mainDiv, {childList: true});
 }
 
@@ -48,26 +49,40 @@ function getLegislatorData(name, legislatorData) {
   return ["", ""];
 }
 
-function renderLegislatorsSection(nonFirsts, legislatorData) {
+function renderLegislatorsSection(nonFirsts, cosigners, legislatorData) {
   const nonFirstsDiv = document.getElementById('nonFirsts');
-  if (nonFirstsDiv === null || nonFirsts.length === 0) { return; }
-  for (const nonFirst of nonFirsts) {
-    const legislators = legislatorData.legislators.filter((legislator) => legislator.name === nonFirst);
-    let picUrl = "";
-    let party = "";
-    if (legislators.length === 1) {
-      picUrl = legislators[0].picUrl.replace("http://", "https://");
-      party = legislators[0].party;
+  const cosignersDiv = document.getElementById('cosigners');
+  if (nonFirstsDiv != null && nonFirsts.length != 0) {
+    for (const nonFirst of nonFirsts) {
+      const legislators = legislatorData.legislators.filter((legislator) => legislator.name === nonFirst);
+      let picUrl = "";
+      let party = "";
+      if (legislators.length === 1) {
+        picUrl = legislators[0].picUrl.replace("http://", "https://");
+        party = legislators[0].party;
+      }
+      nonFirstsDiv.appendChild(buildlegislatorDiv("nonFirsts", nonFirst, party, picUrl));
     }
-    nonFirstsDiv.appendChild(buildlegislatorDiv("nonFirst", nonFirst, party, picUrl));
+  }
+  if (cosignersDiv != null && cosigners.length != 0) {
+    for (const cosigner of cosigners) {
+      const legislators = legislatorData.legislators.filter((legislator) => legislator.name === cosigner);
+      let picUrl = "";
+      let party = "";
+      if (legislators.length === 1) {
+        picUrl = legislators[0].picUrl.replace("http://", "https://");
+        party = legislators[0].party;
+      }
+      cosignersDiv.appendChild(buildlegislatorDiv("cosigners", cosigner, party, picUrl));
+    }
   }
 }
 
 function buildlegislatorDiv(listName, name, party, picUrl) {
   const legislatorDiv = document.createElement('div');
-  if (listName === "nonFirst") {
+  if (listName === "nonFirsts") {
     legislatorDiv.className = 'legislator';
-  } else if (listName === "cosign") {
+  } else if (listName === "cosigners") {
     legislatorDiv.className = 'legislator legislator--sm';
   }
   const avatarDiv = document.createElement('div');
