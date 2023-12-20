@@ -21,6 +21,7 @@ async function renderData(){
   const legislatorResponse = await fetch(`https://ly.govapi.tw/legislator/${sessionPeriod}?limit=200`)
   const legislatorData = await legislatorResponse.json(); 
   const [partyTheFirst, picUrlTheFirst] = getLegislatorData(theFirst, legislatorData);
+  const data = {"billData": billData, "legislatorData": legislatorData};
 
   document.getElementById('billName').innerText = billName;
   document.getElementById('reason').innerText = reason;
@@ -30,15 +31,31 @@ async function renderData(){
   imgTheFirst.src = picUrlTheFirst;
   imgTheFirst.alt = theFirst;
 
-  let nonFirsts = [];
-  const cosigners = (billData.連署人 != undefined) ? billData.連署人 : [];
-  if (billData.提案人 != undefined && billData.提案人.length > 1) {
-    nonFirsts = billData.提案人.slice(1);
-  }
 
   const mainDiv = document.querySelector('.main');
-  mainDivObserver = new MutationObserver(() => renderLegislatorsSection(nonFirsts, cosigners, legislatorData));
+  //mainDivObserver = new MutationObserver(() => renderLegislatorsSection(nonFirsts, cosigners, legislatorData));
+  mainDivObserver = new MutationObserver(() => dispatchSection(data));
   mainDivObserver.observe(mainDiv, {childList: true});
+}
+
+function dispatchSection(data) {
+  const comparationDivs = document.getElementsByClassName('comparation');
+  const progressDivs = document.getElementsByClassName('progress');
+  const legislatorsDivs = document.getElementsByClassName('legislators');
+  const billData = data.billData;
+  const legislatorData = data.legislatorData;
+  if (comparationDivs.length > 0) {
+    //TODO
+  } else if (progressDivs.length > 0) {
+    //TODO
+  } else if (legislatorsDivs.length > 0) {
+    let nonFirsts = [];
+    const cosigners = (billData.連署人 != undefined) ? billData.連署人 : [];
+    if (billData.提案人 != undefined && billData.提案人.length > 1) {
+      nonFirsts = billData.提案人.slice(1);
+    }
+    renderLegislatorsSection(nonFirsts, cosigners, legislatorData);
+  }
 }
 
 function getLegislatorData(name, legislatorData) {
