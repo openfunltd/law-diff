@@ -72,25 +72,13 @@ function renderLegislatorsSection(nonFirsts, cosigners, legislatorData) {
   const cosignersDiv = document.getElementById('cosigners');
   if (nonFirstsDiv != null && nonFirsts.length != 0) {
     for (const nonFirst of nonFirsts) {
-      const legislators = legislatorData.legislators.filter((legislator) => legislator.name === nonFirst);
-      let picUrl = "";
-      let party = "";
-      if (legislators.length === 1) {
-        picUrl = legislators[0].picUrl.replace("http://", "https://");
-        party = legislators[0].party;
-      }
+      const [party, picUrl] = getLegislatorData(nonFirst, legislatorData);
       nonFirstsDiv.appendChild(buildlegislatorDiv("nonFirsts", nonFirst, party, picUrl));
     }
   }
   if (cosignersDiv != null && cosigners.length != 0) {
     for (const cosigner of cosigners) {
-      const legislators = legislatorData.legislators.filter((legislator) => legislator.name === cosigner);
-      let picUrl = "";
-      let party = "";
-      if (legislators.length === 1) {
-        picUrl = legislators[0].picUrl.replace("http://", "https://");
-        party = legislators[0].party;
-      }
+      const [party, picUrl] = getLegislatorData(cosigner, legislatorData);
       cosignersDiv.appendChild(buildlegislatorDiv("cosigners", cosigner, party, picUrl));
     }
   }
