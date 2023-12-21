@@ -17,7 +17,7 @@ const common = {
     const billViewing = ref('comparation') // 預設顯示法案對照表
 
     const compareFrom = ref(0)
-    const compareBy = ref(-1)
+    const compareBy = ref(1)
 
     // 議案頁版本修改者與修改內容
     const billVersions = ref([])
@@ -25,7 +25,7 @@ const common = {
     let versions = [];
 
     const loadComparationData = async () => {
-      versions = await getComparationData();
+      const [versions, bills] = await getComparationData();
       try {
         if (versions && versions.length) {
           billVersions.value = versions.slice(1, versions.length)

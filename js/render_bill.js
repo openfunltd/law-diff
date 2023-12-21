@@ -31,18 +31,21 @@ async function renderData(){
   imgTheFirst.src = picUrlTheFirst;
   imgTheFirst.alt = theFirst;
 
-
   const mainDiv = document.querySelector('.main');
-  mainDivObserver = new MutationObserver(() => dispatchSection(data));
-  mainDivObserver.observe(mainDiv, {childList: true});
+  const mainDivObserver = new MutationObserver(() => dispatchSection(data, mainDivObserver));
+  mainDivObserver.observe(mainDiv, {childList: true, subtree: true});
 }
 
-function dispatchSection(data) {
+function dispatchSection(data, observer) {
+  const comparationDivs = document.getElementsByClassName('comparation');
   const progressDivs = document.getElementsByClassName('progress');
   const legislatorsDivs = document.getElementsByClassName('legislators');
   const billData = data.billData;
   const legislatorData = data.legislatorData;
-  if (progressDivs.length > 0) {
+  observer.disconnect();
+  if (comparationDivs.length > 0) {
+    renderVersionName();
+  } else if (progressDivs.length > 0) {
     //TODO
   } else if (legislatorsDivs.length > 0) {
     let nonFirsts = [];
@@ -52,6 +55,35 @@ function dispatchSection(data) {
     }
     renderLegislatorsSection(nonFirsts, cosigners, legislatorData);
   }
+  const mainDiv = document.querySelector('.main');
+  observer.observe(mainDiv, {childList: true, subtree: true});
+}
+
+function renderVersionName() {
+  const versionSelect = document.getElementById("versionSelect");
+  const selectValue = versionSelect.selectedIndex;
+  if (selectValue === -1) { return; }
+  const versionName = versionSelect.options[selectValue].innerText;
+  const elements = document.getElementsByClassName("version");
+  for (const element of elements) {
+    if (element.innerText === "") {
+      element.innerText = "現行條文";
+    } else if (element.innerText.includes("修正條文")) {
+      element.innerText = versionName + "提案 修正條文";
+    } else if (element.innerText.includes("新增條文")) {
+      element.innerText = versionName + "提案 新增條文";
+    }
+  }
+}
+
+function getIdString(row) {
+  let idString = "";
+  if (row.現行 != "") {
+    idString = row.現行.replace(/　/g, ' ').split(' ')[0];
+  } else {
+    idString = row.修正.replace(/　/g, ' ').split(' ')[0];
+  }
+  return idString;
 }
 
 async function getComparationData() {
@@ -66,10 +98,50 @@ async function getComparationData() {
     billDataArr.push(relatedBillData);
   }
   let versions = ['現行條文'];
+  let currentLaws = [];
+
+  //Figure out how many groups of law-diff.
   for (const billData of billDataArr) {
+    if (billData.對照表 === undefined){ continue; }
     versions.push(billData['提案單位/提案委員']);
+    const rows = billData.對照表[0].rows;
+    for (const row of rows) {
+      const idString = getIdString(row);
+      currentLawIndex = currentLaws.findIndex((law) => law.idString === idString);
+      if (currentLawIndex === -1) {
+        currentLaws.push({"idString": idString, "currentLaw": row.現行})
+      }
+    }
   }
-  return versions;
+
+  //Build variable bills for frontend to render/display
+  let bills = [];
+  for (const law of currentLaws) {
+    bills.push([{
+                 "content": (law.currentLaw === "") ? null : law.currentLaw,
+                 "passed": false,
+                 "comment": null
+                }]);
+  }
+  for (let i = 0; i < currentLaws.length; i++) {
+    const idString = currentLaws[i].idString;
+    for (const billData of billDataArr) {
+      if (billData.對照表 === undefined){ continue; }
+      let payload = {"content": null, "passed": false, "comment": null};
+      const rows = billData.對照表[0].rows;
+      for (const row of rows) {
+        const diffIdString = getIdString(row);
+        if (diffIdString === idString){
+          payload.content = row.修正;
+          payload.comment = row.說明;
+          break;
+        }
+      }
+      bills[i].push(payload);
+    }
+  }
+
+  return [versions, bills];
 }
 
 function getLegislatorData(name, legislatorData) {
