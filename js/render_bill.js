@@ -33,20 +33,16 @@ async function renderData(){
 
 
   const mainDiv = document.querySelector('.main');
-  //mainDivObserver = new MutationObserver(() => renderLegislatorsSection(nonFirsts, cosigners, legislatorData));
   mainDivObserver = new MutationObserver(() => dispatchSection(data));
   mainDivObserver.observe(mainDiv, {childList: true});
 }
 
 function dispatchSection(data) {
-  const comparationDivs = document.getElementsByClassName('comparation');
   const progressDivs = document.getElementsByClassName('progress');
   const legislatorsDivs = document.getElementsByClassName('legislators');
   const billData = data.billData;
   const legislatorData = data.legislatorData;
-  if (comparationDivs.length > 0) {
-    //TODO
-  } else if (progressDivs.length > 0) {
+  if (progressDivs.length > 0) {
     //TODO
   } else if (legislatorsDivs.length > 0) {
     let nonFirsts = [];
@@ -56,6 +52,24 @@ function dispatchSection(data) {
     }
     renderLegislatorsSection(nonFirsts, cosigners, legislatorData);
   }
+}
+
+async function getComparationData() {
+  const GET_billNo = document.location.search.match(/billNo=([0-9]*)/);
+  let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
+  const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
+  const billData = await billResponse.json();
+  let billDataArr = [billData];
+  for (const relatedBill of billData.關連議案){
+    const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${relatedBill.billNo}`);
+    const relatedBillData = await relatedBillResponse.json();
+    billDataArr.push(relatedBillData);
+  }
+  let versions = ['現行條文'];
+  for (const billData of billDataArr) {
+    versions.push(billData['提案單位/提案委員']);
+  }
+  return versions;
 }
 
 function getLegislatorData(name, legislatorData) {
