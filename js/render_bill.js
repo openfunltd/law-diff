@@ -6,6 +6,7 @@ async function renderData(){
   //202103113910000 20委10030929
   //201103147900000 20政10034320
   let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
+  billNo = encodeURIComponent(billNo);
   const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
   const billData = await billResponse.json();
     
