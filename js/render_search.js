@@ -45,7 +45,7 @@ async function buildBillResults(root, bill) {
 
   //Build root <a> element
   const billRootA = document.createElement('a');
-  billRootA.href = `/bills.html?billNo=${bill.billNo}`;
+  billRootA.href = `bills.html?billNo=${bill.billNo}`;
   billRootA.className = 'result';
   billRootA.target = '_blank';
 
