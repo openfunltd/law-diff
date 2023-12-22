@@ -1,9 +1,12 @@
 renderData();
 
 async function renderData(){
-  //const billResponse = await fetch("https://ly.govapi.tw/bill/20委10033531");
-  const billResponse = await fetch("https://ly.govapi.tw/bill/20委10030929");
-  //const billResponse = await fetch("https://ly.govapi.tw/bill/20政10034320");
+  const GET_billNo = document.location.search.match(/billNo=([0-9]*)/);
+  //202103139970000 20委10033531
+  //202103113910000 20委10030929
+  //201103147900000 20政10034320
+  let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
+  const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
   const billData = await billResponse.json();
     
   let billName = billData.議案名稱;
