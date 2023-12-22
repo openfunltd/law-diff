@@ -50,8 +50,8 @@
             <a href="https://ccw.org.tw/about/brief">認識公督盟</a>
             <a href="https://ccw.org.tw/assess">立委評鑑</a>
 
-            <form action="/" class="search-bar">
-              <input type="text" placeholder="搜尋議案">
+            <form action="/" method="GET" class="search-bar">
+              <input type="text" name="q" placeholder="搜尋議案">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -66,9 +66,9 @@
     <div class="main">
       <section class="search">
         <div class="container">
-          <form action="/" class="search-form">
+          <form action="/" method="GET" class="search-form">
             <div class="search-keywords">
-              <input type="text" placeholder="搜尋議案關鍵字">
+              <input type="text" name="q" placeholder="搜尋議案關鍵字">
               <button>
                 <span class="material-symbols-rounded">
                   search
