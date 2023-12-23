@@ -55,6 +55,13 @@ async function buildBillResults(root, bill) {
   titleDiv.innerText = renderTitle(bill.議案名稱);
   billRootA.appendChild(titleDiv);
 
+  //Build <div class="status">
+  let statusDiv = document.createElement('div');
+  statusDiv.className = 'status';
+  console.log(bill.billNo);
+  statusDiv = buildStatusDiv(statusDiv, bill.議案流程);
+  billRootA.appendChild(statusDiv);
+
   //Build <div class="desc">
   const descriptionDiv = document.createElement('div');
   descriptionDiv.className = 'desc';
@@ -81,6 +88,24 @@ function renderTitle(title) {
     title = title.substring(startIdx + 1, endIdx);
   }
   return title
+}
+
+function buildStatusDiv(statusDiv, progresses) {
+  if (progresses === undefined || !progresses.length) { return statusDiv; }
+  const latestProgress = progresses.slice(-1)[0];
+  console.log(latestProgress)
+  const theStatus = latestProgress.狀態;
+  const date = latestProgress.日期.slice(-1)[0];
+  const statusLogoSpan = document.createElement('span');
+  statusLogoSpan.className = 'material-symbols-rounded';
+  statusLogoSpan.innerText = 'clock_loader_40';
+  const badgeSpan = document.createElement('span');
+  badgeSpan.className = 'badge badge--inprogress';
+  badgeSpan.appendChild(statusLogoSpan);
+  badgeSpan.innerHTML += " " + theStatus;
+  statusDiv.appendChild(badgeSpan);
+  statusDiv.innerHTML += " " + date;
+  return statusDiv;
 }
 
 function buildLegislatorsDiv(legislatorsDiv, legislators, proposers) {
