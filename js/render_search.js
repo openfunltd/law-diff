@@ -9,6 +9,12 @@ async function renderData() {
   for (span of keywordSpans) {
     span.innerText = decodeURIComponent(query);
   }
+  //Toggle section.results when retrieving searsh results
+  const resultSections = document.getElementsByClassName('results');
+  resultSections[0].style.display = '';
+  resultSections[1].style.display = 'none';
+
+
 
   //Lookup law id by query (only root law for now)
   const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${query}`);
@@ -30,11 +36,17 @@ async function renderData() {
   //Order final result by last_time
   bills.sort(compareDate);
 
-  //Build html element to display each bills
-  const root = document.getElementsByClassName('results')[0];
-  for (bill of bills) {
-    await buildBillResults(root, bill);
+  //Toggle results section when no bills
+  if (!bills.length) {
+    resultSections[0].style.display = 'none';
+    resultSections[1].style.display = '';
   }
+
+  //Build html element to display each bills
+  for (bill of bills) {
+    await buildBillResults(resultSections[0], bill);
+  }
+
 }
 
 async function buildBillResults(root, bill) {
