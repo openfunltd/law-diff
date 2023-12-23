@@ -58,7 +58,6 @@ async function buildBillResults(root, bill) {
   //Build <div class="status">
   let statusDiv = document.createElement('div');
   statusDiv.className = 'status';
-  console.log(bill.billNo);
   statusDiv = buildStatusDiv(statusDiv, bill.議案流程);
   billRootA.appendChild(statusDiv);
 
@@ -93,7 +92,6 @@ function renderTitle(title) {
 function buildStatusDiv(statusDiv, progresses) {
   if (progresses === undefined || !progresses.length) { return statusDiv; }
   const latestProgress = progresses.slice(-1)[0];
-  console.log(latestProgress)
   const theStatus = latestProgress.狀態;
   const date = latestProgress.日期.slice(-1)[0];
   const statusLogoSpan = document.createElement('span');
