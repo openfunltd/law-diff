@@ -43,8 +43,9 @@ async function renderData() {
   }
 
   //Build html element to display each bills
+  const containerDiv = resultSections[0].getElementsByClassName('container')[0];
   for (bill of bills) {
-    await buildBillResults(resultSections[0], bill);
+    await buildBillResults(containerDiv, bill);
   }
 
 }
