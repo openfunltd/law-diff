@@ -14,8 +14,6 @@ async function renderData() {
   resultSections[0].style.display = '';
   resultSections[1].style.display = 'none';
 
-
-
   //Lookup law id by query (only root law for now)
   const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${query}`);
   const lawData = await lawResponse.json();
@@ -42,20 +40,20 @@ async function renderData() {
     resultSections[1].style.display = '';
   }
 
-  //Build html element to display each bills
-  const containerDiv = resultSections[0].getElementsByClassName('container')[0];
-  for (bill of bills) {
-    await buildBillResults(containerDiv, bill);
-  }
-
-}
-
-async function buildBillResults(root, bill) {
-  //Lookup legislators' party
+  //Lookup legislators' data for checking party later
   const legislatorResponse = await fetch(`https://ly.govapi.tw/legislator/10?page=1&limit=500`);
   const legislatorData = await legislatorResponse.json();
   const legislators = legislatorData.legislators;
 
+  //Build html element to display each bills
+  const containerDiv = resultSections[0].getElementsByClassName('container')[0];
+  for (bill of bills) {
+    buildBillResults(containerDiv, bill, legislators);
+  }
+
+}
+
+function buildBillResults(root, bill, legislators) {
   //Build root <a> element
   const billRootA = document.createElement('a');
   billRootA.href = `bills.html?billNo=${bill.billNo}`;
