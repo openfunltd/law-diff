@@ -51,6 +51,8 @@ async function renderData() {
     buildBillResults(containerDiv, bill, legislators);
   }
 
+  //Build div.page depend on bills.length
+  buildPageDiv(containerDiv, bills.length);
 }
 
 function buildBillResults(root, bill, legislators) {
@@ -130,6 +132,37 @@ function buildLegislatorsDiv(legislatorsDiv, legislators, proposers) {
     legislatorsDiv.appendChild(badgeSpan);
   }
   return legislatorsDiv;
+}
+
+function buildPageDiv(root, resultCnt) {
+  let pageCnt = Math.floor(resultCnt / 10);
+  if (resultCnt % 10) { pageCnt++; }
+  if (!pageCnt) { return; }
+
+  // Add previous page button
+  const pageDiv = document.createElement('div');
+  pageDiv.className = 'pages';
+  const previousPageA = document.createElement('a');
+  previousPageA.innerText = '上一頁';
+  previousPageA.href = '#';
+  pageDiv.appendChild(previousPageA);
+
+  // Add page buttons
+  for (let i = 1; i <= pageCnt; i++) {
+    const pageA = document.createElement('a');
+    if (i === 1) { pageA.className = 'active'; }
+    pageA.innerText = i;
+    pageA.href = '#';
+    pageDiv.appendChild(pageA);
+  }
+
+  // Add next page button
+  const nextPageA = document.createElement('a');
+  nextPageA.innerText = '下一頁';
+  nextPageA.href = '#';
+  pageDiv.appendChild(nextPageA)
+
+  root.appendChild(pageDiv);
 }
 
 function compareDate(billA, billB) {
