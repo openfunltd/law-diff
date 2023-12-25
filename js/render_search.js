@@ -47,19 +47,25 @@ async function renderData() {
 
   //Build html element to display each bills
   const containerDiv = resultSections[0].getElementsByClassName('container')[0];
-  for (bill of bills) {
-    buildBillResults(containerDiv, bill, legislators);
+  // Get index and bill
+  for (let i = 0; i < bills.length; i++) {
+    buildBillResults(containerDiv, bills[i], i, legislators);
   }
 
   //Build div.page depend on bills.length
   buildPageDiv(containerDiv, bills.length);
 }
 
-function buildBillResults(root, bill, legislators) {
+function buildBillResults(root, bill, idx, legislators) {
   //Build root <a> element
+  idx++;
+  let page = Math.floor((idx) / 10);
+  if (idx % 10 > 0) { page++; }
   const billRootA = document.createElement('a');
   billRootA.href = `bills.html?billNo=${bill.billNo}`;
-  billRootA.className = 'result';
+  if (page > 1) { billRootA.style.display = 'none'; }
+
+  billRootA.className = `result in-page-${page}`;
   billRootA.target = '_blank';
 
   //Build <div class="title">
@@ -150,9 +156,11 @@ function buildPageDiv(root, resultCnt) {
   // Add page buttons
   for (let i = 1; i <= pageCnt; i++) {
     const pageA = document.createElement('a');
-    if (i === 1) { pageA.className = 'active'; }
+    if (i === 1) { pageA.className = 'active '; }
+    pageA.className += `page page-${i}`;
     pageA.innerText = i;
     pageA.href = '#';
+    pageA.addEventListener('click', () => togglePage(i));
     pageDiv.appendChild(pageA);
   }
 
@@ -163,6 +171,26 @@ function buildPageDiv(root, resultCnt) {
   pageDiv.appendChild(nextPageA)
 
   root.appendChild(pageDiv);
+}
+
+function togglePage(page) {
+  const results = document.getElementsByClassName('result');
+  for (result of results) {
+    if (result.classList.contains(`in-page-${page}`)) {
+      result.style.display = '';
+    } else {
+      result.style.display = 'none';
+    }
+  }
+  const pages = document.getElementsByClassName('page');
+  //remove active class from all pages
+  //add active class to page
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active');
+    if (i + 1 === page) {
+      pages[i].classList.add('active');
+    }
+  }
 }
 
 function compareDate(billA, billB) {
