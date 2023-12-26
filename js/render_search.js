@@ -151,6 +151,7 @@ function buildPageDiv(root, resultCnt) {
   const previousPageA = document.createElement('a');
   previousPageA.innerText = '上一頁';
   previousPageA.href = '#';
+  previousPageA.addEventListener('click', () => turnPage('previous', pageCnt));
   pageDiv.appendChild(previousPageA);
 
   // Add page buttons
@@ -168,29 +169,59 @@ function buildPageDiv(root, resultCnt) {
   const nextPageA = document.createElement('a');
   nextPageA.innerText = '下一頁';
   nextPageA.href = '#';
+  nextPageA.addEventListener('click', () => turnPage('next', pageCnt));
   pageDiv.appendChild(nextPageA)
+
+  // Add current page idx holder
+  const currentIdxSpan = document.createElement('span');
+  currentIdxSpan.id = 'currentIdx';
+  currentIdxSpan.hidden = true;
+  currentIdxSpan.innerText = 1;
+  pageDiv.appendChild(currentIdxSpan);
 
   root.appendChild(pageDiv);
 }
 
-function togglePage(page) {
+function togglePage(pageIdx) {
   const results = document.getElementsByClassName('result');
-  for (result of results) {
-    if (result.classList.contains(`in-page-${page}`)) {
-      result.style.display = '';
-    } else {
-      result.style.display = 'none';
-    }
-  }
+  const currentPageSpan = document.getElementById('currentIdx');
   const pages = document.getElementsByClassName('page');
-  //remove active class from all pages
-  //add active class to page
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].classList.remove('active');
-    if (i + 1 === page) {
-      pages[i].classList.add('active');
-    }
+
+  // Toggle 'active'
+  currentPageIdx = currentPageSpan.innerText;
+  pages[currentPageIdx - 1].classList.remove('active');
+  pages[pageIdx - 1].classList.add('active');
+  currentPageSpan.innerText = pageIdx;
+
+  // Toggle items
+  for (result of results) {
+    result.style.display = (result.classList.contains(`in-page-${pageIdx}`)) ? '' : 'none';
   }
+}
+
+function turnPage(type, maxPageIdx) {
+  const currentPageSpan = document.getElementById('currentIdx');
+  currentPageIdx = parseInt(currentPageSpan.innerText);
+
+  if (type === 'previous' && currentPageIdx === '1') { return; }
+  if (type === 'next' && currentPageIdx === maxPageIdx) { return; }
+
+  const results = document.getElementsByClassName('result');
+  const pages = document.getElementsByClassName('page');
+
+  // Toogle 'active'
+  pages[currentPageIdx - 1].classList.remove('active');
+  if (type === 'previous') { currentPageIdx = currentPageIdx - 1 }
+  if (type === 'next') { currentPageIdx = currentPageIdx + 1; }
+  pages[currentPageIdx - 1].classList.add('active');
+
+  // Toggle items
+  for (result of results) {
+    result.style.display = (result.classList.contains(`in-page-${currentPageIdx}`)) ? '' : 'none';
+  }
+
+  //Update current page index to holder
+  currentPageSpan.innerText = currentPageIdx;
 }
 
 function compareDate(billA, billB) {
