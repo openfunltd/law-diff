@@ -29,6 +29,22 @@
           border: 0;
           font-size: 1.2rem;
         }
+
+        select {
+          width: 96%;
+          border: 0;
+          background: transparent;
+          font-size: 1.2rem;
+        }
+      }
+
+      .search-by {
+        margin-top: 1rem;
+
+        label {
+          display: inline-block;
+          margin-right: 1rem;
+        }
       }
     }
 
@@ -79,20 +95,15 @@
 
   .results {
     padding: 2rem 0 4rem 0;
-    max-width: 1000px;
     margin: 0 auto;
 
-    h1 {
-      // color: var(--gold);
-    }
-
     .filters {
-      margin: 3rem 0 2rem 0;
+      margin: 3rem auto 2rem auto;
       padding: 0.8rem 1rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 0.4rem 1rem;
-      background: #f2f2f2;
+      background: #f6f6f6;
       border-radius: 0.25rem;
       color: #777;
 
@@ -104,6 +115,63 @@
         margin-right: 2rem;
       }
     }
+
+    .result-main {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: 200px 1fr;
+
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rwd-filter-options-switch {
+      display: none;
+      text-align: center;
+
+      a {
+        color: currentColor;
+        text-decoration: none;
+      }
+
+      @media (max-width: 575px) {
+        display: block;
+      }
+    }
+
+    .filter-options {
+      @media (max-width: 575px) {
+        display: none;
+      }
+
+      &.rwd-active {
+        display: block;
+      }
+
+      .option {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f2f2f2;
+        border-radius: 0.25rem;
+      }
+
+      .title {
+        margin-bottom: 0.4rem;
+        font-weight: bold;
+      }
+
+      .list {
+        font-size: 0.8rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .result-list {}
   }
 
   .result {

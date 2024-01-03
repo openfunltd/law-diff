@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>搜尋頁</title>
+  <!-- [phase2] 更新title -->
+  <title>law-diff 提案法律對照表</title>
   <meta name=description content="">
   <meta name="og:type" content="website">
   <meta name="og:title" content="">
@@ -18,12 +19,13 @@
 </head>
 <body>
   <div class="_congress _search">
+    <!-- [phase2] 幫我整塊header更新 -->
     <section class="site-header">
       <div class="container">
         <div class="header">
           <div class="logo">
             <a href="/">
-              <img src="/images/logo.png" alt="公民監督國會聯盟">
+              <img src="/images/logo.svg" alt="law-diff 提案法律對照表">
             </a>
           </div>
           <div class="rwd-menu-icon">
@@ -46,9 +48,8 @@
             class="menu"
             :class="{ active: rwdMenuVisible }"
           >
-            <a href="https://ccw.org.tw/news">最新消息</a>
-            <a href="https://ccw.org.tw/about/brief">認識公督盟</a>
-            <a href="https://ccw.org.tw/assess">立委評鑑</a>
+            <a href="https://ly.govapi.tw/" target="_blank">國會 API</a>
+            <a href="https://github.com/openfunltd/law-diff" target="_blank">Github Repo</a>
 
             <form action="/" class="search-bar">
               <input type="text" placeholder="搜尋議案">
@@ -68,13 +69,45 @@
         <div class="container">
           <form action="/" class="search-form">
             <div class="search-keywords">
-              <input type="text" placeholder="搜尋議案關鍵字">
+              <!-- [phase2] 修改 begin -->
+              <select v-if="searchBy.value === 'period'">
+                <option>第10屆第8會期</option>
+                <option>第10屆第7會期第2次臨時會</option>
+                <option>第10屆第7會期第1次臨時會</option>
+                <option>第10屆第7會期</option>
+                <option>第10屆第6會期</option>
+              </select>
+
+              <select v-else-if="searchBy.value === 'progress'">
+                <option>提案</option>
+                <option>一讀</option>
+                <option>委員會</option>
+                <option>二讀</option>
+                <option>三讀</option>
+                <option>頒佈</option>
+                <option>生效</option>
+              </select>
+
+              <input
+                v-else
+                type="text"
+                :placeholder="searchBy.title"
+              >
+              <!-- [phase2] 修改 end -->
+
               <button>
                 <span class="material-symbols-rounded">
                   search
                 </span>
                 搜尋
               </button>
+            </div>
+            <!-- [phase2] 新增search-by -->
+            <div class="search-by">
+              <label v-for="condition in searchConditions">
+                <input v-model="searchBy" type="radio" :value="condition">
+                {{ condition.title }}
+              </label>
             </div>
 
             <!-- <div class="options-switch">
@@ -205,85 +238,181 @@
             </div>
           </div>
 
-          <a href="/bills" class="result">
-            <div class="title">
-              擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
-            </div>
-            <div class="status">
-              <span class="badge badge--inprogress">
-                <span class="material-symbols-rounded">
-                  clock_loader_40
-                  <!--
-                    google icon 有 10, 20, 40, 60, 80, 90 這幾個選項，對應到
-                    提案, 一讀, 委員會, 二讀, 三讀, 頒佈, 生效
-                  -->
+          <!-- [phase2] 新增了 .result-main .result-list 的結構 包在原本的list外 -->
+          <!-- [phase2] 新增了 .filter-options checkbox list -->
+          <div class="result-main">
+            <div class="rwd-filter-options-switch">
+              <a
+                href="#"
+                @click.prevent="rwdFilterOptionsVisible = !rwdFilterOptionsVisible"
+              >
+                進階篩選
+                <span
+                  v-if="rwdFilterOptionsVisible"
+                  class="material-symbols-rounded"
+                >
+                  expand_more
                 </span>
-                交付審查
-              </span>
-              112年10月16日
+                <span
+                  v-else
+                  class="material-symbols-rounded"
+                >
+                  expand_less
+                </span>
+              </a>
             </div>
-            <div class="desc">
-              本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
-            </div>
-            <div class="legislators">
-              相關委員：
-              <span class="badge">
-                <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-                <span class="party party--1"></span>
-                王定宇
-              </span>
-              <span class="badge">
-                <span class="party party--0"></span>
-                黃國書
-              </span>
-              <span class="badge">
-                <span class="party party--4"></span>
-                王婉諭
-              </span>
-              <span class="badge">
-                <span class="party party--3"></span>
-                陳柏惟
-              </span>
-            </div>
-          </a>
 
-          <a href="/bills" class="result">
-            <div class="title">
-              擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
+            <div
+              class="filter-options"
+              :class="{ 'rwd-active': rwdFilterOptionsVisible }"
+            >
+              <div class="option">
+                <div class="title">屆期會期</div>
+                <div class="list">
+                  <label>
+                    <input type="checkbox">
+                    第10屆第8會期
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    第10屆第7會期
+                  </label>
+                </div>
+              </div>
+
+              <div class="option">
+                <div class="title">提案人</div>
+                <div class="list">
+                  <label>
+                    <input type="checkbox">
+                    苗博雅
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    王婉諭
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    范雲
+                  </label>
+                </div>
+              </div>
+
+              <div class="option">
+                <div class="title">法條名稱</div>
+                <div class="list">
+                  <label>
+                    <input type="checkbox">
+                    刑事補償法部分條文修正草案
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    核子損害賠償法刪除第三十五條條文草案
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    國家賠償法刪除第十五條條文草案
+                  </label>
+                </div>
+              </div>
+
+              <div class="option">
+                <div class="title">立法進度</div>
+                <div class="list">
+                  <label>
+                    <input type="checkbox">
+                    一讀
+                  </label>
+                  <label>
+                    <input type="checkbox">
+                    委員會
+                  </label>
+                </div>
+              </div>
             </div>
-            <div class="status">
-              <span class="badge badge--done">
-                <span class="material-symbols-rounded">
-                  task_alt
-                </span>
-                已生效
-              </span>
-              112年12月6日（台立院議字第1120703929號）
+
+            <div class="result-list">
+              <a href="/bills" class="result">
+                <div class="title">
+                  擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
+                </div>
+                <div class="status">
+                  <span class="badge badge--inprogress">
+                    <span class="material-symbols-rounded">
+                      clock_loader_40
+                      <!--
+                        google icon 有 10, 20, 40, 60, 80, 90 這幾個選項，對應到
+                        提案, 一讀, 委員會, 二讀, 三讀, 頒佈, 生效
+                      -->
+                    </span>
+                    交付審查
+                  </span>
+                  112年10月16日
+                </div>
+                <div class="desc">
+                  本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
+                </div>
+                <div class="legislators">
+                  相關委員：
+                  <span class="badge">
+                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                    <span class="party party--1"></span>
+                    王定宇
+                  </span>
+                  <span class="badge">
+                    <span class="party party--0"></span>
+                    黃國書
+                  </span>
+                  <span class="badge">
+                    <span class="party party--4"></span>
+                    王婉諭
+                  </span>
+                  <span class="badge">
+                    <span class="party party--3"></span>
+                    陳柏惟
+                  </span>
+                </div>
+              </a>
+
+              <a href="/bills" class="result">
+                <div class="title">
+                  擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
+                </div>
+                <div class="status">
+                  <span class="badge badge--done">
+                    <span class="material-symbols-rounded">
+                      task_alt
+                    </span>
+                    已生效
+                  </span>
+                  112年12月6日（台立院議字第1120703929號）
+                </div>
+                <div class="desc">
+                  本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
+                </div>
+                <div class="legislators">
+                  相關委員：
+                  <span class="badge">
+                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
+                    <span class="party party--1"></span>
+                    王定宇
+                  </span>
+                  <span class="badge">
+                    <span class="party party--0"></span>
+                    黃國書
+                  </span>
+                  <span class="badge">
+                    <span class="party party--4"></span>
+                    王婉諭
+                  </span>
+                  <span class="badge">
+                    <span class="party party--3"></span>
+                    陳柏惟
+                  </span>
+                </div>
+              </a>
             </div>
-            <div class="desc">
-              本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
-            </div>
-            <div class="legislators">
-              相關委員：
-              <span class="badge">
-                <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-                <span class="party party--1"></span>
-                王定宇
-              </span>
-              <span class="badge">
-                <span class="party party--0"></span>
-                黃國書
-              </span>
-              <span class="badge">
-                <span class="party party--4"></span>
-                王婉諭
-              </span>
-              <span class="badge">
-                <span class="party party--3"></span>
-                陳柏惟
-              </span>
-            </div>
-          </a>
+          </div>
 
           <div class="pages">
             <a href="#">上一頁</a>
@@ -350,46 +479,22 @@
       </section>
     </div>
 
+    <!-- [phase2] 幫我整塊footer更新 -->
     <section class="site-footer">
       <div class="container">
         <div class="footer">
-          <div class="ccw">
-            <a href="https://ccw.org.tw/" target="_blank">
-              <img src="/images/logo_w.png">
+          <div class="logo">
+            <a href="/" target="_blank">
+              <img src="/images/logo_w.svg">
             </a>
-            <div class="info">
-              <div class="contact">
-                <div>
-                  10647 台北市大安區羅斯福路三段183號10樓
-                </div>
-                <div>
-                  +886-2-2367-1571
-                  ・
-                  <a href="mailto:ccw@ccw.org.tw">ccw@ccw.org.tw</a>
-                </div>
-              </div>
-              <div class="sns">
-                <div>
-                  Find Us On Social Media
-                </div>
-                <div class="sns-links">
-                  <a href="https://www.facebook.com/ccw.org.tw/" target="_blank">
-                    Facebook
-                  </a>
-                  <a href="https://instagram.com/c_c_watch?igshid=13fbnwd1melvf" target="_blank">
-                    Instagram
-                  </a>
-                  <a href="https://www.youtube.com/user/CitizenCongressWatch/featured" target="_blank">
-                    Youtube
-                  </a>
-                  <a href="https://line.me/R/ti/p/%40tyu0276q" target="_blank">
-                    Line
-                  </a>
-                </div>
-              </div>
+          </div>
+          <div class="info">
+            <div>
+              Source Code on <a href="https://github.com/openfunltd/law-diff" target="_blank">GitHub</a>
             </div>
             <div>
-              &copy; 2007-2023 Citizen Congress Watch, All rights Reserved
+              Data source powered by
+              <a href="https://ly.govapi.tw/" target="_blank">國會 API</a>
             </div>
           </div>
         </div>
