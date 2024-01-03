@@ -38,6 +38,7 @@ h2 {
     background-color: var(--gold);
     border-radius: 100px;
     color: #fff;
+    text-align: center;
   }
 }
 
@@ -46,7 +47,7 @@ a {
 }
 
 input, textarea, select, button {
-  padding: 0.6rem 0.4rem;
+  padding: 0.6rem 0.8rem;
   margin: 0;
   min-height: 1rem;
   font-size: 16px;
@@ -264,7 +265,49 @@ table {
   border-radius: 100px;
 
   // 無黨籍
+  &--0 {
+    background: #aaa;
+  }
+
+  // 民進黨
   &--1 {
+    background: #1B9431;
+  }
+
+  // 社民黨
+  &--2 {
+    background: #FF0088;
+  }
+
+  // 台灣基進
+  &--3 {
+    background: #a73f24;
+  }
+
+  // 時代力量
+  &--4 {
+    background: #FBBE01
+  }
+
+  // 綠黨
+  &--5 {
+    background: #73BE00
+  }
+
+  // 民眾黨
+  &--6 {
+    background: #28C8C8;
+  }
+
+  // 國民黨
+  &--7 {
+    background: #000099;
+  }
+}
+
+.bg {
+  // 無黨籍
+  &--0 {
     background: #aaa;
   }
 
@@ -315,7 +358,6 @@ table {
     height: 4rem;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-gap: 3rem;
     align-items: center;
 
     @media (max-width: 991px) {

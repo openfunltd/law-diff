@@ -37,6 +37,7 @@ h2 .icon {
   background-color: var(--gold);
   border-radius: 100px;
   color: #fff;
+  text-align: center;
 }
 
 a {
@@ -47,7 +48,7 @@ input,
 textarea,
 select,
 button {
-  padding: 0.6rem 0.4rem;
+  padding: 0.6rem 0.8rem;
   margin: 0;
   min-height: 1rem;
   font-size: 16px;
@@ -264,7 +265,7 @@ table tbody tr:nth-child(odd) td {
   border-radius: 100px;
 }
 
-.party--1 {
+.party--0 {
   background: #aaa;
 }
 
@@ -296,6 +297,38 @@ table tbody tr:nth-child(odd) td {
   background: #000099;
 }
 
+.bg--0 {
+  background: #aaa;
+}
+
+.bg--1 {
+  background: #1B9431;
+}
+
+.bg--2 {
+  background: #FF0088;
+}
+
+.bg--3 {
+  background: #a73f24;
+}
+
+.bg--4 {
+  background: #FBBE01;
+}
+
+.bg--5 {
+  background: #73BE00;
+}
+
+.bg--6 {
+  background: #28C8C8;
+}
+
+.bg--7 {
+  background: #000099;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -308,7 +341,6 @@ table tbody tr:nth-child(odd) td {
   height: 4rem;
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-gap: 3rem;
   align-items: center;
 }
 
@@ -461,6 +493,10 @@ table tbody tr:nth-child(odd) td {
   border-radius: 0.25rem;
 }
 
+._search .search .search-form .search-keywords input {
+  width: 100%;
+}
+
 ._search .search .search-form .search-keywords input,
 ._search .search .search-form .search-keywords button {
   -webkit-appearance: none;
@@ -471,45 +507,20 @@ table tbody tr:nth-child(odd) td {
   font-size: 1.2rem;
 }
 
-._search .search .search-form .search-keywords select {
-  width: 96%;
-  border: 0;
-  background: transparent;
-  font-size: 1.2rem;
-}
-
-._search .search .search-form .search-by {
+._search .search .options {
   margin-top: 1rem;
-}
-
-._search .search .search-form .search-by label {
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-._search .search .options-switch {
-  margin: 0.4rem 0;
-  text-align: right;
-}
-
-._search .search .options-switch a {
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-._search .search .options .option {
-  margin: 0.4rem 0;
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem;
   align-items: center;
 }
 
-._search .search .options .option .value {
+._search .search .options .value {
   display: flex;
   align-items: center;
 }
 
-._search .search .options .option .value input {
+._search .search .options .value input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -519,11 +530,19 @@ table tbody tr:nth-child(odd) td {
   border-radius: 0.25rem;
 }
 
-._search .search .options .option .value span {
-  margin: 0 0.25rem;
+._search .search .options .value select {
+  width: 100%;
+  background: #fff;
+  border: 0;
+  border-radius: 0.25rem;
 }
 
-._search .search .options .actions {
+._search .search .options .value div {
+  margin: 0 0.8rem;
+  white-space: nowrap;
+}
+
+._search .search .actions {
   margin-top: 1.2rem;
   text-align: center;
 }
@@ -531,6 +550,72 @@ table tbody tr:nth-child(odd) td {
 ._search .results {
   padding: 2rem 0 4rem 0;
   margin: 0 auto;
+}
+
+._search .results h2 {
+  text-align: center;
+}
+
+._search .results .knowledges {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 767px) {
+  ._search .results .knowledges {
+    grid-template-columns: 1fr;
+  }
+}
+
+._search .results .knowledge {
+  padding: 2rem;
+  background: #f2f2f2;
+  border-radius: 1rem;
+}
+
+@media (max-width: 575px) {
+  ._search .results .knowledge {
+    padding: 1rem;
+  }
+}
+
+._search .results .party-percentage {
+  grid-column: 1/2 span;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+@media (max-width: 767px) {
+  ._search .results .party-percentage {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+  }
+}
+
+._search .results .party-percentage .desc .item {
+  margin: 0.8rem 0;
+}
+
+._search .results .party-percentage .desc .bar {
+  margin: 0.25rem 0;
+  height: 3px;
+  background: #fff;
+}
+
+._search .results .party-percentage .desc .bar .bar-percent {
+  height: 100%;
+}
+
+._search .results .party-percentage .graphic {
+  text-align: center;
+}
+
+._search .results .party-percentage .graphic img {
+  display: block;
+  margin: 0 auto 1rem auto;
+  width: 90%;
 }
 
 ._search .results .filters {
@@ -660,19 +745,43 @@ table tbody tr:nth-child(odd) td {
   text-align: center;
 }
 
+._bills .bill-info .bill-info-row {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: auto 1fr;
+}
+
+@media (max-width: 575px) {
+  ._bills .bill-info .bill-info-row {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+}
+
 ._bills .bill-info .content {
   max-width: 1000px;
   margin: 0 auto;
 }
 
+._bills .bill-info .proposer {
+  order: -1;
+}
+
+@media (max-width: 575px) {
+  ._bills .bill-info .proposer {
+    order: 0;
+  }
+}
+
 ._bills .bill-info .proposer .title {
-  margin: 2rem auto 1rem auto;
+  margin: 1rem auto;
   padding: 0 1rem;
   width: -moz-fit-content;
   width: fit-content;
   background: #fff;
   border-radius: 100px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 ._bills .bill-tab {
@@ -724,12 +833,13 @@ table tbody tr:nth-child(odd) td {
 
 ._bills .legislators .row {
   display: grid;
-  grid-template-columns: auto 1px auto;
+  grid-template-columns: auto auto auto;
   justify-content: space-around;
 }
 
 ._bills .legislators .row .separator {
   border-left: 1px solid rgba(0, 0, 0, 0.0666666667);
+  margin: 0 2rem;
 }
 
 @media (max-width: 991px) {

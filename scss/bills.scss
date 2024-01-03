@@ -8,19 +8,37 @@
     background-size: cover;
     text-align: center;
 
+    .bill-info-row {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: auto 1fr;
+
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+      }
+    }
+
     .content {
       max-width: 1000px;
       margin: 0 auto;
     }
 
     .proposer {
+      order: -1;
+
+      @media (max-width: 575px) {
+        order: 0;
+      }
+
       .title {
-        margin: 2rem auto 1rem auto;
+        margin: 1rem auto;
         padding: 0 1rem;
         width: fit-content;
         background: #fff;
         border-radius: 100px;
         font-weight: bold;
+        white-space: nowrap;
       }
     }
   }
@@ -75,11 +93,12 @@
 
     .row {
       display: grid;
-      grid-template-columns: auto 1px auto;
+      grid-template-columns: auto auto auto;
       justify-content: space-around;
 
       .separator {
         border-left: 1px solid #0001;
+        margin: 0 2rem;
       }
 
       @media (max-width: 991px) {

@@ -69,32 +69,7 @@
         <div class="container">
           <form action="/" class="search-form">
             <div class="search-keywords">
-              <!-- [phase2] 修改 begin -->
-              <select v-if="searchBy.value === 'period'">
-                <option>第10屆第8會期</option>
-                <option>第10屆第7會期第2次臨時會</option>
-                <option>第10屆第7會期第1次臨時會</option>
-                <option>第10屆第7會期</option>
-                <option>第10屆第6會期</option>
-              </select>
-
-              <select v-else-if="searchBy.value === 'progress'">
-                <option>提案</option>
-                <option>一讀</option>
-                <option>委員會</option>
-                <option>二讀</option>
-                <option>三讀</option>
-                <option>頒佈</option>
-                <option>生效</option>
-              </select>
-
-              <input
-                v-else
-                type="text"
-                :placeholder="searchBy.title"
-              >
-              <!-- [phase2] 修改 end -->
-
+              <input type="text" placeholder="法律名稱關鍵字">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -102,93 +77,159 @@
                 搜尋
               </button>
             </div>
-            <!-- [phase2] 新增search-by -->
-            <div class="search-by">
-              <label v-for="condition in searchConditions">
-                <input v-model="searchBy" type="radio" :value="condition">
-                {{ condition.title }}
-              </label>
+            <!-- [phase2] 新增進階搜尋功能 -->
+            <div class="options">
+              <div class="title">
+                屆期
+              </div>
+              <div class="value">
+                <select>
+                  <option>10</option>
+                  <option>9</option>
+                </select>
+                <div>會期</div>
+                <select>
+                  <option value="8">8</option>
+                  <option value="7">7</option>
+                  <option value="6">6</option>
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
+
+              <div class="title">
+                主提案第一人
+              </div>
+              <div class="value">
+                <input type="text" placeholder="請輸入立委名稱">
+              </div>
+
+              <div class="title">
+                立法進度
+              </div>
+              <div class="value">
+                <select>
+                  <option>任意進度</option>
+                  <option>提案</option>
+                  <option>一讀</option>
+                  <option>委員會</option>
+                  <option>二讀</option>
+                  <option>三讀</option>
+                  <option>頒佈</option>
+                  <option>生效</option>
+                </select>
+              </div>
             </div>
 
-            <!-- <div class="options-switch">
-              <a
-                @click.prevent="advancedSearchVisible = !advancedSearchVisible"
-                href="#"
-              >
-                進階搜尋
-                <span
-                  v-if="advancedSearchVisible"
-                  class="material-symbols-rounded"
-                >
-                  expand_more
+            <div class="actions">
+              <button class="btn btn--gray" type="reset">
+                <span class="material-symbols-rounded">
+                  close
                 </span>
-                <span
-                  v-else
-                  class="material-symbols-rounded"
-                >
-                  expand_less
+                清除條件
+              </button>
+              <button class="btn">
+                <span class="material-symbols-rounded">
+                  search
                 </span>
-              </a>
+                搜尋
+              </button>
             </div>
-
-            <div
-              v-if="advancedSearchVisible"
-              class="options"
-            >
-              <div class="option">
-                <div class="title">
-                  日期區間
-                </div>
-                <div class="value">
-                  <input type="date">
-                  <span>~</span>
-                  <input type="date">
-                </div>
-              </div>
-              <div class="option">
-                <div class="title">
-                  委員姓名
-                </div>
-                <div class="value">
-                  <input type="text">
-                </div>
-              </div>
-              <div class="option">
-                <div class="title">
-                  法律名稱
-                </div>
-                <div class="value">
-                  <input type="text">
-                </div>
-              </div>
-              <div class="option">
-                <div class="title">
-                  法律內容
-                </div>
-                <div class="value">
-                  <input type="text">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn--gray" type="reset">
-                  <span class="material-symbols-rounded">
-                    close
-                  </span>
-                  清除條件
-                </button>
-                <button class="btn">
-                  <span class="material-symbols-rounded">
-                    search
-                  </span>
-                  搜尋
-                </button>
-              </div>
-            </div> -->
           </form>
         </div>
       </section>
 
+      <!-- 尚未搜尋時 -->
+      <section class="results">
+        <div class="container">
+          <h1>
+            <span class="icon material-symbols-rounded">
+              quick_reference_all
+            </span>
+            國會小知識
+          </h1>
+
+          <div class="knowledges">
+            <div class="knowledge">
+              <h2>
+                <span class="icon material-symbols-rounded">
+                  calendar_month
+                </span>
+                立法院會期
+              </h2>
+              <div class="content">
+                立法院以會期作為行使職權的時間單位。每年兩次會期，分別是二月起與九月起，《立法院職權行使法》也明文規定了報到日分別是2月1日與9月1日。（資料來源Wikipedia）
+              </div>
+            </div>
+
+            <div class="knowledge">
+              <h2>
+                <span class="icon material-symbols-rounded">
+                  assured_workload
+                </span>
+                立法院運作
+              </h2>
+              <div class="content">
+                立法院作為國會，運作主要依《中華民國憲法》、《中華民國憲法增修條文》及1999年所制定，修訂之國會五法：《立法院組織法》、《立法院各委員會組織法》、《立法院職權行使法》、《立法委員行為法》、與《立法院議事規則》。（資料來源Wikipedia）
+              </div>
+            </div>
+
+            <div class="knowledge party-percentage">
+              <div class="desc">
+                <h2>
+                  <span class="icon material-symbols-rounded">
+                    data_usage
+                  </span>
+                  第十屆立法院政黨分佈
+                </h2>
+                <div class="content">
+                  <div class="percentage-list">
+                    <div class="item">
+                      民主進步黨黨團（64）
+                      <div class="bar">
+                        <div class="bar-percent bg--1" style="width: calc(64 / 113 * 100%)"></div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      中國國民黨黨團（38）
+                      <div class="bar">
+                        <div class="bar-percent bg--7" style="width: calc(38 / 113 * 100%)"></div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      台灣民眾黨黨團（5）
+                      <div class="bar">
+                        <div class="bar-percent bg--6" style="width: calc(5 / 113 * 100%)"></div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      時代力量黨團（3）
+                      <div class="bar">
+                        <div class="bar-percent bg--4" style="width: calc(3 / 113 * 100%)"></div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      缺額（1）
+                      <div class="bar">
+                        <div class="bar-percent bg--0" style="width: calc(1 / 113 * 100%)"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="graphic">
+                <img src="/images/party_percentage.png">
+                圖片與資料來源Wikipedia
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 搜尋結果 -->
       <section class="results">
         <div class="container">
           <h1>

@@ -9,29 +9,7 @@ const common = {
     const rwdMenuVisible = ref(false)
 
     // ---------- 搜尋頁 ----------
-    // 搜尋頁是否顯示進階搜尋
-    const advancedSearchVisible = ref(false)
-    const searchConditions = ref([
-      {
-        title: '法律名稱關鍵字',
-        value: 'law_name'
-      },
-      {
-        title: '依照屆期會期搜尋',
-        value: 'period'
-      },
-      {
-        title: '依提案人名稱',
-        value: 'legislator'
-      },
-      {
-        title: '依立法進度搜尋',
-        value: 'progress'
-      }
-    ])
-    const searchBy = ref({})
-    searchBy.value = searchConditions.value[0]
-
+    // 小畫面模式是否顯示二次篩選條件
     const rwdFilterOptionsVisible = ref(false)
 
     // ---------- 議案頁 ----------
@@ -92,9 +70,6 @@ const common = {
 
     return {
       rwdMenuVisible,
-      advancedSearchVisible,
-      searchConditions,
-      searchBy,
       rwdFilterOptionsVisible,
 
       billViewing,

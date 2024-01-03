@@ -23,79 +23,131 @@
         background: #fff;
         border-radius: 0.25rem;
 
+        input {
+          width: 100%;
+        }
+
         input, button {
           appearance: none;
           background: transparent;
           border: 0;
           font-size: 1.2rem;
         }
-
-        select {
-          width: 96%;
-          border: 0;
-          background: transparent;
-          font-size: 1.2rem;
-        }
-      }
-
-      .search-by {
-        margin-top: 1rem;
-
-        label {
-          display: inline-block;
-          margin-right: 1rem;
-        }
-      }
-    }
-
-    .options-switch {
-      margin: 0.4rem 0;
-      text-align: right;
-
-      a {
-        text-decoration: none;
-        color: rgba(0, 0, 0, 0.5);
       }
     }
 
     .options {
-      .option {
-        margin: 0.4rem 0;
-        display: grid;
-        grid-template-columns: 80px 1fr;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-gap: 1rem;
+      align-items: center;
+
+      .title {
+      }
+
+      .value {
+        display: flex;
         align-items: center;
 
-        .title {
+        input {
+          appearance: none;
+          width: 100%;
+          background: #fff;
+          border: 0;
+          border-radius: 0.25rem;
         }
 
-        .value {
-          display: flex;
-          align-items: center;
+        select {
+          width: 100%;
+          background: #fff;
+          border: 0;
+          border-radius: 0.25rem;
+        }
 
-          input {
-            appearance: none;
-            width: 100%;
-            background: #fff;
-            border: 0;
-            border-radius: 0.25rem;
-          }
-
-          span {
-            margin: 0 0.25rem;
-          }
+        div {
+          margin: 0 0.8rem;
+          white-space: nowrap;
         }
       }
+    }
 
-      .actions {
-        margin-top: 1.2rem;
-        text-align: center;
-      }
+    .actions {
+      margin-top: 1.2rem;
+      text-align: center;
     }
   }
 
   .results {
     padding: 2rem 0 4rem 0;
     margin: 0 auto;
+
+    h2 {
+      text-align: center;
+    }
+
+    .knowledges {
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .knowledge {
+      padding: 2rem;
+      background: #f2f2f2;
+      border-radius: 1rem;
+
+      @media (max-width: 575px) {
+        padding: 1rem;
+      }
+    }
+
+    .party-percentage {
+      grid-column: 1 / 2 span;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+
+      @media (max-width: 767px) {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+      }
+
+      .desc {
+        .item {
+          margin: 0.8rem 0;
+        }
+
+        .bar {
+          margin: 0.25rem 0;
+          height: 3px;
+          background: #fff;
+
+          .bar-percent {
+            height: 100%;
+          }
+        }
+      }
+
+      .percentage-list {
+        // width: fit-content;
+        // margin: 0 auto;
+      }
+
+      .graphic {
+        text-align: center;
+
+        img {
+          display: block;
+          margin: 0 auto 1rem auto;
+          width: 90%;
+        }
+      }
+    }
 
     .filters {
       margin: 3rem auto 2rem auto;
