@@ -895,10 +895,18 @@ table tbody tr:nth-child(odd) td {
 
 ._bills .comparation .empty {
   margin: 1rem 0;
-  padding: 6rem 1rem;
+  padding: 4rem 1rem;
   border-radius: 1rem;
   background: #f0f0f0;
   text-align: center;
+}
+
+._bills .comparation .empty .icon {
+  color: #ccc;
+}
+
+._bills .comparation .empty .icon span {
+  font-size: 10rem;
 }
 
 ._bills .comparation .diff-hint {

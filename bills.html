@@ -500,6 +500,9 @@
           <div class="diff-main">
             <div class="available-sections">
               <div class="title">
+                <span class="material-symbols-rounded">
+                  playlist_add_check
+                </span>
                 比較條文
               </div>
               <label v-for="idx in allAvailableSections">
@@ -524,7 +527,12 @@
                 v-if="!selectedSections.length"
                 class="empty"
               >
-                請先於左側選擇欲比較條文
+                <div class="icon">
+                  <span class="material-symbols-rounded">
+                    info
+                  </span>
+                </div>
+                請於上方選擇欲比較之版本，左側選擇欲比較之條文。
               </div>
 
               <div

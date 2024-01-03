@@ -275,10 +275,17 @@
 
     .empty {
       margin: 1rem 0;
-      padding: 6rem 1rem;
+      padding: 4rem 1rem;
       border-radius: 1rem;
       background: #f0f0f0;
       text-align: center;
+
+      .icon {
+        span {
+          font-size: 10rem;
+        }
+        color: #ccc;
+      }
     }
 
     .bills-list {
