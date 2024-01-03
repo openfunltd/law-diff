@@ -558,6 +558,7 @@
                     </tr>
                     <tr v-for="ver in selectedVersions">
                       <td>
+                        {{ billVersions[ver].versionName }}
                         <div
                           v-if="billsData[idx].versions[ver].passed"
                           class="passed"
@@ -569,7 +570,6 @@
                             通過版本
                           </span>
                         </div>
-                        {{ billVersions[ver].versionName }}
                       </td>
                       <td v-html="
                         billsData[idx].versions[ver].content

@@ -55,7 +55,7 @@ const common = {
 
     // 改成依照目前選的版本，取得有修改的聯集的條文
     const allAvailableSections = computed (() => {
-      const result = []
+      let result = []
 
       billsData.value.map((item, idx) => {
         return item.versions.filter((it, i) => {
@@ -71,6 +71,10 @@ const common = {
           result.push(idx)
         }
       })
+
+      if (!result.length) {
+        result = billsData.value.map((item, idx) => idx)
+      }
 
       // 重新整理 selectedSections，若有不存在 allAvailableSections 的 Section 須移除
       selectedSections.value = selectedSections.value.filter(item => result.includes(item))
