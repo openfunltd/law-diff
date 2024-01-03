@@ -53,7 +53,7 @@ const common = {
       }
     } catch {}
 
-    // 一目前選的版本，決定要顯示出哪幾條共同都有修改的條文
+    // 改成依照目前選的版本，取得有修改的聯集的條文
     const allAvailableSections = computed (() => {
       const result = []
 
@@ -62,7 +62,12 @@ const common = {
           return it.content && selectedVersions.value.includes(i)
         }).length
       }).forEach((item, idx) => {
-        if (item === selectedVersions.value.length) {
+        // 交集
+        // if (item === selectedVersions.value.length) {
+        //   result.push(idx)
+        // }
+        // 聯集
+        if (item) {
           result.push(idx)
         }
       })

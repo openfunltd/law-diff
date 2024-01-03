@@ -179,6 +179,30 @@ table tbody tr:nth-child(odd) td {
   color: #fff;
 }
 
+.tag {
+  display: inline-block;
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0 0.8rem;
+  background: rgba(0, 0, 0, 0.0666666667);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+
+.tag .icon {
+  font-size: 0.8rem;
+}
+
+.tag--inprogress {
+  background: var(--yellow);
+  color: #fff;
+}
+
+.tag--done {
+  background: var(--green);
+  color: #fff;
+}
+
 .legislator {
   margin: 0 0.5rem 1rem 0.5rem;
   max-width: 90px;
@@ -923,6 +947,10 @@ table tbody tr:nth-child(odd) td {
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 0.4rem;
+}
+
+._bills .comparation .bill .passed {
+  margin-top: 0.4rem;
 }
 
 ._bills .comparation del {

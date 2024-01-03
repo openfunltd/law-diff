@@ -557,12 +557,29 @@
                       <td width="20%">{{ billsData[idx].versions[0].reason || '無' }}</td>
                     </tr>
                     <tr v-for="ver in selectedVersions">
-                      <td>{{ billVersions[ver].versionName }}</td>
-                      <td v-html="compareDiff(
-                        billsData[idx].versions[0].content || '',
-                        billsData[idx].versions[ver].content || ''
-                      )"></td>
-                      <td>{{ billsData[idx].versions[ver].reason }}</td>
+                      <td>
+                        <div
+                          v-if="billsData[idx].versions[ver].passed"
+                          class="passed"
+                        >
+                          <span class="tag tag--done">
+                            <span class="material-symbols-rounded icon">
+                              task_alt
+                            </span>
+                            通過版本
+                          </span>
+                        </div>
+                        {{ billVersions[ver].versionName }}
+                      </td>
+                      <td v-html="
+                        billsData[idx].versions[ver].content
+                          ? compareDiff(
+                              billsData[idx].versions[0].content || '',
+                              billsData[idx].versions[ver].content || ''
+                            )
+                          : '無'
+                      "></td>
+                      <td>{{ billsData[idx].versions[ver].reason || '無' }}</td>
                     </tr>
                   </tbody>
                 </table>
