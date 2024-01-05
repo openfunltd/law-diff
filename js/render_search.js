@@ -39,18 +39,19 @@ async function renderData() {
   resultSections[2].style.display = 'none';
 
   //Lookup law id by query (only root law for now)
-  const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${lawKeyword}`);
+  const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${encodeURIComponent(lawKeyword)}`);
   const lawData = await lawResponse.json();
   if (lawData.total.value === 0) { return; }
 
   //Lookup bills for each law-id (only top 10 result and propose by legislator for now)
   let bills = [];
   for (law of lawData.laws) {
-    const query_url = "https://ly.govapi.tw/bill" +
+    let query_url = "https://ly.govapi.tw/bill" +
                       "?proposal_type=委員提案" +
-                      "&field=議案流程&field=提案人&field=last_time&field=案由&limit=10" +
-                      `&term=${term}&sessionPeriod=${sessionPeriod}` +
-                      `&law=${law.id}&proposer=${theFirst}`;
+                      "&field=議案流程&field=提案人&field=last_time&field=案由" +
+                      `&term=${term}&law=${law.id}`;
+    if (sessionPeriod) { query_url += `&sessionPeriod=${sessionPeriod}`; }
+    if (proposer) { query_url += `&proposer=${encodeURIComponent(proposer)}` }
     const billResponse = await fetch(query_url);
     const billsData = await billResponse.json();
     bills.push(...billsData.bills);
