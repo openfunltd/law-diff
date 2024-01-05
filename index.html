@@ -52,7 +52,7 @@
             <a href="https://github.com/openfunltd/law-diff" target="_blank">Github Repo</a>
 
             <form action="." class="search-bar">
-              <input type="text" placeholder="搜尋議案">
+              <input type="text" name="law" id="input-header-law" placeholder="搜尋議案">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -69,7 +69,7 @@
         <div class="container">
           <form action="." method="GET" class="search-form">
             <div class="search-keywords">
-              <input type="text" placeholder="法律名稱關鍵字">
+              <input type="text" name="law" id="input-law" placeholder="法律名稱關鍵字">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -83,12 +83,12 @@
                 屆期
               </div>
               <div class="value">
-                <select>
-                  <option>10</option>
-                  <option>9</option>
+                <select name="term" id="select-term">
+                  <option value="10">10</option>
+                  <option value="9">9</option>
                 </select>
                 <div>會期</div>
-                <select>
+                <select name="sessionPeriod" id="select-sessionPeriod">
                   <option value="8">8</option>
                   <option value="7">7</option>
                   <option value="6">6</option>
@@ -104,14 +104,15 @@
                 主提案第一人
               </div>
               <div class="value">
-                <input type="text" placeholder="請輸入立委名稱">
+                <input type="text" name="theFirst" id="input-theFirst" placeholder="請輸入立委名稱">
               </div>
 
+              <!--
               <div class="title">
                 立法進度
               </div>
               <div class="value">
-                <select>
+                <select name="bill_progress">
                   <option>任意進度</option>
                   <option>提案</option>
                   <option>一讀</option>
@@ -122,6 +123,7 @@
                   <option>生效</option>
                 </select>
               </div>
+              -->
             </div>
 
             <div class="actions">
@@ -241,50 +243,24 @@
 
           <div class="filters">
             <div class="filter">
-              搜尋關鍵字：<span class="query-keyword"></span>
+              <span class="material-symbols-rounded">
+                gavel
+              </span>
+              <span> 法律名稱關鍵字：</span><span class="law"></span>
             </div>
-
-            <div></div>
-
-            <!-- 有選時間時顯示 -->
-            <!--
             <div class="filter">
               <span class="material-symbols-rounded">
                 schedule
               </span>
-              2023-12-01 ~ 2023-12-12
+              第 <span class="term"></span> 屆第 <span class="sessionPeriod"></span> 會期
             </div>
-            -->
-
-            <!--  有填寫委員名稱時顯示 -->
-            <!--
             <div class="filter">
               <span class="material-symbols-rounded">
-                group
+                person
               </span>
-              林淑芬, 范雲
+              &nbsp;<span class="theFirst"></span>
             </div>
-            -->
-
-            <!-- 有填寫法律名稱時顯示 -->
-            <!--
-            <div class="filter">
-              <span class="material-symbols-rounded">
-                gavel
-              </span>
-              入出國及移民法
-            </div>
-            -->
-
-            <!-- 有填寫法律內容時顯示 -->
-            <!--
-            <div class="filter">
-              <span class="material-symbols-rounded">
-                receipt_long
-              </span>
-              出國及移民法有關規範
-            </div>
-            -->
+            <div></div>
           </div>
 
           <!-- [phase2] 新增了 .result-main .result-list 的結構 包在原本的list外 -->
@@ -487,50 +463,24 @@
 
           <div class="filters">
             <div class="filter">
-              搜尋關鍵字：<span class="query-keyword"></span>
+              <span class="material-symbols-rounded">
+                gavel
+              </span>
+              <span> 法律名稱關鍵字：</span><span class="law"></span>
             </div>
-
-            <div></div>
-
-            <!-- 有選時間時顯示 -->
-            <!--
             <div class="filter">
               <span class="material-symbols-rounded">
                 schedule
               </span>
-              2023-12-01 ~ 2023-12-12
+              第 <span class="term"></span> 屆第 <span class="sessionPeriod"></span> 會期
             </div>
-            -->
-
-            <!-- 有填寫委員名稱時顯示 -->
-            <!--
             <div class="filter">
               <span class="material-symbols-rounded">
-                group
+                person
               </span>
-              林淑芬, 范雲
+              &nbsp;<span class="theFirst"></span>
             </div>
-            -->
-
-            <!-- 有填寫法律名稱時顯示 -->
-            <!--
-            <div class="filter">
-              <span class="material-symbols-rounded">
-                gavel
-              </span>
-              入出國及移民法
-            </div>
-            -->
-
-            <!-- 有填寫法律內容時顯示 -->
-            <!--
-            <div class="filter">
-              <span class="material-symbols-rounded">
-                receipt_long
-              </span>
-              出國及移民法有關規範
-            </div>
-            -->
+            <div></div>
           </div>
         </div>
       </section>
@@ -558,6 +508,6 @@
       </div>
     </section>
   </div>
-  <!-- <script src="./js/render_search.js"></script> -->
+  <script src="./js/render_search.js"></script>
 </body>
 </html>

@@ -1,9 +1,36 @@
 renderData();
 
 async function renderData() {
-  const GET_query = document.location.search.match(/q=([^&]*)/);
-  let query = (GET_query) ? GET_query[1] : "";
-  query = decodeURIComponent(encodeURIComponent(query));
+  const GET_law = document.location.search.match(/law=([^&]*)/);
+  const GET_term = document.location.search.match(/term=([0-9]*)/);
+  const GET_sessionPeriod = document.location.search.match(/sessionPeriod=([0-9]*)/);
+  const GET_theFirst = document.location.search.match(/theFirst=([^&]*)/);
+
+  const law = (GET_law) ? decodeURIComponent(GET_law[1]) : "";
+  const term = (GET_term) ? GET_term[1] : 10;
+  const sessionPeriod = (GET_sessionPeriod) ? GET_sessionPeriod[1] : 8;
+  const theFirst = (GET_theFirst) ? decodeURIComponent(GET_theFirst[1]) : "";
+
+  const lawInput = document.getElementById("input-law");
+  const termSelect = document.getElementById("select-term");
+  const sessionPeriodSelect = document.getElementById("select-sessionPeriod");
+  const theFirstInput = document.getElementById("input-theFirst");
+
+  lawInput.setAttribute('value', law);
+  termSelect.setAttribute('value', term);
+  sessionPeriodSelect.setAttribute('value', sessionPeriod);
+  theFirstInput.setAttribute('value', theFirst);
+
+  const lawSpans = document.getElementsByClassName("law");
+  const termSpans = document.getElementsByClassName("term");
+  const sessionPeriodSpans = document.getElementsByClassName("sessionPeriod");
+  const theFirstSpans = document.getElementsByClassName("theFirst");
+
+  Array.from(lawSpans).forEach(span => { span.innerText = law });
+  Array.from(termSpans).forEach(span => { span.innerText = term });
+  Array.from(sessionPeriodSpans).forEach(span => { span.innerText = sessionPeriod });
+  Array.from(theFirstSpans).forEach(span => { span.innerText = theFirst });
+
   if (query === "") { return; }
   const keywordSpans = document.getElementsByClassName('query-keyword');
   for (span of keywordSpans) {
