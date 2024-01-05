@@ -4,32 +4,32 @@ async function renderData() {
   const GET_lawKeyword = document.location.search.match(/lawKeyword=([^&]*)/);
   const GET_term = document.location.search.match(/term=([0-9]*)/);
   const GET_sessionPeriod = document.location.search.match(/sessionPeriod=([0-9]*)/);
-  const GET_theFirst = document.location.search.match(/theFirst=([^&]*)/);
+  const GET_proposer = document.location.search.match(/proposer=([^&]*)/);
 
   const lawKeyword = (GET_lawKeyword) ? decodeURIComponent(GET_lawKeyword[1]) : "";
   const term = (GET_term) ? GET_term[1] : 10;
   const sessionPeriod = (GET_sessionPeriod) ? GET_sessionPeriod[1] : 8;
-  const theFirst = (GET_theFirst) ? decodeURIComponent(GET_theFirst[1]) : "";
+  const proposer = (GET_proposer) ? decodeURIComponent(GET_proposer[1]) : "";
 
   const lawKeywordInput = document.getElementById("input-lawKeyword");
   const termSelect = document.getElementById("select-term");
   const sessionPeriodSelect = document.getElementById("select-sessionPeriod");
-  const theFirstInput = document.getElementById("input-theFirst");
+  const proposerInput = document.getElementById("input-proposer");
 
   lawKeywordInput.setAttribute('value', lawKeyword);
   termSelect.setAttribute('value', term);
   sessionPeriodSelect.setAttribute('value', sessionPeriod);
-  theFirstInput.setAttribute('value', theFirst);
+  proposerInput.setAttribute('value', proposer);
 
   const lawKeywordSpans = document.getElementsByClassName("lawKeyword");
   const termSpans = document.getElementsByClassName("term");
   const sessionPeriodSpans = document.getElementsByClassName("sessionPeriod");
-  const theFirstSpans = document.getElementsByClassName("theFirst");
+  const proposerSpans = document.getElementsByClassName("proposer");
 
   Array.from(lawKeywordSpans).forEach(span => { span.innerText = lawKeyword });
   Array.from(termSpans).forEach(span => { span.innerText = term });
   Array.from(sessionPeriodSpans).forEach(span => { span.innerText = sessionPeriod });
-  Array.from(theFirstSpans).forEach(span => { span.innerText = (theFirst) ? theFirst : "所有立委" });
+  Array.from(proposerSpans).forEach(span => { span.innerText = (proposer) ? proposer : "所有立委" });
 
   if (lawKeyword === "") { return; }
   //Toggle section.results when retrieving searsh results
