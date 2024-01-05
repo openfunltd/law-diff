@@ -52,7 +52,7 @@
             <a href="https://github.com/openfunltd/law-diff" target="_blank">Github Repo</a>
 
             <form action="." class="search-bar">
-              <input type="text" name="law" id="input-header-law" placeholder="搜尋議案">
+              <input type="text" name="lawKeyword" id="input-header-law" placeholder="法律名稱關鍵字">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -69,7 +69,7 @@
         <div class="container">
           <form action="." method="GET" class="search-form">
             <div class="search-keywords">
-              <input type="text" name="law" id="input-law" placeholder="法律名稱關鍵字">
+              <input type="text" name="lawKeyword" id="input-lawKeyword" placeholder="法律名稱關鍵字">
               <button>
                 <span class="material-symbols-rounded">
                   search
@@ -246,7 +246,7 @@
               <span class="material-symbols-rounded">
                 gavel
               </span>
-              <span> 法律名稱關鍵字：</span><span class="law"></span>
+              <span> 法律名稱關鍵字：</span><span class="lawKeyword"></span>
             </div>
             <div class="filter">
               <span class="material-symbols-rounded">
@@ -357,85 +357,6 @@
             </div>
 
             <div class="result-list">
-              <a href="/bills" class="result">
-                <div class="title">
-                  擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
-                </div>
-                <div class="status">
-                  <span class="badge badge--inprogress">
-                    <span class="material-symbols-rounded">
-                      clock_loader_40
-                      <!--
-                        google icon 有 10, 20, 40, 60, 80, 90 這幾個選項，對應到
-                        提案, 一讀, 委員會, 二讀, 三讀, 頒佈, 生效
-                      -->
-                    </span>
-                    交付審查
-                  </span>
-                  112年10月16日
-                </div>
-                <div class="desc">
-                  本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
-                </div>
-                <div class="legislators">
-                  相關委員：
-                  <span class="badge">
-                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-                    <span class="party party--1"></span>
-                    王定宇
-                  </span>
-                  <span class="badge">
-                    <span class="party party--0"></span>
-                    黃國書
-                  </span>
-                  <span class="badge">
-                    <span class="party party--4"></span>
-                    王婉諭
-                  </span>
-                  <span class="badge">
-                    <span class="party party--3"></span>
-                    陳柏惟
-                  </span>
-                </div>
-              </a>
-
-              <a href="/bills" class="result">
-                <div class="title">
-                  擬具「入出國及移民法第二十一條、第三十五條之一及第六十六條條文修正草案」，請審議案。
-                </div>
-                <div class="status">
-                  <span class="badge badge--done">
-                    <span class="material-symbols-rounded">
-                      task_alt
-                    </span>
-                    已生效
-                  </span>
-                  112年12月6日（台立院議字第1120703929號）
-                </div>
-                <div class="desc">
-                  本院委員李昆澤等16人，鑒於入出國及移民法有關規範外國人來台所為之各項處分，影響當事人權益甚鉅，應以書面通知當事人。惟目前本法仍有部分處分並未規範以書面通知當事人，此外，考量外國人可能無法理解我國語文，為保障其知悉處分內容及救濟管道，所以修正規定入出國及移民署對外國人所為...
-                </div>
-                <div class="legislators">
-                  相關委員：
-                  <span class="badge">
-                    <!-- 0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7 -->
-                    <span class="party party--1"></span>
-                    王定宇
-                  </span>
-                  <span class="badge">
-                    <span class="party party--0"></span>
-                    黃國書
-                  </span>
-                  <span class="badge">
-                    <span class="party party--4"></span>
-                    王婉諭
-                  </span>
-                  <span class="badge">
-                    <span class="party party--3"></span>
-                    陳柏惟
-                  </span>
-                </div>
-              </a>
             </div>
           </div>
 
@@ -466,7 +387,7 @@
               <span class="material-symbols-rounded">
                 gavel
               </span>
-              <span> 法律名稱關鍵字：</span><span class="law"></span>
+              <span> 法律名稱關鍵字：</span><span class="lawKeyword"></span>
             </div>
             <div class="filter">
               <span class="material-symbols-rounded">

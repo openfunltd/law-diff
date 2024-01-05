@@ -1,48 +1,45 @@
 renderData();
 
 async function renderData() {
-  const GET_law = document.location.search.match(/law=([^&]*)/);
+  const GET_lawKeyword = document.location.search.match(/lawKeyword=([^&]*)/);
   const GET_term = document.location.search.match(/term=([0-9]*)/);
   const GET_sessionPeriod = document.location.search.match(/sessionPeriod=([0-9]*)/);
   const GET_theFirst = document.location.search.match(/theFirst=([^&]*)/);
 
-  const law = (GET_law) ? decodeURIComponent(GET_law[1]) : "";
+  const lawKeyword = (GET_lawKeyword) ? decodeURIComponent(GET_lawKeyword[1]) : "";
   const term = (GET_term) ? GET_term[1] : 10;
   const sessionPeriod = (GET_sessionPeriod) ? GET_sessionPeriod[1] : 8;
   const theFirst = (GET_theFirst) ? decodeURIComponent(GET_theFirst[1]) : "";
 
-  const lawInput = document.getElementById("input-law");
+  const lawKeywordInput = document.getElementById("input-lawKeyword");
   const termSelect = document.getElementById("select-term");
   const sessionPeriodSelect = document.getElementById("select-sessionPeriod");
   const theFirstInput = document.getElementById("input-theFirst");
 
-  lawInput.setAttribute('value', law);
+  lawKeywordInput.setAttribute('value', lawKeyword);
   termSelect.setAttribute('value', term);
   sessionPeriodSelect.setAttribute('value', sessionPeriod);
   theFirstInput.setAttribute('value', theFirst);
 
-  const lawSpans = document.getElementsByClassName("law");
+  const lawKeywordSpans = document.getElementsByClassName("lawKeyword");
   const termSpans = document.getElementsByClassName("term");
   const sessionPeriodSpans = document.getElementsByClassName("sessionPeriod");
   const theFirstSpans = document.getElementsByClassName("theFirst");
 
-  Array.from(lawSpans).forEach(span => { span.innerText = law });
+  Array.from(lawKeywordSpans).forEach(span => { span.innerText = lawKeyword });
   Array.from(termSpans).forEach(span => { span.innerText = term });
   Array.from(sessionPeriodSpans).forEach(span => { span.innerText = sessionPeriod });
-  Array.from(theFirstSpans).forEach(span => { span.innerText = theFirst });
+  Array.from(theFirstSpans).forEach(span => { span.innerText = (theFirst) ? theFirst : "所有立委" });
 
-  if (query === "") { return; }
-  const keywordSpans = document.getElementsByClassName('query-keyword');
-  for (span of keywordSpans) {
-    span.innerText = decodeURIComponent(query);
-  }
+  if (lawKeyword === "") { return; }
   //Toggle section.results when retrieving searsh results
   const resultSections = document.getElementsByClassName('results');
-  resultSections[0].style.display = '';
-  resultSections[1].style.display = 'none';
+  resultSections[0].style.display = 'none';
+  resultSections[1].style.display = '';
+  resultSections[2].style.display = 'none';
 
   //Lookup law id by query (only root law for now)
-  const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${query}`);
+  const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${lawKeyword}`);
   const lawData = await lawResponse.json();
   if (lawData.total.value === 0) { return; }
 
@@ -52,7 +49,8 @@ async function renderData() {
     const query_url = "https://ly.govapi.tw/bill" +
                       "?proposal_type=委員提案" +
                       "&field=議案流程&field=提案人&field=last_time&field=案由&limit=10" +
-                      `&law=${law.id}`;
+                      `&term=${term}&sessionPeriod=${sessionPeriod}` +
+                      `&law=${law.id}&proposer=${theFirst}`;
     const billResponse = await fetch(query_url);
     const billsData = await billResponse.json();
     bills.push(...billsData.bills);
@@ -64,7 +62,8 @@ async function renderData() {
   //Toggle results section when no bills
   if (!bills.length) {
     resultSections[0].style.display = 'none';
-    resultSections[1].style.display = '';
+    resultSections[1].style.display = 'none';
+    resultSections[2].style.display = '';
   }
 
   //Lookup legislators' data for checking party later
@@ -73,7 +72,7 @@ async function renderData() {
   const legislators = legislatorData.legislators;
 
   //Build html element to display each bills
-  const containerDiv = resultSections[0].getElementsByClassName('container')[0];
+  const containerDiv = document.getElementsByClassName('result-list')[0];
   // Get index and bill
   for (let i = 0; i < bills.length; i++) {
     buildBillResults(containerDiv, bills[i], i, legislators);
@@ -116,7 +115,7 @@ function buildBillResults(root, bill, idx, legislators) {
   //Build <div class="legislators">
   let legislatorsDiv = document.createElement('div');
   legislatorsDiv.className = 'legislators';
-  legislatorsDiv.innerText = '相關委員：';
+  legislatorsDiv.innerText = '提案委員：';
   legislatorsDiv = buildLegislatorsDiv(legislatorsDiv, legislators, bill.提案人);
   billRootA.appendChild(legislatorsDiv);
 
