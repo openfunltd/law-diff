@@ -8,19 +8,37 @@
     background-size: cover;
     text-align: center;
 
+    .bill-info-row {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: auto 1fr;
+
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+      }
+    }
+
     .content {
       max-width: 1000px;
       margin: 0 auto;
     }
 
     .proposer {
+      order: -1;
+
+      @media (max-width: 575px) {
+        order: 0;
+      }
+
       .title {
-        margin: 2rem auto 1rem auto;
+        margin: 1rem auto;
         padding: 0 1rem;
         width: fit-content;
         background: #fff;
         border-radius: 100px;
         font-weight: bold;
+        white-space: nowrap;
       }
     }
   }
@@ -75,11 +93,12 @@
 
     .row {
       display: grid;
-      grid-template-columns: auto 1px auto;
+      grid-template-columns: auto auto auto;
       justify-content: space-around;
 
       .separator {
         border-left: 1px solid #0001;
+        margin: 0 2rem;
       }
 
       @media (max-width: 991px) {
@@ -228,22 +247,67 @@
 
   .comparation {
     padding: 2rem 0 4rem 0;
-    text-align: center;
 
-    .compare {
-      margin-bottom: 3rem;
+    h2 {
+      text-align: center;
+    }
 
-      select {
-        width: 300px;
-      }
-      span {
-        margin: 0 1rem;
-
-        @media (max-width: 767px) {
-          display: block;
-          margin: 0.4rem 0;
+    .bill-versions {
+      table {
+        th:first-child,
+        td:first-child {
+          text-align: center;
         }
       }
+    }
+
+    .diff-main {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-gap: 2rem;
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .available-sections {
+      padding: 0.8rem 1rem;
+      background: #f6f6f6;
+      border-radius: 1rem;
+
+      .title {
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-bottom: 3px solid var(--red);
+      }
+
+      label {
+        margin-bottom: 0.4rem;
+        display: block;
+        color: #555;
+      }
+    }
+
+    .empty {
+      margin: 1rem 0;
+      padding: 4rem 1rem;
+      border-radius: 1rem;
+      background: #f0f0f0;
+      text-align: center;
+
+      .icon {
+        span {
+          font-size: 10rem;
+        }
+        color: #ccc;
+      }
+    }
+
+    .bills-list {
     }
 
     .diff-hint {
@@ -252,73 +316,17 @@
     }
 
     .bill {
-      margin: 1.6rem 0;
-      padding: 1rem;
-      box-shadow: 0 0 10px #0002;
-      border-radius: 0.25rem;
-      text-align: left;
+      margin-bottom: 2rem;
 
-      .version {
-        margin: -1rem -1rem 1rem -1rem;
-        padding: 0.6rem 1rem;
-        color: var(--color);
+      .title {
+        text-align: left;
         font-weight: bold;
-        background: #0001;
-        text-decoration: none;
+        font-size: 1.2rem;
+        margin-bottom: 0.4rem;
       }
 
-      &--new {
-        .version {
-          background: #0901;
-        }
-      }
-
-      .content {
-      }
-
-      .passed-icon {
-        color: var(--green);
-      }
-
-      .comment {
-        margin-top: 1rem;
-        padding: 0.6rem;
-        background: #fafaec;
-        border-radius: 0.25rem;
-        font-size: 0.8rem;
-      }
-
-      &:first-child {
-        border-right: 1px solid #0001;
-      }
-    }
-
-    .bill-compare {
-      margin: 1.6rem 0;
-      display: grid;
-      overflow: hidden;
-      grid-template-columns: 1fr 1fr;
-      box-shadow: 0 0 8px #0002;
-      border-radius: 0.25rem;
-
-      @media (max-width: 767px) {
-        grid-template-columns: 1fr;
-      }
-
-      .bill {
-        margin: 0;
-        box-shadow: none;
-        border-radius: 0;
-
-        .version {
-          background: #9001;
-        }
-
-        &:last-child {
-          .version {
-            background: #0901;
-          }
-        }
+      .passed {
+        margin-top: 0.4rem;
       }
     }
 

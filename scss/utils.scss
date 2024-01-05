@@ -38,6 +38,7 @@ h2 {
     background-color: var(--gold);
     border-radius: 100px;
     color: #fff;
+    text-align: center;
   }
 }
 
@@ -46,7 +47,7 @@ a {
 }
 
 input, textarea, select, button {
-  padding: 0.6rem 0.4rem;
+  padding: 0.6rem 0.8rem;
   margin: 0;
   min-height: 1rem;
   font-size: 16px;
@@ -77,6 +78,60 @@ select {
 
 section {
   box-sizing: border-box;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+
+  th, td {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.8rem;
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(odd) td {
+    background: #f6f6f6;
+  }
+}
+
+.scroll-table {
+  // position: relative;
+  overflow-x: auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+
+  table {
+    white-space: nowrap;
+    border-left: 0;
+    border-right: 0;
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      border-left: 0;
+      border-right: 0;
+      box-shadow: -1px 0 0 #ccc inset;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      border-left: 0;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+  }
 }
 
 .main {
@@ -110,6 +165,30 @@ section {
   padding: 0.25rem 0.8rem;
   background: #0001;
   border-radius: 0.25rem;
+
+  &--inprogress {
+    background: var(--yellow);
+    color: #fff;
+  }
+
+  &--done {
+    background: var(--green);
+    color: #fff;
+  }
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0 0.8rem;
+  background: #0001;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  vertical-align: middle;
+
+  .icon {
+    font-size: 0.8rem;
+  }
 
   &--inprogress {
     background: var(--yellow);
@@ -186,7 +265,49 @@ section {
   border-radius: 100px;
 
   // 無黨籍
+  &--0 {
+    background: #aaa;
+  }
+
+  // 民進黨
   &--1 {
+    background: #1B9431;
+  }
+
+  // 社民黨
+  &--2 {
+    background: #FF0088;
+  }
+
+  // 台灣基進
+  &--3 {
+    background: #a73f24;
+  }
+
+  // 時代力量
+  &--4 {
+    background: #FBBE01
+  }
+
+  // 綠黨
+  &--5 {
+    background: #73BE00
+  }
+
+  // 民眾黨
+  &--6 {
+    background: #28C8C8;
+  }
+
+  // 國民黨
+  &--7 {
+    background: #000099;
+  }
+}
+
+.bg {
+  // 無黨籍
+  &--0 {
     background: #aaa;
   }
 
@@ -231,12 +352,12 @@ section {
   top: 0;
   z-index: 10000;
   background: #fff;
+  border-bottom: 1px solid #0002;
 
   .header {
     height: 4rem;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-gap: 3rem;
     align-items: center;
 
     @media (max-width: 991px) {
@@ -339,6 +460,7 @@ section {
   background: #222;
   color: #fff;
   font-size: 0.8rem;
+  text-align: center;
 
   .footer {
   }
@@ -348,43 +470,11 @@ section {
     text-decoration: none;
   }
 
-  .ccw {
+  .logo {
+    margin-bottom: 1rem;
+
     img {
       height: 2.2rem;
-    }
-  }
-
-  .info {
-    margin: 3rem 0 1.4rem 0;
-    display: grid;
-    grid-template-columns: 1fr auto;
-
-    .contact {
-    }
-
-    .sns {
-      text-align: right;
-
-      a {
-        &:after {
-          content: ', '
-        }
-
-        &:last-child {
-          &:after {
-            content: none;
-          }
-        }
-      }
-    }
-
-    @media (max-width: 767px) {
-      grid-template-columns: 1fr;
-
-      .sns {
-        margin-top: 1rem;
-        text-align: left;
-      }
     }
   }
 }

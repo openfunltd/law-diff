@@ -23,6 +23,10 @@
         background: #fff;
         border-radius: 0.25rem;
 
+        input {
+          width: 100%;
+        }
+
         input, button {
           appearance: none;
           background: transparent;
@@ -32,67 +36,126 @@
       }
     }
 
-    .options-switch {
-      margin: 0.4rem 0;
-      text-align: right;
+    .options {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-gap: 1rem;
+      align-items: center;
 
-      a {
-        text-decoration: none;
-        color: rgba(0, 0, 0, 0.5);
+      .title {
+      }
+
+      .value {
+        display: flex;
+        align-items: center;
+
+        input {
+          appearance: none;
+          width: 100%;
+          background: #fff;
+          border: 0;
+          border-radius: 0.25rem;
+        }
+
+        select {
+          width: 100%;
+          background: #fff;
+          border: 0;
+          border-radius: 0.25rem;
+        }
+
+        div {
+          margin: 0 0.8rem;
+          white-space: nowrap;
+        }
       }
     }
 
-    .options {
-      .option {
-        margin: 0.4rem 0;
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        align-items: center;
-
-        .title {
-        }
-
-        .value {
-          display: flex;
-          align-items: center;
-
-          input {
-            appearance: none;
-            width: 100%;
-            background: #fff;
-            border: 0;
-            border-radius: 0.25rem;
-          }
-
-          span {
-            margin: 0 0.25rem;
-          }
-        }
-      }
-
-      .actions {
-        margin-top: 1.2rem;
-        text-align: center;
-      }
+    .actions {
+      margin-top: 1.2rem;
+      text-align: center;
     }
   }
 
   .results {
     padding: 2rem 0 4rem 0;
-    max-width: 1000px;
     margin: 0 auto;
 
-    h1 {
-      // color: var(--gold);
+    h2 {
+      text-align: center;
+    }
+
+    .knowledges {
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .knowledge {
+      padding: 2rem;
+      background: #f2f2f2;
+      border-radius: 1rem;
+
+      @media (max-width: 575px) {
+        padding: 1rem;
+      }
+    }
+
+    .party-percentage {
+      grid-column: 1 / 2 span;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+
+      @media (max-width: 767px) {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+      }
+
+      .desc {
+        .item {
+          margin: 0.8rem 0;
+        }
+
+        .bar {
+          margin: 0.25rem 0;
+          height: 3px;
+          background: #fff;
+
+          .bar-percent {
+            height: 100%;
+          }
+        }
+      }
+
+      .percentage-list {
+        // width: fit-content;
+        // margin: 0 auto;
+      }
+
+      .graphic {
+        text-align: center;
+
+        img {
+          display: block;
+          margin: 0 auto 1rem auto;
+          width: 90%;
+        }
+      }
     }
 
     .filters {
-      margin: 3rem 0 2rem 0;
+      margin: 3rem auto 2rem auto;
       padding: 0.8rem 1rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 0.4rem 1rem;
-      background: #f2f2f2;
+      background: #f6f6f6;
       border-radius: 0.25rem;
       color: #777;
 
@@ -104,6 +167,63 @@
         margin-right: 2rem;
       }
     }
+
+    .result-main {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: 200px 1fr;
+
+      @media (max-width: 575px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rwd-filter-options-switch {
+      display: none;
+      text-align: center;
+
+      a {
+        color: currentColor;
+        text-decoration: none;
+      }
+
+      @media (max-width: 575px) {
+        display: block;
+      }
+    }
+
+    .filter-options {
+      @media (max-width: 575px) {
+        display: none;
+      }
+
+      &.rwd-active {
+        display: block;
+      }
+
+      .option {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f2f2f2;
+        border-radius: 0.25rem;
+      }
+
+      .title {
+        margin-bottom: 0.4rem;
+        font-weight: bold;
+      }
+
+      .list {
+        font-size: 0.8rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .result-list {}
   }
 
   .result {

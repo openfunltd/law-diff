@@ -9,15 +9,14 @@ const common = {
     const rwdMenuVisible = ref(false)
 
     // ---------- 搜尋頁 ----------
-    // 搜尋頁是否顯示進階搜尋
-    const advancedSearchVisible = ref(false)
+    // 小畫面模式是否顯示二次篩選條件
+    const rwdFilterOptionsVisible = ref(false)
 
     // ---------- 議案頁 ----------
     // 議案頁的兩個對照版本 0為現行條文 -1為通過條文 其他請參考網頁中的versions
     const billViewing = ref('comparation') // 預設顯示法案對照表
 
-    const compareFrom = ref(0)
-    const compareBy = ref(1)
+    const selectedVersions = ref([])
 
     // 議案頁版本修改者與修改內容
     const billVersions = ref([])
@@ -37,88 +36,55 @@ const common = {
     }
     onMounted(loadComparationData);
 
-    // 產生比較法條列表
-    const filterBills = computed(() => {
-      if (!billVersions.value.length || !billsData.value.length) {
-        return
+    // 改成依照目前選的版本，取得有修改的聯集的條文
+    const allAvailableSections = computed (() => {
+      let result = []
+
+      billsData.value.map((item, idx) => {
+        return item.versions.filter((it, i) => {
+          return it.content && selectedVersions.value.includes(i)
+        }).length
+      }).forEach((item, idx) => {
+        // 交集
+        // if (item === selectedVersions.value.length) {
+        //   result.push(idx)
+        // }
+        // 聯集
+        if (item) {
+          result.push(idx)
+        }
+      })
+
+      if (!result.length) {
+        result = billsData.value.map((item, idx) => idx)
       }
 
-      const result = []
-
-      // 一條一條找有from（比較欄位左邊）與有by（比較欄位右邊）的資料
-      billsData.value.forEach(billsSet => {
-        const row = {
-          from: null,
-          by: null
-        }
-
-        const isNew = !billsSet[0].content
-
-        // 找左欄資料
-        if (billsSet[compareFrom.value].content) {
-          row.from = {
-            name: versions[compareFrom.value],
-            nowRule: compareFrom.value === 0,
-            new: isNew,
-            ...billsSet[compareFrom.value]
-          }
-        }
-
-        // 找右欄資料 當compareBy.value === -1時，要找審過(passed)的資料
-        if (compareBy.value === -1) {
-          const idx = billsSet.findIndex(bill => bill.passed)
-          row.by = idx > -1
-            ? {
-              name: versions[idx],
-              nowRule: false,
-              new: isNew,
-              ...billsSet[idx]
-            }
-            : null
-        } else if (billsSet[compareBy.value]?.content) {
-          row.by = {
-            name: versions[compareBy.value],
-            nowRule: false,
-            new: isNew,
-            ...billsSet[compareBy.value]
-          }
-        }
-
-        // 如果兩欄都有資料，製作diff顯示，只需要跟現行條文比較，不用做委員與委員之間的比較
-        // 只有其中一欄有資料的話，只要把\n轉br即可
-
-        // 現行條文
-        const nowBill = billsSet[0].content || ''
-        const diff = new Diff()
-        let textDiff
-
-        if (row.from) {
-          textDiff = diff.main(nowBill, row.from.content)
-          row.from.htmlContent = diff.prettyHtml(textDiff)
-          // row.from.htmlContent = row.from.content.replace(/\n/g, '<br>')
-        }
-
-        if (row.by) {
-          // row.by.htmlContent = '<ins>' + row.by.content.replace(/\n/g, '<br>') + '</ins>'
-          textDiff = diff.main(nowBill, row.by.content)
-          row.by.htmlContent = diff.prettyHtml(textDiff)
-        }
-
-        result.push(row)
-      })
+      // 重新整理 selectedSections，若有不存在 allAvailableSections 的 Section 須移除
+      selectedSections.value = selectedSections.value.filter(item => result.includes(item))
 
       return result
     })
 
+    const selectedSections = ref([])
+
+    function compareDiff (content1, content2) {
+      const diff = new Diff()
+      let textDiff = diff.main(content1, content2)
+      return diff.prettyHtml(textDiff)
+    }
+
     return {
       rwdMenuVisible,
-      advancedSearchVisible,
+      rwdFilterOptionsVisible,
+
       billViewing,
-      compareFrom,
-      compareBy,
       billVersions,
       billsData,
-      filterBills
+      selectedVersions,
+      allAvailableSections,
+      selectedSections,
+
+      compareDiff
     }
   }
 }
