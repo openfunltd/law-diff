@@ -11,14 +11,7 @@ async function renderData(){
   const billData = await billResponse.json();
     
   let billName = billData.議案名稱;
-  if (billName.substring(0, 2) === "廢止") {
-    billName = billName.split("，")[0];
-    billName = billName.replace(/[「」]/g, '');
-  } else {
-    const startIdx = billName.indexOf("「");
-    const endIdx = billName.indexOf("」");
-    billName = billName.substring(startIdx + 1, endIdx);
-  }
+  billName = formatBillName(billName);
   const reason = (billData.案由 != undefined) ? billData.案由 : "無資料";
   const theFirst = (billData.提案人 != undefined) ? billData.提案人[0] : "無資料";
   const sessionPeriod = billData.屆期;
@@ -221,6 +214,18 @@ function buildlegislatorDiv(listName, name, party, picUrl) {
   legislatorDiv.appendChild(nameDiv);
 
   return legislatorDiv;
+}
+
+function formatBillName(billName) {
+  if (billName.substring(0, 2) === "廢止") {
+    billName = billName.split("，")[0];
+    billName = billName.replace(/[「」]/g, '');
+  } else {
+    const startidx = billName.indexOf("「");
+    const endidx = billName.indexOf("」");
+    billName = billName.substring(startidx + 1, endidx);
+  }
+  return billName;
 }
 
 //0無黨籍 民進黨1 社民黨2 台灣基進3 時代力量4 綠黨5 民眾黨6 國民黨7
