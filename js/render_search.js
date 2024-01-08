@@ -73,7 +73,7 @@ async function renderData() {
   const legislators = legislatorData.legislators;
 
   //Build html element to display each bills
-  const containerDiv = document.getElementsByClassName('result-list')[0];
+  const containerDiv = document.getElementById('bill-list');
   // Get index and bill
   for (let i = 0; i < bills.length; i++) {
     buildBillResults(containerDiv, bills[i], i, legislators);
