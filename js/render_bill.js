@@ -50,7 +50,7 @@ function dispatchSection(data, observer) {
   if (comparationDivs.length > 0) {
     renderVersionName();
   } else if (progressDivs.length > 0) {
-    //TODO
+    renderProgress(billData.議案流程);
   } else if (legislatorsDivs.length > 0) {
     let nonFirsts = [];
     const cosigners = (billData.連署人 != undefined) ? billData.連署人 : [];
@@ -155,6 +155,30 @@ function getLegislatorData(name, legislatorData) {
     return [legislators[0].party, picUrl];
   }
   return ["", ""];
+}
+
+function renderProgress(progressData) {
+  const progressDiv = document.getElementById('bill_progress');
+  const progress_ongoing = '<span class="material-symbols-rounded"> update </span> ';
+  const progress_done = '<span class="material-symbols-rounded"> check </span> ';
+  const progress_error = '<span class="material-symbols-rounded"> error </span> ';
+  if (progressData === undefined || progressData.length === 0) {
+    const progressH3 = document.createElement('h3');
+    progressH3.innerHTML = progress_error + '無資料';
+    progressDiv.appendChild(progressH3);
+    return;
+  }
+  isFirst = true;
+  for (const progress of progressData.reverse()) {
+    const progressH3 = document.createElement('h3');
+    if (isFirst) {
+      isFirst = false;
+      progressH3.innerHTML = progress_ongoing + progress.狀態;
+    } else {
+      progressH3.innerHTML = progress_done + progress.狀態;
+    }
+    progressDiv.appendChild(progressH3);
+  }
 }
 
 function renderLegislatorsSection(nonFirsts, cosigners, legislatorData) {
