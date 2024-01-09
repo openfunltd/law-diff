@@ -21,13 +21,12 @@ const common = {
     // 議案頁版本修改者與修改內容
     const billVersions = ref([])
     const billsData = ref([])
-    let versions = [];
 
     const loadComparationData = async () => {
       const [versions, bills] = await getComparationData();
       try {
         if (versions && versions.length) {
-          billVersions.value = versions.slice(1, versions.length)
+          billVersions.value = versions
         }
         if (bills && bills.length) {
           billsData.value = bills

@@ -40,9 +40,7 @@ function dispatchSection(data, observer) {
   const billData = data.billData;
   const legislatorData = data.legislatorData;
   observer.disconnect();
-  if (comparationDivs.length > 0) {
-    renderVersionName();
-  } else if (progressDivs.length > 0) {
+  if (progressDivs.length > 0) {
     renderProgress(billData.議案流程);
   } else if (legislatorsDivs.length > 0) {
     let nonFirsts = [];
@@ -54,23 +52,6 @@ function dispatchSection(data, observer) {
   }
   const mainDiv = document.querySelector('.main');
   observer.observe(mainDiv, {childList: true, subtree: true});
-}
-
-function renderVersionName() {
-  const versionSelect = document.getElementById("versionSelect");
-  const selectValue = versionSelect.selectedIndex;
-  if (selectValue === -1) { return; }
-  const versionName = versionSelect.options[selectValue].innerText;
-  const elements = document.getElementsByClassName("version");
-  for (const element of elements) {
-    if (element.innerText === "") {
-      element.innerText = "現行條文";
-    } else if (element.innerText.includes("修正條文")) {
-      element.innerText = versionName + "提案 修正條文";
-    } else if (element.innerText.includes("新增條文")) {
-      element.innerText = versionName + "提案 新增條文";
-    }
-  }
 }
 
 function getIdString(row) {
@@ -94,19 +75,27 @@ async function getComparationData() {
     const relatedBillData = await relatedBillResponse.json();
     billDataArr.push(relatedBillData);
   }
-  let versions = ['現行條文'];
+  let versions = [{}]; //The frist object is for '現行法律' which is hidden for now.
   let currentLaws = [];
 
   //Figure out how many groups of law-diff.
   for (const billData of billDataArr) {
     if (billData.對照表 === undefined){ continue; }
-    versions.push(billData['提案單位/提案委員']);
+    let version = {};
+    version.billName = formatBillName(billData.議案名稱);
+    version.versionName = billData['提案單位/提案委員'];
+    const proposers = (billData.提案人) ? billData.提案人 : [];
+    version.nonMainFirstProposer = proposers.slice(1).join('、');
+    version.billNo = billData.提案編號;
+    version.billDate = billData.first_time;
+    versions.push(version);
     const rows = billData.對照表[0].rows;
     for (const row of rows) {
       const idString = getIdString(row);
       currentLawIndex = currentLaws.findIndex((law) => law.idString === idString);
       if (currentLawIndex === -1) {
-        currentLaws.push({"idString": idString, "currentLaw": row.現行})
+        const currentLaw = (row.現行) ? row.現行 : null;
+        currentLaws.push({"idString": idString, "currentLaw": currentLaw})
       }
     }
   }
@@ -114,30 +103,36 @@ async function getComparationData() {
   //Build variable bills for frontend to render/display
   let bills = [];
   for (const law of currentLaws) {
-    bills.push([{
-                 "content": (law.currentLaw === "") ? null : law.currentLaw,
-                 "passed": false,
-                 "comment": null
-                }]);
+    let bill = {
+      "title": law.idString,
+      "versions": [
+        {
+          "content": law.currentLaw,
+          "passed": false,
+          "comment": null,
+          "reason": null,
+        }
+      ]
+    }
+    bills.push(bill);
   }
   for (let i = 0; i < currentLaws.length; i++) {
     const idString = currentLaws[i].idString;
     for (const billData of billDataArr) {
       if (billData.對照表 === undefined){ continue; }
-      let payload = {"content": null, "passed": false, "comment": null};
+      let payload = {"content": null, "passed": false, "comment": null, "reason": null};
       const rows = billData.對照表[0].rows;
       for (const row of rows) {
         const diffIdString = getIdString(row);
         if (diffIdString === idString){
           payload.content = row.修正;
-          payload.comment = row.說明;
+          payload.reason = row.說明;
           break;
         }
       }
-      bills[i].push(payload);
+      bills[i].versions.push(payload);
     }
   }
-
   return [versions, bills];
 }
 
