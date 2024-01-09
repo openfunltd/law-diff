@@ -1,6 +1,11 @@
 renderData();
 
 async function renderData() {
+  if (window.location.hostname === "openfunltd.github.io") {
+    homeATags = document.getElementsByClassName('home');
+    Array.from(homeATags).forEach(aTag => { aTag.href = "/law-diff/"; })
+  }
+
   const GET_lawKeyword = document.location.search.match(/lawKeyword=([^&]*)/);
   const GET_term = document.location.search.match(/term=([0-9]*)/);
   const GET_sessionPeriod = document.location.search.match(/sessionPeriod=([0-9]*)/);

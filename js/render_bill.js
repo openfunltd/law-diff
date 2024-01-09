@@ -1,6 +1,11 @@
 renderData();
 
 async function renderData(){
+  if (window.location.hostname === "openfunltd.github.io") {
+    homeATags = document.getElementsByClassName('home');
+    Array.from(homeATags).forEach(aTag => { aTag.href = "/law-diff/"; })
+  }
+
   const GET_billNo = document.location.search.match(/billNo=([0-9]*)/);
   //202103139970000 20委10033531
   //202103113910000 20委10030929
