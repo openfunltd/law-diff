@@ -75,7 +75,7 @@ async function getComparationData() {
   const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
   const billData = await billResponse.json();
   const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}/related_bills`);
-  const relatedBillDataArr = await billResponse.json();
+  const relatedBillDataArr = await relatedBillResponse.json();
   const billDataArr = (relatedBillDataArr.bills) ? relatedBillDataArr.bills : [billData];
 
   let versions = [{}]; //The frist object is for '現行法律' which is hidden for now.
