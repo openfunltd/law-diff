@@ -74,12 +74,10 @@ async function getComparationData() {
   let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
   const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
   const billData = await billResponse.json();
-  let billDataArr = [billData];
-  for (const relatedBill of billData.關連議案){
-    const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${relatedBill.billNo}`);
-    const relatedBillData = await relatedBillResponse.json();
-    billDataArr.push(relatedBillData);
-  }
+  const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}/related_bills`);
+  const relatedBillDataArr = await billResponse.json();
+  const billDataArr = (relatedBillDataArr.bills) ? relatedBillDataArr.bills : [billData];
+
   let versions = [{}]; //The frist object is for '現行法律' which is hidden for now.
   let currentLaws = [];
 
