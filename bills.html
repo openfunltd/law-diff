@@ -494,6 +494,22 @@
                     {{ version.billDate }}
                   </td>
                 </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- 按下Enter後，會觸發 getBillByNo 並帶入輸入的文字與目前的法案編號 -->
+                    <input
+                      type="text"
+                      placeholder="自行輸入提案編號"
+                      class="custom-bill-no"
+                      @keyup.enter="getBillByNo($event, 'bill_00001')"
+                    >
+                  </td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -504,16 +520,23 @@
                 <span class="material-symbols-rounded">
                   playlist_add_check
                 </span>
-                比較條文
+                <!-- 比較條文 -->
+                條文索引
               </div>
-              <label v-for="idx in allAvailableSections">
+              <!-- <label v-for="idx in allAvailableSections">
                 <input
                   v-model="selectedSections"
                   type="checkbox"
                   :value="idx"
                 >
                 {{ billsData[idx].title }}
-              </label>
+              </label> -->
+              <a
+                v-for="idx in allAvailableSections"
+                :href="`#bill_${idx}`"
+              >
+                {{ billsData[idx].title }}
+              </a>
             </div>
 
             <div class="bills-list">
@@ -524,8 +547,9 @@
                 與現行法規比較 <ins>綠色</ins> 為新增 <del>紅色</del>為刪除
               </div>
 
+              <!-- v-if="!selectedSections.length" -->
               <div
-                v-if="!selectedSections.length"
+                v-if="!allAvailableSections.length"
                 class="empty"
               >
                 <div class="icon">
@@ -533,12 +557,14 @@
                     info
                   </span>
                 </div>
-                請於上方選擇欲比較之版本，左側選擇欲比較之條文。
+                請於上方選擇欲比較之版本，點選左側條文標題可跳至該條文。
               </div>
 
+              <!-- v-for="idx in selectedSections.sort()" -->
               <div
-                v-for="idx in selectedSections.sort()"
+                v-for="idx in allAvailableSections"
                 class="bill"
+                :id="`bill_${idx}`"
               >
                 <div class="title">
                   {{ billsData[idx].title }}

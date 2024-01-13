@@ -11,5 +11,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/search.html'))
 })
 app.use('/bills', express.static(__dirname + '/bills.html'))
+app.use('/sample_bill_api', express.static(__dirname + '/sample_bill_api.json'))
  
 app.listen(3005)
