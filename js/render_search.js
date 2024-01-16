@@ -98,8 +98,8 @@ async function renderData() {
   //Build html element to display each bills
   const containerDiv = document.getElementById('bill-list');
   // Get index and bill
-  for (let i = 0; i < bills.length; i++) {
-    buildBillResults(containerDiv, bills[i], i, legislators);
+  for (const bill of bills) {
+    buildBillResults(containerDiv, bill, legislators);
   }
 
   //Build div.page depend on bills.length
@@ -152,16 +152,12 @@ function countFilter(aggs, filterCount, lawName) {
   return filterCount;
 }
 
-function buildBillResults(root, bill, idx, legislators) {
+function buildBillResults(root, bill, legislators) {
   //Build root <a> element
-  idx++;
-  let page = Math.floor((idx) / 10);
-  if (idx % 10 > 0) { page++; }
   const billRootA = document.createElement('a');
   billRootA.href = `bills.html?billNo=${bill.billNo}`;
-  if (page > 1) { billRootA.style.display = 'none'; }
 
-  billRootA.className = `result in-page-${page}`;
+  billRootA.className = 'result';
   billRootA.target = '_blank';
 
   //Build <div class="title">
