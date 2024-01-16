@@ -73,7 +73,7 @@ async function renderData() {
   }
 
   //Lookup legislators' data for checking party later
-  const legislatorResponse = await fetch(`https://ly.govapi.tw/legislator/10?page=1&limit=500`);
+  const legislatorResponse = await fetch(`https://ly.govapi.tw/legislator/${term}?page=1&limit=500`);
   const legislatorData = await legislatorResponse.json();
   const legislators = legislatorData.legislators;
 
