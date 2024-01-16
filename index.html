@@ -234,7 +234,7 @@
 
       <!-- 搜尋結果 -->
       <section class="results" style="display: none;">
-        <div class="container" id="bill-list">
+        <div class="container">
           <h1>
             <span class="icon material-symbols-rounded">
               manage_search
@@ -262,6 +262,58 @@
               &nbsp;<span class="proposer"></span>
             </div>
             <div></div>
+          </div>
+
+          <!-- [phase2] 新增了 .result-main .result-list 的結構 包在原本的list外 -->
+          <!-- [phase2] 新增了 .filter-options checkbox list -->
+          <div class="result-main">
+            <div class="rwd-filter-options-switch">
+              <a
+                href="#"
+                @click.prevent="rwdFilterOptionsVisible = !rwdFilterOptionsVisible"
+              >
+                進階篩選
+                <span
+                  v-if="rwdFilterOptionsVisible"
+                  class="material-symbols-rounded"
+                >
+                  expand_more
+                </span>
+                <span
+                  v-else
+                  class="material-symbols-rounded"
+                >
+                  expand_less
+                </span>
+              </a>
+            </div>
+
+            <div
+              class="filter-options"
+              :class="{ 'rwd-active': rwdFilterOptionsVisible }"
+            >
+              <div class="option">
+                <div class="title">屆期會期</div>
+                <div class="list sessionPeriod-options"></div>
+              </div>
+
+              <div class="option">
+                <div class="title">法條名稱</div>
+                <div class="list law-options"></div>
+              </div>
+
+              <div class="option">
+                <div class="title">立法進度</div>
+                <div class="list billProgress-options"></div>
+              </div>
+
+              <div class="option">
+                <div class="title">提案人</div>
+                <div class="list proposer-options"></div>
+              </div>
+            </div>
+
+            <div id="bill-list" class="result-list"></div>
           </div>
         </div>
       </section>
