@@ -52,6 +52,7 @@ async function renderData() {
   sessionPeriodCount = Array(8).fill(0);
   proposerCount = {};
   lawCount = {};
+  lawCode = {};
   billProgressCount = {};
 
   //Lookup bills for each law-id (only top 10 result and propose by legislator for now)
@@ -68,6 +69,7 @@ async function renderData() {
     sessionPeriodCount = countSessionPeriod(billsData.aggs.會期, sessionPeriodCount);
     proposerCount = countFilter(billsData.aggs.提案人, proposerCount);
     lawCount = countFilter(billsData.aggs.laws, lawCount, law.name);
+    lawCode[law.name] = law.id;
     billProgressCount = countFilter(billsData.aggs.議案狀態, billProgressCount);
     bills.push(...billsData.bills);
   }
@@ -90,7 +92,7 @@ async function renderData() {
   //Build filter options
   buildFilterOptions("sessionPeriod", sessionPeriodCount, term);
   buildFilterOptions("proposer", proposerCount);
-  buildFilterOptions("law", lawCount);
+  buildFilterOptions("law", lawCount, null, lawCode);
   buildFilterOptions("billProgress", billProgressCount);
 
   //Build html element to display each bills
@@ -104,16 +106,21 @@ async function renderData() {
   buildPageDiv(containerDiv, bills.length);
 }
 
-function buildFilterOptions(fieldName, options, term) {
+function buildFilterOptions(fieldName, options, term, lawCode) {
   const fieldDiv = document.getElementsByClassName(`${fieldName}-options`)[0];
   const isSessionPeriod = (fieldName === "sessionPeriod");
+  const isLaw = (fieldName === "law");
   const length = options.length //used when isSessionPeriod === true
   for (let key in options) {
     if (options[key] === 0) { continue; }
     const text = (isSessionPeriod) ? `第${term}屆第${length - key}會期`: key;
+    if (isLaw) { console.log(lawCode[key]); }
+    let id = (isSessionPeriod) ? `${fieldName}-${length - key}` : `${fieldName}-${key}`;
+    if (isLaw) { id = `${fieldName}-${lawCode[key]}`; }
     const optionLabel = document.createElement('label');
     const optionInput = document.createElement('input');
     optionInput.setAttribute('type', 'checkbox');
+    optionInput.id = id;
     const textNode = document.createTextNode(text);
     optionLabel.appendChild(optionInput);
     optionLabel.appendChild(textNode);
