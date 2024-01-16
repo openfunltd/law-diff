@@ -158,6 +158,7 @@ function buildBillResults(root, bill, legislators) {
   billRootA.href = `bills.html?billNo=${bill.billNo}`;
 
   billRootA.className = 'result';
+  billRootA.id = bill.billNo;
   billRootA.target = '_blank';
 
   //Build <div class="title">
