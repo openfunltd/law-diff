@@ -124,7 +124,7 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
     optionInput.classList.add('filter-option');
     optionInput.id = inputId;
     //add event listener
-    optionInput.addEventListener('change', () => filterBills());
+    optionInput.addEventListener('change', () => filterBills(optionInput));
     const textSpan = document.createElement('span');
     textSpan.innerText = text;
     const countSpan = document.createElement('span');

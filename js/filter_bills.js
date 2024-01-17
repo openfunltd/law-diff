@@ -1,9 +1,33 @@
-function filterBills() {
+function filterBills(inputEle) {
+  const [filterType, target] = inputEle.id.split('-');
   const filterInputs = document.getElementsByClassName('filter-option');
-  //filterInputs is not an array, but a HTMLCollection
-  //Use Array.from() to convert it to an array
   const checkedInputs = Array.from(filterInputs).filter((ele) => ele.checked);
-  console.log(checkedInputs);
+  updateFilterCount(filterType, checkedInputs);
+  //console.log(inputEle.checked);
+}
+
+function updateFilterCount(filterType, checkedInputs) {
+  let sessionPeriodFilters = [];
+  let lawFilters = [];
+  let billProgressFilters = [];
+  let proposerFilters = [];
+  for (const checkedInput of checkedInputs) {
+    const [filterType, target] = checkedInput.id.split('-');
+    switch (filterType) {
+      case "sessionPeriod":
+        sessionPeriodFilters.push(target);
+        break;
+      case "law":
+        lawFilters.push(target);
+        break;
+      case "billProgress":
+        billProgressFilters.push(target);
+        break;
+      case "proposer":
+        proposerFilters.push(target);
+        break;
+    }
+  }
 }
 
 function setAllBills(bill) {
