@@ -1,3 +1,4 @@
+let allBills = [];
 renderData();
 
 async function renderData() {
@@ -95,11 +96,12 @@ async function renderData() {
   buildFilterOptions("law", lawCount, null, lawCode);
   buildFilterOptions("billProgress", billProgressCount);
 
-  //Build html element to display each bills
   const containerDiv = document.getElementById('bill-list');
-  // Get index and bill
   for (const bill of bills) {
+    //Build html element to display each bills
     buildBillResults(containerDiv, bill, legislators);
+    //Insert bill data into allBills(global variable)
+    setAllBills(bill);
   }
 
   //Build div.page depend on bills.length
