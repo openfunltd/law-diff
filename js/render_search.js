@@ -114,16 +114,23 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
   for (let key in options) {
     if (options[key] === 0) { continue; }
     const text = (isSessionPeriod) ? `第${term}屆第${length - key}會期`: key;
-    if (isLaw) { console.log(lawCode[key]); }
-    let id = (isSessionPeriod) ? `${fieldName}-${length - key}` : `${fieldName}-${key}`;
-    if (isLaw) { id = `${fieldName}-${lawCode[key]}`; }
+    let inputId = (isSessionPeriod) ? `${fieldName}-${length - key}` : `${fieldName}-${key}`;
+    if (isLaw) { inputId = `${fieldName}-${lawCode[key]}`; }
     const optionLabel = document.createElement('label');
     const optionInput = document.createElement('input');
     optionInput.setAttribute('type', 'checkbox');
-    optionInput.id = id;
-    const textNode = document.createTextNode(text);
+    optionInput.classList.add('filter-option');
+    optionInput.id = inputId;
+    //add event listener
+    optionInput.addEventListener('change', () => filterBills());
+    const textSpan = document.createElement('span');
+    textSpan.innerText = text;
+    const countSpan = document.createElement('span');
+    countSpan.id = `count-${inputId}`;
+    countSpan.innerText = `(${options[key]})`;
     optionLabel.appendChild(optionInput);
-    optionLabel.appendChild(textNode);
+    optionLabel.appendChild(textSpan);
+    optionLabel.appendChild(countSpan);
     fieldDiv.appendChild(optionLabel);
   }
 }
