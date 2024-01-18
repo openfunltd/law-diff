@@ -97,11 +97,9 @@ function filterBills(filteredBills, checkedInputs, filterType) {
       filteredBills = filteredBills.filter((bill) => filters.includes(bill.billProgress))
       break;
     case "proposer":
-      filteredBills = filteredBills.filter((bill) => {
-        filters.some((proposer) => {
-          bill.proposers.includes(proposer)
-        })
-      });
+      filteredBills = filteredBills.filter((bill) =>
+        filters.some((proposer) => bill.proposers.includes(proposer))
+      );
       break;
   }
   return [filteredBills, true];
