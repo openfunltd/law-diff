@@ -14,6 +14,20 @@ function updateFilters(inputEle) {
       updateOptionsCount(optionsCount, filterType);
     }
   }
+  toggleBillVisibility(filteredBills);
+}
+
+function toggleBillVisibility(filteredBills) {
+  billElements = document.getElementsByClassName('result');
+  for (billEle of billElements) {
+    const ID = billEle.id;
+    isTargetBill = filteredBills.some(bill => bill.billNo === ID);
+    if (isTargetBill) {
+      billEle.style.display = 'block';
+      continue;
+    }
+    billEle.style.display = 'none';
+  }
 }
 
 function updateOptionsCount(optionsCount, filterType) {
