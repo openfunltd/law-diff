@@ -250,6 +250,7 @@ function buildPageDiv(root, resultCnt) {
   // Add previous page button
   const pageDiv = document.createElement('div');
   pageDiv.className = 'pages';
+  pageDiv.style.display = 'none';
   const previousPageA = document.createElement('a');
   previousPageA.innerText = '上一頁';
   previousPageA.href = '#';
