@@ -1,4 +1,5 @@
 let allBills = [];
+let allBillOptionsCount = {};
 renderData();
 
 async function renderData() {
@@ -103,6 +104,7 @@ async function renderData() {
     //Insert bill data into allBills(global variable)
     setAllBills(bill);
   }
+  allBillOptionsCount = countBillFieldValues(allBills);
 
   //Build div.page depend on bills.length
   buildPageDiv(containerDiv, bills.length);
@@ -130,6 +132,7 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
     const countSpan = document.createElement('span');
     countSpan.id = `count-${inputId}`;
     countSpan.innerText = `(${options[key]})`;
+    countSpan.classList.add('option-count');
     optionLabel.appendChild(optionInput);
     optionLabel.appendChild(textSpan);
     optionLabel.appendChild(countSpan);

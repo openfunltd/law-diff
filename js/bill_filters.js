@@ -1,9 +1,33 @@
 function updateFilters(inputEle) {
-  const [filterType, target] = inputEle.id.split('-');
   const filterInputs = document.getElementsByClassName('filter-option');
   const checkedInputs = Array.from(filterInputs).filter((ele) => ele.checked);
-  const filteredBills = filterBills(checkedInputs);
-  const optionsCount = countBillFieldValues(filteredBills);
+  let filteredBills = allBills;
+
+  //Replay filter in the order of sessionPeriod, law, billProgress, proposer
+  updateOptionsCount(allBillOptionsCount);
+  for (const filterType of ["sessionPeriod", "law", "billProgress", "proposer"]) {
+    const payload = filterBills(filteredBills, checkedInputs, filterType);
+    filteredBills = payload[0];
+    const isFiltered = payload[1];
+    if (isFiltered) {
+      const optionsCount = countBillFieldValues(filteredBills);
+      updateOptionsCount(optionsCount, filterType);
+    }
+  }
+}
+
+function updateOptionsCount(optionsCount, filterType) {
+  inputEles = document.getElementsByClassName('filter-option');
+  countSpans = document.getElementsByClassName('option-count');
+  for (let i = 0; i < inputEles.length; i++) {
+    const ID = inputEles[i].id
+    const field = ID.split('-')[0];
+    if (field === filterType) { continue; }
+    const hasCount = optionsCount.hasOwnProperty(ID);
+    countSpans[i].innerText = (hasCount) ? `(${optionsCount[ID]})` : '';
+    inputEles[i].disabled = !hasCount;
+    inputEles[i].checked = inputEles[i].checked && hasCount;
+  }
 }
 
 function countBillFieldValues(filteredBills) {
@@ -23,7 +47,7 @@ function countBillFieldValues(filteredBills) {
           values.push(bill.billProgress);
           break;
         case "proposer":
-          values = bill.proposers;
+          if (bill.proposers) { values = bill.proposers; }
           break;
       }
       for (const value of values) {
@@ -39,46 +63,34 @@ function countBillFieldValues(filteredBills) {
   return optionsCount;
 }
 
-function filterBills(checkedInputs) {
-  let sessionPeriodFilters = [];
-  let lawFilters = [];
-  let billProgressFilters = [];
-  let proposerFilters = [];
+function filterBills(filteredBills, checkedInputs, filterType) {
+  let filters = [];
   for (const checkedInput of checkedInputs) {
-    const [filterType, target] = checkedInput.id.split('-');
-    switch (filterType) {
-      case "sessionPeriod":
-        sessionPeriodFilters.push(parseInt(target));
-        break;
-      case "law":
-        lawFilters.push(target);
-        break;
-      case "billProgress":
-        billProgressFilters.push(target);
-        break;
-      case "proposer":
-        proposerFilters.push(target);
-        break;
+    const [field, target] = checkedInput.id.split('-');
+    if (filterType === field) {
+      filters.push((filterType === "sessionPeriod") ? parseInt(target) : target);
     }
   }
-  let filteredBills = allBills;
-  if (sessionPeriodFilters.length) {
-    filteredBills = filteredBills.filter((bill) => sessionPeriodFilters.includes(bill.sessionPeriod))
+  if (filters.length === 0) { return [filteredBills, false]; }
+  switch (filterType) {
+    case "sessionPeriod":
+      filteredBills = filteredBills.filter((bill) => filters.includes(bill.sessionPeriod))
+      break;
+    case "law":
+      filteredBills = filteredBills.filter((bill) => filters.some((law) => bill.laws.includes(law)))
+      break;
+    case "billProgress":
+      filteredBills = filteredBills.filter((bill) => filters.includes(bill.billProgress))
+      break;
+    case "proposer":
+      filteredBills = filteredBills.filter((bill) => {
+        filters.some((proposer) => {
+          bill.proposers.includes(proposer)
+        })
+      });
+      break;
   }
-  if (lawFilters.length) {
-    filteredBills = filteredBills.filter((bill) => lawFilters.some((law) => bill.laws.includes(law)))
-  }
-  if (billProgressFilters.length) {
-    filteredBills = filteredBills.filter((bill) => billProgressFilters.includes(bill.billProgress))
-  }
-  if (proposerFilters.length) {
-    filteredBills = filteredBills.filter((bill) => {
-      proposerFilters.some((proposer) => {
-        bill.proposers.includes(proposer)
-      })
-    });
-  }
-  return filteredBills;
+  return [filteredBills, true];
 }
 
 function setAllBills(bill) {
