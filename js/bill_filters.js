@@ -3,10 +3,10 @@ function updateFilters(inputEle) {
   const filterInputs = document.getElementsByClassName('filter-option');
   const checkedInputs = Array.from(filterInputs).filter((ele) => ele.checked);
   const filteredBills = filterBills(checkedInputs);
-  const optionsCount = countBillFieldValues(filteredBills, filterType);
+  const optionsCount = countBillFieldValues(filteredBills);
 }
 
-function countBillFieldValues(filteredBills, filterType) {
+function countBillFieldValues(filteredBills) {
   const fields = ['sessionPeriod', 'law', 'billProgress', 'proposer'];
   const optionsCount = {};
   for (const field of fields) {
