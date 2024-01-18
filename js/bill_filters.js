@@ -3,6 +3,40 @@ function updateFilters(inputEle) {
   const filterInputs = document.getElementsByClassName('filter-option');
   const checkedInputs = Array.from(filterInputs).filter((ele) => ele.checked);
   const filteredBills = filterBills(checkedInputs);
+  const optionsCount = countBillFieldValues(filteredBills, filterType);
+}
+
+function countBillFieldValues(filteredBills, filterType) {
+  const fields = ['sessionPeriod', 'law', 'billProgress', 'proposer'];
+  const optionsCount = {};
+  for (const field of fields) {
+    for (const bill of filteredBills) {
+      let values = [];
+      switch (field) {
+        case "sessionPeriod":
+          values.push(bill.sessionPeriod);
+          break;
+        case "law":
+          values = bill.laws;
+          break;
+        case "billProgress":
+          values.push(bill.billProgress);
+          break;
+        case "proposer":
+          values = bill.proposers;
+          break;
+      }
+      for (const value of values) {
+        filterID = `${field}-${value}`;
+        if (optionsCount.hasOwnProperty(filterID)) {
+          optionsCount[filterID] += 1;
+          continue;
+        }
+        optionsCount[filterID] = 1;
+      }
+    }
+  }
+  return optionsCount;
 }
 
 function filterBills(checkedInputs) {
