@@ -12,6 +12,10 @@
   --primary: var(--red);
 }
 
+html {
+  scroll-padding-top: 9rem;
+}
+
 body {
   margin: 0;
   color: var(--color);
@@ -46,19 +50,29 @@ a {
   color: var(--link);
 }
 
-input, textarea, select, button {
+input[type="text"], textarea, select, button {
+  box-sizing: border-box;
   padding: 0.6rem 0.8rem;
   margin: 0;
   min-height: 1rem;
+  appearance: none;
   font-size: 16px;
   outline: none;
+  background: #fff;
   border-radius: 0.25rem;
   border: 1px solid #aaa;
   color: var(--color);
 }
 
 select {
-  background: #fff;
+  padding-right: 2.2rem;
+  appearance: none;
+  background-image: url('/images/select_arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem auto;
+  border: 0;
+  border-radius: 0.25rem;
 }
 
 .btn {

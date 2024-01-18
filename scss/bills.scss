@@ -259,6 +259,11 @@
           text-align: center;
         }
       }
+
+      input.custom-bill-no {
+        width: 100%;
+        padding: 0.4rem;
+      }
     }
 
     .diff-main {
@@ -266,6 +271,7 @@
       display: grid;
       grid-template-columns: 200px 1fr;
       grid-gap: 2rem;
+      align-items: flex-start;
 
       @media (max-width: 767px) {
         grid-template-columns: 1fr;
@@ -273,9 +279,15 @@
     }
 
     .available-sections {
+      position: sticky;
+      top: 9rem;
       padding: 0.8rem 1rem;
       background: #f6f6f6;
       border-radius: 1rem;
+
+      @media (max-width: 767px) {
+        position: static;
+      }
 
       .title {
         margin-bottom: 0.8rem;
@@ -288,6 +300,12 @@
       label {
         margin-bottom: 0.4rem;
         display: block;
+        color: #555;
+      }
+
+      a {
+        display: block;
+        margin-bottom: 0.4rem;
         color: #555;
       }
     }

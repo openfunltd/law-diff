@@ -12,6 +12,10 @@
   --primary: var(--red);
 }
 
+html {
+  scroll-padding-top: 9rem;
+}
+
 body {
   margin: 0;
   color: var(--color);
@@ -44,22 +48,36 @@ a {
   color: var(--link);
 }
 
-input,
+input[type=text],
 textarea,
 select,
 button {
+  box-sizing: border-box;
   padding: 0.6rem 0.8rem;
   margin: 0;
   min-height: 1rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   font-size: 16px;
   outline: none;
+  background: #fff;
   border-radius: 0.25rem;
   border: 1px solid #aaa;
   color: var(--color);
 }
 
 select {
-  background: #fff;
+  padding-right: 2.2rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("/images/select_arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem auto;
+  border: 0;
+  border-radius: 0.25rem;
 }
 
 .btn {
@@ -521,20 +539,12 @@ table tbody tr:nth-child(odd) td {
 }
 
 ._search .search .options .value input {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
   width: 100%;
-  background: #fff;
   border: 0;
-  border-radius: 0.25rem;
 }
 
 ._search .search .options .value select {
   width: 100%;
-  background: #fff;
-  border: 0;
-  border-radius: 0.25rem;
 }
 
 ._search .search .options .value div {
@@ -994,11 +1004,17 @@ table tbody tr:nth-child(odd) td {
   text-align: center;
 }
 
+._bills .comparation .bill-versions input.custom-bill-no {
+  width: 100%;
+  padding: 0.4rem;
+}
+
 ._bills .comparation .diff-main {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-gap: 2rem;
+  align-items: flex-start;
 }
 
 @media (max-width: 767px) {
@@ -1008,9 +1024,17 @@ table tbody tr:nth-child(odd) td {
 }
 
 ._bills .comparation .available-sections {
+  position: sticky;
+  top: 9rem;
   padding: 0.8rem 1rem;
   background: #f6f6f6;
   border-radius: 1rem;
+}
+
+@media (max-width: 767px) {
+  ._bills .comparation .available-sections {
+    position: static;
+  }
 }
 
 ._bills .comparation .available-sections .title {
@@ -1024,6 +1048,12 @@ table tbody tr:nth-child(odd) td {
 ._bills .comparation .available-sections label {
   margin-bottom: 0.4rem;
   display: block;
+  color: #555;
+}
+
+._bills .comparation .available-sections a {
+  display: block;
+  margin-bottom: 0.4rem;
   color: #555;
 }
 

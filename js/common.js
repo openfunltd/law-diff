@@ -59,17 +59,48 @@ const common = {
       }
 
       // 重新整理 selectedSections，若有不存在 allAvailableSections 的 Section 須移除
-      selectedSections.value = selectedSections.value.filter(item => result.includes(item))
+      // selectedSections.value = selectedSections.value.filter(item => result.includes(item))
 
       return result
     })
 
-    const selectedSections = ref([])
+    // const selectedSections = ref([])
 
     function compareDiff (content1, content2) {
       const diff = new Diff()
       let textDiff = diff.main(content1, content2)
       return diff.prettyHtml(textDiff)
+    }
+
+    async function getBillByNo ({ target, target: { value } }, billNo) {
+      // value 是使用者輸入的文字
+      console.log(value, billNo)
+
+      if (!value) {
+        return
+      }
+
+      try {
+        // 這邊需要做一隻 API，到時可能需要帶入目前頁面的法案編號，與使用者查詢的提案編號。
+        // 以下因為只是範例，網址就以 sample_bill_api 帶過
+        const result = await fetch('/sample_bill_api')
+        // 當正式串接時應該會類似長這樣
+        // const result = await fetch(`/sample_bill_api/${billNo}/value`)
+        const data = await result.json()
+        // API須回應包含新提案資料的json
+        // 格式：{ versions: [格式與html中的versions相同], bills: [格式與html中的bills相同] }
+
+        // 接下來更新
+        billVersions.value = data.versions
+        billsData.value = data.bills
+        // 清空輸入欄位
+        target.value = ''
+      } catch (err) {
+        // if find no bill
+        alert('提案編號是不同法律')
+        // or not the same law
+        // alert('查無提案')
+      }
     }
 
     return {
@@ -81,9 +112,10 @@ const common = {
       billsData,
       selectedVersions,
       allAvailableSections,
-      selectedSections,
+      // selectedSections,
 
-      compareDiff
+      compareDiff,
+      getBillByNo
     }
   }
 }
