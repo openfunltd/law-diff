@@ -182,7 +182,7 @@ function buildBillResults(root, bill, legislators) {
   //Build <div class="status">
   let statusDiv = document.createElement('div');
   statusDiv.className = 'status';
-  statusDiv = buildStatusDiv(statusDiv, bill.議案流程);
+  statusDiv = buildStatusDiv(statusDiv, bill.議案狀態, bill.last_time);
   billRootA.appendChild(statusDiv);
 
   //Build <div class="desc">
@@ -213,11 +213,8 @@ function renderTitle(title) {
   return title
 }
 
-function buildStatusDiv(statusDiv, progresses) {
-  if (progresses === undefined || !progresses.length) { return statusDiv; }
-  const latestProgress = progresses.slice(-1)[0];
-  const theStatus = latestProgress.狀態;
-  const date = latestProgress.日期.slice(-1)[0];
+function buildStatusDiv(statusDiv, theStatus, date) {
+  if ([theStatus,date].includes(undefined)) { return statusDiv; }
   const statusLogoSpan = document.createElement('span');
   statusLogoSpan.className = 'material-symbols-rounded';
   statusLogoSpan.innerText = 'clock_loader_40';
