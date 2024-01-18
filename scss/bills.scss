@@ -279,8 +279,10 @@
     }
 
     .available-sections {
-      // position: sticky;
-      // top: 9rem;
+      position: sticky;
+      top: 9rem;
+      max-height: calc(100vh - 12rem);
+      overflow-y: auto;
       padding: 0.8rem 1rem;
       background: #f6f6f6;
       border-radius: 1rem;
