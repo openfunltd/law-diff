@@ -795,8 +795,8 @@ table tbody tr:nth-child(odd) td {
 }
 
 ._bills .bill-tab {
-  position: sticky;
-  top: 4rem;
+  /*position: sticky;
+  top: 4rem;*/
   z-index: 9000;
   background: #fff;
   border-top: 1px solid #ddd;
