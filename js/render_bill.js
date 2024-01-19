@@ -36,6 +36,10 @@ async function renderData(){
   const mainDiv = document.querySelector('.main');
   const mainDivObserver = new MutationObserver(() => dispatchSection(data, mainDivObserver));
   mainDivObserver.observe(mainDiv, {childList: true, subtree: true});
+
+  //Set ppg_url
+  const ppgEle= document.getElementById('origin');
+  ppgEle.href = billData.ppg_url;
 }
 
 function dispatchSection(data, observer) {
