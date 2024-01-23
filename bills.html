@@ -574,20 +574,20 @@
                     <tr>
                       <th>版本名稱</th>
                       <th>條文內容</th>
-                      <th>立法理由</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td width="20%">現行條文</td>
-                      <td width="60%">
+                      <td>現行條文</td>
+                      <td>
                         {{
                           billsData[idx].diff
                             ? billsData[idx].versions[0].content || '本條新增無現行版本'
                             : '本條全文修正無法與現行版本比較'
                         }}
+                        <!-- <hr>
+                        立法理由：{{ billsData[idx].versions[0].reason || '無' }} -->
                       </td>
-                      <td width="20%">{{ billsData[idx].versions[0].reason || '無' }}</td>
                     </tr>
                     <tr v-for="ver in selectedVersions">
                       <td>
@@ -604,15 +604,22 @@
                           </span>
                         </div>
                       </td>
-                      <td v-html="
-                        billsData[idx].versions[ver].content !== null
-                          ? compareDiff(
-                              billsData[idx].versions[0].content || '',
-                              billsData[idx].versions[ver].content || ''
-                            )
-                          : '無'
-                      "></td>
-                      <td>{{ billsData[idx].versions[ver].reason || '無' }}</td>
+                      <td>
+                        <div v-html="
+                          billsData[idx].versions[ver].content !== null
+                            ? compareDiff(
+                                billsData[idx].versions[0].content || '',
+                                billsData[idx].versions[ver].content || ''
+                              )
+                            : '無'
+                        "></div>
+                        <div
+                          v-if="billsData[idx].versions[ver].content !== null"
+                          class="bill-reason"
+                        >
+                          立法理由：{{ billsData[idx].versions[ver].reason || '無' }}
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

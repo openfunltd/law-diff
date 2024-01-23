@@ -104,6 +104,14 @@ const common = {
       }
     }
 
+    onMounted(() => {
+      document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('bill-reason')) {
+          event.target.classList.toggle('show-all')
+        }
+      })
+    })
+
     return {
       rwdMenuVisible,
       rwdFilterOptionsVisible,

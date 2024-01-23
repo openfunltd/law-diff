@@ -338,6 +338,23 @@
     .bill {
       margin-bottom: 2rem;
 
+      table {
+        table-layout: fixed;
+      }
+
+      th:first-child,
+      td:first-child {
+        max-width: 150px;
+        min-width: 150px;
+        width: 150px;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        max-width: calc(100% - 150px);
+        min-width: calc(100% - 150px);
+        width: calc(100% - 150px);
+      }
+
       .title {
         text-align: left;
         font-weight: bold;
@@ -347,6 +364,23 @@
 
       .passed {
         margin-top: 0.4rem;
+      }
+
+      .bill-reason {
+        margin: 0.8rem 0;
+        padding: 0.8rem;
+        background: #faf6f0;
+        border: 1px solid #f0e9e0;
+        border-radius: 0.4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.show-all {
+          white-space: initial;
+          overflow: initial;
+          text-overflow: initial;
+        }
       }
     }
 
