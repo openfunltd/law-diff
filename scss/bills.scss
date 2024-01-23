@@ -333,6 +333,10 @@
     .diff-hint {
       text-align: right;
       color: #666;
+
+      .print-btn {
+        margin-left: 1rem;
+      }
     }
 
     .bill {

@@ -95,6 +95,19 @@ select {
   &--gray {
     background: #aaa;
   }
+
+  &--gold {
+    background: var(--gold);
+  }
+
+  &--sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+
+    span {
+      font-size: 1em;
+    }
+  }
 }
 
 section {

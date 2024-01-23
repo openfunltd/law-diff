@@ -104,6 +104,19 @@ select {
   background: #aaa;
 }
 
+.btn--gold {
+  background: var(--gold);
+}
+
+.btn--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.btn--sm span {
+  font-size: 1em;
+}
+
 section {
   box-sizing: border-box;
 }
@@ -1085,6 +1098,10 @@ table tbody tr:nth-child(odd) td {
 ._bills .comparation .diff-hint {
   text-align: right;
   color: #666;
+}
+
+._bills .comparation .diff-hint .print-btn {
+  margin-left: 1rem;
 }
 
 ._bills .comparation .bill {
