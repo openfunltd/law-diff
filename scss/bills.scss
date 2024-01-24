@@ -352,12 +352,6 @@
         min-width: 150px;
         width: 150px;
       }
-      th:nth-child(2),
-      td:nth-child(2) {
-        max-width: calc(100% - 150px);
-        min-width: calc(100% - 150px);
-        width: calc(100% - 150px);
-      }
 
       .title {
         text-align: left;

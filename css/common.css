@@ -1119,13 +1119,6 @@ table tbody tr:nth-child(odd) td {
   width: 150px;
 }
 
-._bills .comparation .bill th:nth-child(2),
-._bills .comparation .bill td:nth-child(2) {
-  max-width: calc(100% - 150px);
-  min-width: calc(100% - 150px);
-  width: calc(100% - 150px);
-}
-
 ._bills .comparation .bill .title {
   text-align: left;
   font-weight: bold;
