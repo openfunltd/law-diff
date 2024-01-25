@@ -9,6 +9,7 @@
   --green: #76c114;
   --yellow: #d6b113;
   --gold: #c2a86b;
+  --gray: #999;
   --primary: var(--red);
 }
 
@@ -19,6 +20,12 @@ html {
 body {
   margin: 0;
   color: var(--color);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--gray);
 }
 
 h1 {
@@ -87,6 +94,19 @@ select {
 
   &--gray {
     background: #aaa;
+  }
+
+  &--gold {
+    background: var(--gold);
+  }
+
+  &--sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+
+    span {
+      font-size: 1em;
+    }
   }
 }
 
@@ -422,7 +442,7 @@ table {
       .search-bar {
         display: grid;
         grid-template-columns: 1fr 1.6rem;
-        margin: 0 1rem;
+        margin: 0 0 0 1rem;
         padding: 0 0.8rem;
         background: #0001;
         border-radius: 0.25rem;

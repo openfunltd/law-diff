@@ -41,7 +41,7 @@ const common = {
 
       billsData.value.map((item, idx) => {
         return item.versions.filter((it, i) => {
-          return it.content && selectedVersions.value.includes(i)
+          return it.content !== null && selectedVersions.value.includes(i)
         }).length
       }).forEach((item, idx) => {
         // 交集
@@ -68,8 +68,13 @@ const common = {
 
     function compareDiff (content1, content2) {
       const diff = new Diff()
-      let textDiff = diff.main(content1, content2)
-      return diff.prettyHtml(textDiff)
+
+      if (content1) {
+        const textDiff = diff.main(content1, content2)
+        return diff.prettyHtml(textDiff)
+      } else {
+        return content2
+      }
     }
 
     async function getBillByNo ({ target, target: { value } }, billNo) {
@@ -102,6 +107,14 @@ const common = {
         // alert('查無提案')
       }
     }
+
+    onMounted(() => {
+      document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('bill-reason')) {
+          event.target.classList.toggle('show-all')
+        }
+      })
+    })
 
     return {
       rwdMenuVisible,

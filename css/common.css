@@ -9,6 +9,7 @@
   --green: #76c114;
   --yellow: #d6b113;
   --gold: #c2a86b;
+  --gray: #999;
   --primary: var(--red);
 }
 
@@ -19,6 +20,12 @@ html {
 body {
   margin: 0;
   color: var(--color);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--gray);
 }
 
 h1 {
@@ -95,6 +102,19 @@ select {
 
 .btn--gray {
   background: #aaa;
+}
+
+.btn--gold {
+  background: var(--gold);
+}
+
+.btn--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.btn--sm span {
+  font-size: 1em;
 }
 
 section {
@@ -415,7 +435,7 @@ table tbody tr:nth-child(odd) td {
 .site-header .header .menu .search-bar {
   display: grid;
   grid-template-columns: 1fr 1.6rem;
-  margin: 0 1rem;
+  margin: 0 0 0 1rem;
   padding: 0 0.8rem;
   background: rgba(0, 0, 0, 0.0666666667);
   border-radius: 0.25rem;
@@ -1080,8 +1100,23 @@ table tbody tr:nth-child(odd) td {
   color: #666;
 }
 
+._bills .comparation .diff-hint .print-btn {
+  margin-left: 1rem;
+}
+
 ._bills .comparation .bill {
   margin-bottom: 2rem;
+}
+
+._bills .comparation .bill table {
+  table-layout: fixed;
+}
+
+._bills .comparation .bill th:first-child,
+._bills .comparation .bill td:first-child {
+  max-width: 150px;
+  min-width: 150px;
+  width: 150px;
 }
 
 ._bills .comparation .bill .title {
@@ -1093,6 +1128,23 @@ table tbody tr:nth-child(odd) td {
 
 ._bills .comparation .bill .passed {
   margin-top: 0.4rem;
+}
+
+._bills .comparation .bill .bill-reason {
+  margin: 0.8rem 0;
+  padding: 0.6rem 0.8rem;
+  background: #faf6f0;
+  border: 1px solid #f0e9e0;
+  border-radius: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+._bills .comparation .bill .bill-reason.show-all {
+  white-space: initial;
+  overflow: initial;
+  text-overflow: initial;
 }
 
 ._bills .comparation del {
