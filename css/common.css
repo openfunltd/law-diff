@@ -758,6 +758,8 @@ table tbody tr:nth-child(odd) td {
   margin-bottom: 0.4rem;
   font-size: 1.2rem;
   font-weight: bold;
+  text-decoration: none;
+  color: currentColor;
 }
 
 ._search .result .status {
