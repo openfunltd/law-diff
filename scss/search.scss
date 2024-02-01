@@ -215,6 +215,14 @@
         display: block;
         margin-bottom: 0.25rem;
       }
+
+      .filter-option[disabled] + span {
+        color: #aaa;
+      }
+
+      .option-count {
+        margin-left: 0.4rem;
+      }
     }
 
     .result-list {}
