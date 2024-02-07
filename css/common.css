@@ -728,6 +728,14 @@ table tbody tr:nth-child(odd) td {
   margin-bottom: 0.25rem;
 }
 
+._search .results .filter-options .filter-option[disabled] + span {
+  color: #aaa;
+}
+
+._search .results .filter-options .option-count {
+  margin-left: 0.4rem;
+}
+
 ._search .result {
   margin-bottom: 2rem;
   padding: 2rem;
@@ -750,6 +758,8 @@ table tbody tr:nth-child(odd) td {
   margin-bottom: 0.4rem;
   font-size: 1.2rem;
   font-weight: bold;
+  text-decoration: none;
+  color: currentColor;
 }
 
 ._search .result .status {
