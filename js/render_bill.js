@@ -65,10 +65,12 @@ function dispatchSection(data, observer) {
 
 function getIdString(row) {
   let idString = "";
-  if (row.現行 != "") {
+  if (row.現行 !== undefined) {
     idString = row.現行.replace(/　/g, ' ').split(' ')[0];
-  } else {
+  } else if (row.修正 !== undefined) {
     idString = row.修正.replace(/　/g, ' ').split(' ')[0];
+  } else if (row.增訂 !== undefined) {
+    idString = row.增訂.replace(/　/g, ' ').split(' ')[0];
   }
   return idString;
 }
@@ -112,6 +114,7 @@ async function getComparationData() {
   for (const law of currentLaws) {
     let bill = {
       "title": law.idString,
+      "diff": (law.currentLaw !== null),
       "versions": [
         {
           "content": law.currentLaw,
@@ -132,7 +135,11 @@ async function getComparationData() {
       for (const row of rows) {
         const diffIdString = getIdString(row);
         if (diffIdString === idString){
-          payload.content = row.修正;
+          if (row.修正 != undefined) {
+            payload.content = row.修正;
+          } else if (row.增訂 != undefined) {
+            payload.content = row.增訂;
+          }
           payload.reason = row.說明;
           break;
         }
