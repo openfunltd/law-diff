@@ -65,11 +65,11 @@ function dispatchSection(data, observer) {
 
 function getIdString(row) {
   let idString = "";
-  if (row.現行 !== undefined) {
+  if (row.現行 !== undefined && row.現行 !== "") {
     idString = row.現行.replace(/　/g, ' ').split(' ')[0];
-  } else if (row.修正 !== undefined) {
+  } else if (row.修正 !== undefined && row.修正 !== "") {
     idString = row.修正.replace(/　/g, ' ').split(' ')[0];
-  } else if (row.增訂 !== undefined) {
+  } else if (row.增訂 !== undefined && row.增訂 !== "") {
     idString = row.增訂.replace(/　/g, ' ').split(' ')[0];
   }
   return idString;
@@ -114,7 +114,7 @@ async function getComparationData() {
   for (const law of currentLaws) {
     let bill = {
       "title": law.idString,
-      "diff": (law.currentLaw !== null),
+      "diff": (law.currentLaw !== null || law.currentLaw !== ""),
       "versions": [
         {
           "content": law.currentLaw,
