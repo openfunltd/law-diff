@@ -105,10 +105,37 @@ const common = {
     }
 
     onMounted(() => {
+      let pointerX, pointerY = null
+      let allowToggleBillReason = false
+
       document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('bill-reason')) {
+        if (event.target.classList.contains('bill-reason') && allowToggleBillReason) {
           event.target.classList.toggle('show-all')
         }
+      })
+
+      function checkMouseMove (event) {
+        const xdiff = pointerX - event.screenX
+        const ydiff = pointerY - event.screenY
+        const length = Math.sqrt(xdiff * xdiff + ydiff * ydiff)
+
+        if (length > 4) {
+          document.removeEventListener('mousemove', checkMouseMove)
+          allowToggleBillReason = false
+        }
+      }
+
+      document.addEventListener('mousedown', (event) => {
+        if (event.target.classList.contains('bill-reason')) {
+          allowToggleBillReason = true
+          pointerX = event.screenX
+          pointerY = event.screenY
+          document.addEventListener('mousemove', checkMouseMove)
+        }
+      })
+
+      document.addEventListener('mouseup', (event) => {
+        document.removeEventListener('mousemove', checkMouseMove)
       })
     })
 
