@@ -14,7 +14,7 @@ async function renderData() {
   const GET_proposer = document.location.search.match(/proposer=([^&]*)/);
 
   const lawKeyword = (GET_lawKeyword) ? decodeURIComponent(GET_lawKeyword[1]) : "";
-  const term = (GET_term) ? GET_term[1] : 10;
+  const term = (GET_term) ? GET_term[1] : 11;
   const sessionPeriod = (GET_sessionPeriod) ? GET_sessionPeriod[1] : "";
   const proposer = (GET_proposer) ? decodeURIComponent(GET_proposer[1]) : "";
 
