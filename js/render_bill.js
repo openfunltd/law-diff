@@ -83,6 +83,17 @@ async function getComparationData() {
   const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}/related_bills`);
   const relatedBillDataArr = await relatedBillResponse.json();
   const billDataArr = (relatedBillDataArr.bills) ? relatedBillDataArr.bills : [billData];
+  if (billDataArr[0].關連議案 && billDataArr[0].關連議案.length > 1) {
+    lyRelatedBillArr = billDataArr[0].關連議案;
+    lyRelatedBillNoArr = lyRelatedBillArr.map(bill => bill.billNo);
+    billNoArr = billDataArr.map(bill => bill.billNo);
+    uncatchedlyRelatedBillNoArr = lyRelatedBillNoArr.filter(billNo => !billNoArr.includes(billNo));
+    for (const billNo of uncatchedlyRelatedBillNoArr) {
+      const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
+      const billData = await billResponse.json();
+      billDataArr.push(billData);
+    }
+  }
 
   let versions = [{}]; //The frist object is for '現行法律' which is hidden for now.
   let currentLaws = [];
