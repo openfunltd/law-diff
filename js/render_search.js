@@ -135,7 +135,7 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
     countSpan.id = `count-${inputId}`;
     countSpan.innerText = `(${options[key]})`;
     countSpan.classList.add('option-count');
-    optionLabel.appendChild(optionInput);
+    //optionLabel.appendChild(optionInput);
     optionLabel.appendChild(textSpan);
     optionLabel.appendChild(countSpan);
     fieldDiv.appendChild(optionLabel);
