@@ -82,7 +82,7 @@ async function getComparationData() {
   const billData = await billResponse.json();
   const relatedBillResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}/related_bills`);
   const relatedBillDataArr = await relatedBillResponse.json();
-  const billDataArr = (relatedBillDataArr.bills) ? relatedBillDataArr.bills : [billData];
+  const billDataArr = (relatedBillDataArr.bills) ? [billData, ...relatedBillDataArr.bills] : [billData];
   if (billDataArr[0].關連議案 && billDataArr[0].關連議案.length > 1) {
     lyRelatedBillArr = billDataArr[0].關連議案;
     lyRelatedBillNoArr = lyRelatedBillArr.map(bill => bill.billNo);
