@@ -8,37 +8,37 @@ async function renderData() {
     Array.from(homeATags).forEach(aTag => { aTag.href = "/law-diff/"; })
   }
 
-  const GET_lawKeyword = document.location.search.match(/lawKeyword=([^&]*)/);
+  const GET_keyword = document.location.search.match(/keyword=([^&]*)/);
   const GET_term = document.location.search.match(/term=([0-9]*)/);
   const GET_sessionPeriod = document.location.search.match(/sessionPeriod=([0-9]*)/);
   const GET_proposer = document.location.search.match(/proposer=([^&]*)/);
 
-  const lawKeyword = (GET_lawKeyword) ? decodeURIComponent(GET_lawKeyword[1]) : "";
+  const keyword = (GET_keyword) ? decodeURIComponent(GET_keyword[1]) : "";
   const term = (GET_term) ? GET_term[1] : 11;
   const sessionPeriod = (GET_sessionPeriod) ? GET_sessionPeriod[1] : "";
   const proposer = (GET_proposer) ? decodeURIComponent(GET_proposer[1]) : "";
 
-  const lawKeywordInput = document.getElementById("input-lawKeyword");
+  const keywordInput = document.getElementById("input-keyword");
   const termSelect = document.getElementById("select-term");
   const sessionPeriodSelect = document.getElementById("select-sessionPeriod");
   const proposerInput = document.getElementById("input-proposer");
 
-  lawKeywordInput.setAttribute('value', lawKeyword);
+  keywordInput.setAttribute('value', keyword);
   termSelect.setAttribute('value', term);
   sessionPeriodSelect.setAttribute('value', sessionPeriod);
   proposerInput.setAttribute('value', proposer);
 
-  const lawKeywordSpans = document.getElementsByClassName("lawKeyword");
+  const keywordSpans = document.getElementsByClassName("keyword");
   const termSpans = document.getElementsByClassName("term");
   const sessionPeriodSpans = document.getElementsByClassName("sessionPeriod");
   const proposerSpans = document.getElementsByClassName("proposer");
 
-  Array.from(lawKeywordSpans).forEach(span => { span.innerText = lawKeyword });
+  Array.from(keywordSpans).forEach(span => { span.innerText = keyword });
   Array.from(termSpans).forEach(span => { span.innerText = term });
   Array.from(sessionPeriodSpans).forEach(span => { span.innerText = sessionPeriod });
   Array.from(proposerSpans).forEach(span => { span.innerText = (proposer) ? proposer : "所有立委" });
 
-  if (lawKeyword === "") { return; }
+  if (keyword === "") { return; }
   //Toggle section.results when retrieving searsh results
   const resultSections = document.getElementsByClassName('results');
   resultSections[0].style.display = 'none';
@@ -56,7 +56,7 @@ async function renderData() {
   let bill_query = "https://ly.govapi.tw/bill" +
     "?proposal_type=委員提案" +
     "&field=議案流程&field=提案人&field=last_time&field=案由" +
-    `&term=${term}&q=\"${lawKeyword}\"&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
+    `&term=${term}&q=\"${keyword}\"&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
   if (sessionPeriod) { bill_query += `&sessionPeriod=${sessionPeriod}`; }
   if (proposer) { bill_query += `&proposer=${encodeURIComponent(proposer)}` }
   const billResponse = await fetch(bill_query);
