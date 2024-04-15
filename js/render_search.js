@@ -45,11 +45,6 @@ async function renderData() {
   resultSections[1].style.display = '';
   resultSections[2].style.display = 'none';
 
-  //Lookup law id by query (only root law for now)
-  const lawResponse = await fetch(`https://ly.govapi.tw/law?type=母法&q=${encodeURIComponent(lawKeyword)}`);
-  const lawData = await lawResponse.json();
-  if (lawData.total.value === 0) { return; }
-
   //search filter
   sessionPeriodCount = Array(8).fill(0);
   proposerCount = {};
@@ -58,25 +53,29 @@ async function renderData() {
   billProgressCount = {};
 
   //Lookup bills for each law-id (only top 10 result and propose by legislator for now)
-  let bills = [];
-  for (law of lawData.laws) {
-    let query_url = "https://ly.govapi.tw/bill" +
-                      "?proposal_type=委員提案" +
-                      "&field=議案流程&field=提案人&field=last_time&field=案由" +
-                      `&term=${term}&law=${law.id}&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
-    if (sessionPeriod) { query_url += `&sessionPeriod=${sessionPeriod}`; }
-    if (proposer) { query_url += `&proposer=${encodeURIComponent(proposer)}` }
-    const billResponse = await fetch(query_url);
-    const billsData = await billResponse.json();
-    sessionPeriodCount = countSessionPeriod(billsData.aggs.會期, sessionPeriodCount);
-    proposerCount = countFilter(billsData.aggs.提案人, proposerCount);
-    lawCount = countFilter(billsData.aggs.laws, lawCount, law.name);
-    lawCode[law.name] = law.id;
-    billProgressCount = countFilter(billsData.aggs.議案狀態, billProgressCount);
-    bills.push(...billsData.bills);
+  let bill_query = "https://ly.govapi.tw/bill" +
+    "?proposal_type=委員提案" +
+    "&field=議案流程&field=提案人&field=last_time&field=案由" +
+    `&term=${term}&q=\"${lawKeyword}\"&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
+  if (sessionPeriod) { bill_query += `&sessionPeriod=${sessionPeriod}`; }
+  if (proposer) { bill_query += `&proposer=${encodeURIComponent(proposer)}` }
+  const billResponse = await fetch(bill_query);
+  billsData = await billResponse.json();
+  if (billsData.total.value === 0) { return; }
+  sessionPeriodCount = countSessionPeriod(billsData.aggs.會期, sessionPeriodCount);
+  billProgressCount = countFilter(billsData.aggs.議案狀態, billProgressCount);
+  proposerCount = countFilter(billsData.aggs.提案人, proposerCount);
+  lawCount = countFilter(billsData.aggs.laws, lawCount, 'law');
+  for (lawObject of billsData.aggs.laws) {
+    const lawResponse = await fetch(`https://ly.govapi.tw/law/${lawObject.value}`);
+    lawData = await lawResponse.json();
+    if (lawData.hasOwnProperty('name')) {
+      lawCode[lawObject.value] = lawData.name;
+    }
   }
 
   //Order final result by last_time
+  bills = billsData.bills;
   bills.sort(compareDate);
 
   //Toggle results section when no bills
@@ -117,9 +116,12 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
   const length = options.length //used when isSessionPeriod === true
   for (let key in options) {
     if (options[key] === 0) { continue; }
-    const text = (isSessionPeriod) ? `第${term}屆第${length - key}會期`: key;
+    let text = (isSessionPeriod) ? `第${term}屆第${length - key}會期`: key;
     let inputId = (isSessionPeriod) ? `${fieldName}-${length - key}` : `${fieldName}-${key}`;
-    if (isLaw) { inputId = `${fieldName}-${lawCode[key]}`; }
+    if (isLaw) {
+      text = lawCode[key];
+      inputId = `${fieldName}-${key}`;
+    }
     const optionLabel = document.createElement('label');
     const optionInput = document.createElement('input');
     optionInput.setAttribute('type', 'checkbox');
@@ -150,9 +152,9 @@ function countSessionPeriod(aggs, sessionPeriodCount) {
   return sessionPeriodCount;
 }
 
-function countFilter(aggs, filterCount, lawName) {
+function countFilter(aggs, filterCount) {
   for (const payload of aggs) {
-    const title = (lawName) ? lawName : payload.value;
+    let title = payload.value;
     const count = payload.count;
     if (count === 0) { continue; }
     if (filterCount.hasOwnProperty(title)) {
