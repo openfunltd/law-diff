@@ -55,7 +55,7 @@ async function renderData() {
   //Lookup bills for each law-id (only top 10 result and propose by legislator for now)
   let bill_query = "https://ly.govapi.tw/bill" +
     "?proposal_type=委員提案" +
-    "&field=議案流程&field=提案人&field=last_time&field=案由" +
+    "&field=議案流程&field=提案人&field=last_time&field=案由&field=laws" +
     `&term=${term}&q=\"${keyword}\"&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
   if (sessionPeriod) { bill_query += `&sessionPeriod=${sessionPeriod}`; }
   if (proposer) { bill_query += `&proposer=${encodeURIComponent(proposer)}` }
@@ -135,7 +135,7 @@ function buildFilterOptions(fieldName, options, term, lawCode) {
     countSpan.id = `count-${inputId}`;
     countSpan.innerText = `(${options[key]})`;
     countSpan.classList.add('option-count');
-    //optionLabel.appendChild(optionInput);
+    optionLabel.appendChild(optionInput);
     optionLabel.appendChild(textSpan);
     optionLabel.appendChild(countSpan);
     fieldDiv.appendChild(optionLabel);
