@@ -167,40 +167,41 @@ function countFilter(aggs, filterCount) {
 }
 
 function buildBillResults(root, bill, legislators) {
-  //Build root <a> element
-  const billRootA = document.createElement('a');
-  billRootA.href = `bills.html?billNo=${bill.billNo}`;
+  //Build root <div> element
+  const billRootDiv = document.createElement('div');
+  //billRootDiv.href = `bills.html?billNo=${bill.billNo}`;
 
-  billRootA.className = 'result';
-  billRootA.id = bill.billNo;
-  billRootA.target = '_blank';
+  billRootDiv.className = 'result';
+  billRootDiv.id = bill.billNo;
 
   //Build <div class="title">
-  const titleDiv = document.createElement('div');
-  titleDiv.className = 'title';
-  titleDiv.innerText = renderTitle(bill.議案名稱);
-  billRootA.appendChild(titleDiv);
+  const titleA = document.createElement('a');
+  titleA.className = 'title';
+  titleA.innerText = renderTitle(bill.議案名稱);
+  titleA.href = `bills.html?billNo=${bill.billNo}`;
+  titleA.target = '_blank';
+  billRootDiv.appendChild(titleA);
 
   //Build <div class="status">
   let statusDiv = document.createElement('div');
   statusDiv.className = 'status';
   statusDiv = buildStatusDiv(statusDiv, bill.議案狀態, bill.last_time);
-  billRootA.appendChild(statusDiv);
+  billRootDiv.appendChild(statusDiv);
 
   //Build <div class="desc">
   const descriptionDiv = document.createElement('div');
   descriptionDiv.className = 'desc';
-  descriptionDiv.innerText = bill.案由;
-  billRootA.appendChild(descriptionDiv);
+  descriptionDiv.innerText = bill.案由 ?? '查無立法理由資料';
+  billRootDiv.appendChild(descriptionDiv);
 
   //Build <div class="legislators">
   let legislatorsDiv = document.createElement('div');
   legislatorsDiv.className = 'legislators';
   legislatorsDiv.innerText = '提案委員：';
   legislatorsDiv = buildLegislatorsDiv(legislatorsDiv, legislators, bill.提案人);
-  billRootA.appendChild(legislatorsDiv);
+  billRootDiv.appendChild(legislatorsDiv);
 
-  root.appendChild(billRootA);
+  root.appendChild(billRootDiv);
 }
 
 function renderTitle(title) {
