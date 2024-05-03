@@ -315,12 +315,11 @@
                   <tbody>
                     <tr>
                       <td>現行條文</td>
-                      <td>
-                        {{
-                          billsData[idx].diff
-                            ? billsData[idx].versions[0].content || '本條新增無現行版本'
-                            : '本條全文修正無法與現行版本比較'
-                        }}
+                      <td v-html="
+                        billsData[idx].diff
+                          ? billsData[idx].versions[0].content?.replace(/\n|\r/g, '<br>') || '本條新增無現行版本'
+                          : '本條全文修正無法與現行版本比較'
+                      "></td>
                         <!-- <hr>
                         立法理由：{{ billsData[idx].versions[0].reason || '無' }} -->
                       </td>
@@ -346,7 +345,7 @@
                             ? compareDiff(
                                 billsData[idx].versions[0].content || '',
                                 billsData[idx].versions[ver].content || ''
-                              )
+                              )?.replace(/\n|\r/g, '<br>')
                             : '無'
                         "></div>
                         <div
