@@ -259,15 +259,3 @@ const partyColorCode = {
   台灣民眾黨 : 6,
   中國國民黨 : 7,
 }
-
-function checkedBills() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const hasChecked = urlParams.has('checked');
-  if (hasChecked) {
-    const checked = urlParams.get('checked');
-    const checkedArray = checked ? checked.split(',') : [];
-    return checkedArray;
-  }
-  return [1];
-}

@@ -164,3 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = createApp(common)
   app.mount('._congress')
 })
+
+function checkedBills() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const hasChecked = urlParams.has('checked');
+  if (hasChecked) {
+    const checked = urlParams.get('checked');
+    const checkedArray = checked ? checked.split(',') : [];
+    return checkedArray;
+  }
+  return [1];
+}
