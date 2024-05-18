@@ -16,7 +16,7 @@ const common = {
     // 議案頁的兩個對照版本 0為現行條文 -1為通過條文 其他請參考網頁中的versions
     const billViewing = ref('comparation') // 預設顯示法案對照表
 
-    const selectedVersions = ref([])
+    const selectedVersions = ref(checkedBills())
 
     // 議案頁版本修改者與修改內容
     const billVersions = ref([])
