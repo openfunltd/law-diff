@@ -196,12 +196,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(version, idx) in billVersions.slice(1, billVersions.length)">
+                <tr v-for="(version, idx) in billVersions.slice(1, billVersions.length)" :key="idx">
                   <td>
                     <input
-                      v-model="selectedVersions"
+                      v-model="selectedVersions.value"
                       type="checkbox"
                       :value="idx + 1"
+                      :checked="idx === 0"
                     >
                   </td>
                   <td>
