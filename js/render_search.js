@@ -351,3 +351,7 @@ const partyColorCode = {
   台灣民眾黨 : 6,
   中國國民黨 : 7,
 }
+
+function checkedBills() {
+  return [];
+}
