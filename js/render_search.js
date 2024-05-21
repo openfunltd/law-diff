@@ -208,7 +208,7 @@ function renderTitle(title) {
   if (title.substring(0, 2) === "廢止") {
     title = title.split("，")[0];
     title = title.replace(/[「」]/g, '');
-  } else {
+  } else if (title.indexOf("「") >= 0) {
     const startIdx = title.indexOf("「");
     const endIdx = title.indexOf("」");
     title = title.substring(startIdx + 1, endIdx);
