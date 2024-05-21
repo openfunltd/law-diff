@@ -55,7 +55,11 @@ function countBillFieldValues(filteredBills) {
           values.push(bill.sessionPeriod);
           break;
         case "law":
-          values = bill.laws;
+          if (bill.laws != undefined) {
+            values = bill.laws;
+          } else {
+            values = ["00000"];
+          }
           break;
         case "billProgress":
           values.push(bill.billProgress);
@@ -91,7 +95,12 @@ function filterBills(filteredBills, checkedInputs, filterType) {
       filteredBills = filteredBills.filter((bill) => filters.includes(bill.sessionPeriod))
       break;
     case "law":
-      filteredBills = filteredBills.filter((bill) => filters.some((law) => bill.laws.includes(law)))
+      filteredBills = filteredBills.filter((bill) => filters.some(function (law) {
+        if (bill.laws === undefined) {
+            return false;
+        }
+        return bill.laws.includes(law);
+      }));
       break;
     case "billProgress":
       filteredBills = filteredBills.filter((bill) => filters.includes(bill.billProgress))
