@@ -1,5 +1,3 @@
-renderData();
-
 async function renderData(){
   if (window.location.hostname === "openfunltd.github.io") {
     homeATags = document.getElementsByClassName('home');
@@ -84,10 +82,10 @@ async function getComparationData() {
   const relatedBillDataArr = await relatedBillResponse.json();
   const billDataArr = (relatedBillDataArr.bills) ? [billData, ...relatedBillDataArr.bills] : [billData];
   if (billDataArr[0].關連議案 && billDataArr[0].關連議案.length > 1) {
-    lyRelatedBillArr = billDataArr[0].關連議案;
-    lyRelatedBillNoArr = lyRelatedBillArr.map(bill => bill.billNo);
-    billNoArr = billDataArr.map(bill => bill.billNo);
-    uncatchedlyRelatedBillNoArr = lyRelatedBillNoArr.filter(billNo => !billNoArr.includes(billNo));
+    const lyRelatedBillArr = billDataArr[0].關連議案;
+    const lyRelatedBillNoArr = lyRelatedBillArr.map(bill => bill.billNo);
+    const billNoArr = billDataArr.map(bill => bill.billNo);
+    const uncatchedlyRelatedBillNoArr = lyRelatedBillNoArr.filter(billNo => !billNoArr.includes(billNo));
     for (const billNo of uncatchedlyRelatedBillNoArr) {
       const billResponse = await fetch(`https://ly.govapi.tw/bill/${billNo}`);
       const billData = await billResponse.json();
@@ -112,7 +110,7 @@ async function getComparationData() {
     const rows = billData.對照表[0].rows;
     for (const row of rows) {
       const idString = getIdString(row);
-      currentLawIndex = currentLaws.findIndex((law) => law.idString === idString);
+      const currentLawIndex = currentLaws.findIndex((law) => law.idString === idString);
       if (currentLawIndex === -1) {
         const currentLaw = (row.現行) ? row.現行 : null;
         currentLaws.push({"idString": idString, "currentLaw": currentLaw})
@@ -258,4 +256,16 @@ const partyColorCode = {
   綠黨 : 5,
   台灣民眾黨 : 6,
   中國國民黨 : 7,
+}
+
+export {
+  renderData,
+  getComparationData,
+  getIdString,
+  getLegislatorData,
+  renderProgress,
+  renderLegislatorsSection,
+  buildlegislatorDiv,
+  formatBillName,
+  partyColorCode
 }

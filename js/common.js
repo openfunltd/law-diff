@@ -1,4 +1,5 @@
 import Diff from './text_diff.js'
+import { getComparationData, renderData } from './render_bill.js';
 
 const { ref, computed, createApp, onMounted } = Vue
 
@@ -164,6 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = createApp(common)
   app.mount('._congress')
 })
+
+window.addEventListener('onload', () => {
+  renderData?.()
+});
 
 function checkedBills() {
   const queryString = window.location.search;
