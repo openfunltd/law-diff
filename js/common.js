@@ -25,7 +25,7 @@ const common = {
     const loadComparationData = async () => {
       const [versions, bills] = await getComparationData();
       try {
-        if (versions && versions.length) {
+        if (versions) {
           billVersions.value = versions
         }
         if (bills && bills.length) {
@@ -39,9 +39,13 @@ const common = {
     const allAvailableSections = computed (() => {
       let result = []
 
+      console.log(selectedVersions.value);
       billsData.value.map((item, idx) => {
-        return item.versions.filter((it, i) => {
-          return it.content !== null && selectedVersions.value.includes(i)
+        return selectedVersions.value.filter((it, i) => {
+          if ('undefined' === typeof(item.versions[it])) {
+            return false
+          }
+          return item.versions[it].content !== null
         }).length
       }).forEach((item, idx) => {
         // 交集
@@ -143,6 +147,7 @@ const common = {
       })
     })
 
+
     return {
       rwdMenuVisible,
       rwdFilterOptionsVisible,
@@ -174,5 +179,6 @@ function checkedBills() {
     const checkedArray = checked ? checked.split(',') : [];
     return checkedArray;
   }
-  return [1];
+  const billNo = urlParams.get('billNo');
+  return [billNo];
 }

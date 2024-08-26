@@ -196,12 +196,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(version, idx) in billVersions.slice(1, billVersions.length)">
+                <tr v-for="version in billVersions">
                   <td>
                     <input
                       v-model="selectedVersions"
                       type="checkbox"
-                      :value="idx + 1"
+                      :value="version.billId"
                     >
                   </td>
                   <td>
@@ -317,14 +317,14 @@
                       <td>現行條文</td>
                       <td v-html="
                         billsData[idx].diff
-                          ? billsData[idx].versions[0].content?.replace(/\n|\r/g, '<br>') || '本條新增無現行版本'
+                          ? billsData[idx].versions['現行'].content?.replace(/\n|\r/g, '<br>') || '本條新增無現行版本'
                           : '本條全文修正無法與現行版本比較'
                       "></td>
                         <!-- <hr>
-                        立法理由：{{ billsData[idx].versions[0].reason || '無' }} -->
+                        立法理由：{{ billsData[idx].versions['現行'].reason || '無' }} -->
                       </td>
                     </tr>
-                    <tr v-for="ver in selectedVersions">
+                    <tr v-for="ver of selectedVersions">
                       <td>
                         {{ billVersions[ver].versionName }}
                         <div
@@ -343,7 +343,7 @@
                         <div v-html="
                           billsData[idx].versions[ver].content !== null
                             ? compareDiff(
-                                billsData[idx].versions[0].content || '',
+                                billsData[idx].versions['現行'].content || '',
                                 billsData[idx].versions[ver].content || ''
                               )?.replace(/\n|\r/g, '<br>')
                             : '無'

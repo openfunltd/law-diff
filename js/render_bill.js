@@ -95,7 +95,7 @@ async function getComparationData() {
     }
   }
 
-  let versions = [{}]; //The frist object is for '現行法律' which is hidden for now.
+  let versions = {}; //The frist object is for '現行法律' which is hidden for now.
   let currentLaws = [];
 
   //Figure out how many groups of law-diff.
@@ -107,8 +107,9 @@ async function getComparationData() {
     const proposers = (billData.提案人) ? billData.提案人 : [];
     version.nonMainFirstProposer = proposers.slice(1).join('、');
     version.billNo = billData.提案編號;
+    version.billId = billData.billNo;
     version.billDate = billData.first_time;
-    versions.push(version);
+    versions[version.billId] = version;
     const rows = billData.對照表[0].rows;
     for (const row of rows) {
       const idString = getIdString(row);
@@ -126,22 +127,21 @@ async function getComparationData() {
     let bill = {
       "title": law.idString,
       "diff": (law.currentLaw !== null || law.currentLaw !== ""),
-      "versions": [
-        {
+      "versions": {}
+    };
+    bill.versions['現行'] = {
           "content": law.currentLaw,
           "passed": false,
           "comment": null,
           "reason": null,
-        }
-      ]
-    }
+    };
     bills.push(bill);
   }
   for (let i = 0; i < currentLaws.length; i++) {
     const idString = currentLaws[i].idString;
     for (const billData of billDataArr) {
       if (billData.對照表 === undefined){ continue; }
-      let payload = {"content": null, "passed": false, "comment": null, "reason": null};
+      let payload = {"content": null, "passed": false, "comment": null, "reason": null, "id": billData.billNo};
       const rows = billData.對照表[0].rows;
       for (const row of rows) {
         const diffIdString = getIdString(row);
@@ -155,7 +155,7 @@ async function getComparationData() {
           break;
         }
       }
-      bills[i].versions.push(payload);
+      bills[i].versions[payload.id] = payload;
     }
   }
   return [versions, bills];
