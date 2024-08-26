@@ -38,8 +38,22 @@ const common = {
     // 改成依照目前選的版本，取得有修改的聯集的條文
     const allAvailableSections = computed (() => {
       let result = []
+     
+      // update url
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      // add checked bills to url
+      urlParams.delete('checked');
+      const billNo = urlParams.get('billNo');
+      if (selectedVersions.value.length == 0) {
+      } else if (selectedVersions.value.length == 1 && selectedVersions.value[0] === billNo) {
+      } else {
+        urlParams.append('checked', selectedVersions.value.join(','));
+      }
+      const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+      
 
-      console.log(selectedVersions.value);
       billsData.value.map((item, idx) => {
         return selectedVersions.value.filter((it, i) => {
           if ('undefined' === typeof(item.versions[it])) {
