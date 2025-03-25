@@ -53,7 +53,7 @@ async function renderData() {
   billProgressCount = {};
 
   //Lookup bills for each law-id (only top 10 result and propose by legislator for now)
-  let bill_query = "https://v1.ly.govapi.tw/bill" +
+  let bill_query = "https://ly.govapi.tw/v1/bill" +
     "?proposal_type=委員提案" +
     "&field=議案流程&field=提案人&field=last_time&field=案由&field=laws" +
     `&term=${term}&q=\"${keyword}\"&aggs=會期&aggs=提案人&aggs=laws&aggs=議案狀態`;
@@ -67,7 +67,7 @@ async function renderData() {
   proposerCount = countFilter(billsData.aggs.提案人, proposerCount);
   lawCount = countFilter(billsData.aggs.laws, lawCount, 'law');
   for (lawObject of billsData.aggs.laws) {
-    const lawResponse = await fetch(`https://v1.ly.govapi.tw/law/${lawObject.value}`);
+    const lawResponse = await fetch(`https://ly.govapi.tw/v1/law/${lawObject.value}`);
     lawData = await lawResponse.json();
     if (lawData.hasOwnProperty('name')) {
       lawCode[lawObject.value] = lawData.name;
@@ -86,7 +86,7 @@ async function renderData() {
   }
 
   //Lookup legislators' data for checking party later
-  const legislatorResponse = await fetch(`https://v1.ly.govapi.tw/legislator/${term}?page=1&limit=500`);
+  const legislatorResponse = await fetch(`https://ly.govapi.tw/v1/legislator/${term}?page=1&limit=500`);
   const legislatorData = await legislatorResponse.json();
   const legislators = legislatorData.legislators;
 

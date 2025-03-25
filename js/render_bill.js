@@ -12,7 +12,7 @@ async function renderData(){
   //201103147900000 20政10034320
   let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
   billNo = encodeURIComponent(billNo);
-  const billResponse = await fetch(`https://v1.ly.govapi.tw/bill/${billNo}`);
+  const billResponse = await fetch(`https://ly.govapi.tw/v1/bill/${billNo}`);
   const billData = await billResponse.json();
     
   let billName = billData.議案名稱;
@@ -20,7 +20,7 @@ async function renderData(){
   const reason = (billData.案由 != undefined) ? billData.案由 : "無資料";
   const theFirst = (billData.提案人 != undefined) ? billData.提案人[0] : "無資料";
   const sessionPeriod = billData.屆期;
-  const legislatorResponse = await fetch(`https://v1.ly.govapi.tw/legislator/${sessionPeriod}?limit=200`)
+  const legislatorResponse = await fetch(`https://ly.govapi.tw/v1/legislator/${sessionPeriod}?limit=200`)
   const legislatorData = await legislatorResponse.json(); 
   const [partyTheFirst, picUrlTheFirst] = getLegislatorData(theFirst, legislatorData);
   const data = {"billData": billData, "legislatorData": legislatorData};
@@ -78,9 +78,9 @@ function getIdString(row) {
 async function getComparationData() {
   const GET_billNo = document.location.search.match(/billNo=([0-9]*)/);
   let billNo = (GET_billNo) ? GET_billNo[1] : 202103113910000;
-  const billResponse = await fetch(`https://v1.ly.govapi.tw/bill/${billNo}`);
+  const billResponse = await fetch(`https://ly.govapi.tw/v1/bill/${billNo}`);
   const billData = await billResponse.json();
-  const relatedBillResponse = await fetch(`https://v1.ly.govapi.tw/bill/${billNo}/related_bills`);
+  const relatedBillResponse = await fetch(`https://ly.govapi.tw/v1/bill/${billNo}/related_bills`);
   const relatedBillDataArr = await relatedBillResponse.json();
   const billDataArr = (relatedBillDataArr.bills) ? [billData, ...relatedBillDataArr.bills] : [billData];
   if (billDataArr[0].關連議案 && billDataArr[0].關連議案.length > 1) {
@@ -89,7 +89,7 @@ async function getComparationData() {
     billNoArr = billDataArr.map(bill => bill.billNo);
     uncatchedlyRelatedBillNoArr = lyRelatedBillNoArr.filter(billNo => !billNoArr.includes(billNo));
     for (const billNo of uncatchedlyRelatedBillNoArr) {
-      const billResponse = await fetch(`https://v1.ly.govapi.tw/bill/${billNo}`);
+      const billResponse = await fetch(`https://ly.govapi.tw/v1/bill/${billNo}`);
       const billData = await billResponse.json();
       billDataArr.push(billData);
     }
